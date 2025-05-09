@@ -1,0 +1,14 @@
+{
+  // Editor settings
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // ESLint settings
+  "eslint.workingDirectories": [{ "mode": "auto" }],
+
+  // Typescript settings
+  "typescript.preferences.importModuleSpecifier": "project-relative"
+}
