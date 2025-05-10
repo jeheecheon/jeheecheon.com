@@ -1,3 +1,3 @@
-# @repo/eslint-config
+# `@common/eslint-config`
 
 Collection of internal ts configurations.

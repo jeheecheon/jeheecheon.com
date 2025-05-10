@@ -3,24 +3,29 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "start": "vite",
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview",
+    "dev": "vinxi dev",
+    "build": "vinxi build",
+    "start": "vinxi start",
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
-    "solid-js": "^1.9.5"
+    "@tanstack/solid-router": "^1.120.3",
+    "@tanstack/solid-router-devtools": "^1.120.3",
+    "@tanstack/solid-start": "^1.120.3",
+    "solid-js": "^1.9.6"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
-    "@repo/prettier-config": "workspace:*",
+    "@common/eslint-config": "workspace:*",
+    "@common/prettier-config": "workspace:*",
+    "@common/typescript-config": "workspace:*",
     "eslint": "^9.26.0",
     "jiti": "^2.4.2",
     "prettier": "^3.5.3",
+    "prettier-plugin-organize-imports": "^4.1.0",
     "typescript": "^5.8.2",
-    "vite": "^6.0.0",
-    "vite-plugin-solid": "^2.11.6"
+    "vinxi": "^0.5.6",
+    "vite": "^6.3.4",
+    "vite-plugin-solid": "^2.11.6",
+    "vite-tsconfig-paths": "^5.1.4"
   }
 }
