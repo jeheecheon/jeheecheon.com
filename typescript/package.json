@@ -16,6 +16,7 @@
     "@packages/eslint-config": "workspace:*",
     "@packages/typescript-config": "workspace:*",
     "@packages/prettier-config": "workspace:*",
+    "@packages/utils": "workspace:*",
     "eslint": "^9.26.0",
     "prettier": "^3.5.3",
     "prettier-plugin-organize-imports": "^4.1.0",

@@ -17,6 +17,9 @@ importers:
       '@packages/typescript-config':
         specifier: workspace:*
         version: link:packages/typescript-config
+      '@packages/utils':
+        specifier: workspace:*
+        version: link:packages/utils
       eslint:
         specifier: ^9.26.0
         version: 9.26.0(jiti@2.4.2)
@@ -91,6 +94,8 @@ importers:
   packages/prettier-config: {}
 
   packages/typescript-config: {}
+
+  packages/utils: {}
 
 packages:
 
