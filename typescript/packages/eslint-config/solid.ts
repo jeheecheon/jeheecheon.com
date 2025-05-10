@@ -2,7 +2,7 @@ import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended"
 import plugin from "eslint-plugin-solid";
 import globals from "globals";
 import ts from "typescript-eslint";
-import baseConfig from "./base.js";
+import baseConfig from "@eslint-config/base.js";
 
 export default ts.config(
   ...baseConfig,

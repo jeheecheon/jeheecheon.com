@@ -15,9 +15,6 @@
     "solid-js": "^1.9.6"
   },
   "devDependencies": {
-    "@packages/eslint-config": "workspace:*",
-    "@packages/prettier-config": "workspace:*",
-    "@packages/typescript-config": "workspace:*",
     "jiti": "^2.4.2",
     "vinxi": "^0.5.6",
     "vite": "^6.3.4",

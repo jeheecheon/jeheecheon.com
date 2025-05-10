@@ -5,7 +5,7 @@
     "jsxImportSource": "solid-js",
     "module": "ESNext",
     "target": "ES2022",
-    "moduleResolution": "Bundler",
+    "moduleResolution": "bundler",
     "noEmit": true
   }
 }
