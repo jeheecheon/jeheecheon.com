@@ -1,4 +1,6 @@
 /**
  * @type {import("prettier").Config}
  */
-export default {};
+export default {
+  plugins: ["prettier-plugin-organize-imports"],
+};
