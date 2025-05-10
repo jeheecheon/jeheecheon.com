@@ -1,3 +1,3 @@
 {
-  "extends": "@common/typescript-config/solid.json"
+  "extends": "@packages/typescript-config/solid.json"
 }

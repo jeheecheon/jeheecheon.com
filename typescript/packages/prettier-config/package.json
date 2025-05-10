@@ -1,5 +1,5 @@
 {
-  "name": "@common/prettier-config",
+  "name": "@packages/prettier-config",
   "type": "module",
   "private": true,
   "exports": {

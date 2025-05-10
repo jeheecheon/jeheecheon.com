@@ -1,3 +1,3 @@
-# `@common/prettier-config`
+# `@packages/prettier-config`
 
 Collection of internal prettier configurations.

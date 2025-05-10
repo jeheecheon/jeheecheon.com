@@ -1,3 +1,3 @@
-# `@common/eslint-config`
+# `@packages/eslint-config`
 
 Collection of internal eslint configurations.

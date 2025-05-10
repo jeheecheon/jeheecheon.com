@@ -1,4 +1,4 @@
-import config from "@common/prettier-config/base";
+import config from "@packages/prettier-config/base";
 
 export default {
   ...config,
