@@ -1,9 +1,10 @@
 {
   "extends": "@packages/typescript-config/solid.json",
   "compilerOptions": {
+    "types": ["vinxi/types/client"],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./app/*"]
+      "~/*": ["./src/*"]
     }
   }
 }

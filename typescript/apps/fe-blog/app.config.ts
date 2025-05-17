@@ -1,12 +1,8 @@
-import { defineConfig } from "@tanstack/solid-start/config";
-import tsConfigPaths from "vite-tsconfig-paths";
+import { defineConfig } from "@solidjs/start/config";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   vite: {
-    plugins: [
-      tsConfigPaths({
-        projects: ["./tsconfig.json"],
-      }),
-    ],
-  },
+    plugins: [tailwindcss()]
+  }
 });
