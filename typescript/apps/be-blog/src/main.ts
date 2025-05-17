@@ -1,9 +1,13 @@
+import { Logger } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
-import { ensure } from "@packages/utils/assert";
 import { AppModule } from "./app.module.js";
+import { configs } from "./utils/config.js";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  await app.listen(ensure(4001, "PORT is not set"));
+
+  await app.listen(configs.PORT);
+
+  Logger.log(`Server is running on port ${configs.PORT}`);
 }
 bootstrap();
