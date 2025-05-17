@@ -3,6 +3,7 @@
   "type": "module",
   "private": true,
   "exports": {
-    "./base": "./base.mjs"
+    "./base": "./base.mjs",
+    "./front": "./front.mjs"
   }
 }
