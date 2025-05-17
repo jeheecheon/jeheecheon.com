@@ -3,7 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@eslint-config/*": ["*"]
+      "@packages/eslint-config/*": ["*"]
     }
   }
 }

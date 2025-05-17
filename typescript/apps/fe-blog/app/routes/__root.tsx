@@ -1,4 +1,4 @@
-import "@fe-blog/styles/globals-base.css";
+import "@/styles/globals-base.css";
 import { createRootRoute, Outlet } from "@tanstack/solid-router";
 import { TanStackRouterDevtools } from "@tanstack/solid-router-devtools";
 

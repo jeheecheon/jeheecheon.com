@@ -1,4 +1,4 @@
-import { routeTree } from "@fe-blog/routeTree.gen";
+import { routeTree } from "@/routeTree.gen";
 import { createRouter as createTanStackRouter } from "@tanstack/solid-router";
 
 export function createRouter() {

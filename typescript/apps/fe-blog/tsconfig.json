@@ -3,7 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@fe-blog/*": ["./app/*"]
+      "@/*": ["./app/*"]
     }
   }
 }

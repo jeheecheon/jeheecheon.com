@@ -1,4 +1,4 @@
-import { createRouter } from "@fe-blog/router";
+import { createRouter } from "@/router";
 import { getRouterManifest } from "@tanstack/solid-start/router-manifest";
 import {
   createStartHandler,

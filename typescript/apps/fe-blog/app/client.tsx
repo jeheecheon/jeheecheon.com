@@ -1,6 +1,6 @@
 /// <reference types="vinxi/types/client" />
 
-import { createRouter } from "@fe-blog/router";
+import { createRouter } from "@/router";
 import { StartClient } from "@tanstack/solid-start";
 import { hydrate } from "solid-js/web";
 
