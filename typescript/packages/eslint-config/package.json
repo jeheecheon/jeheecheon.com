@@ -1,7 +1,6 @@
 {
   "name": "@packages/eslint-config",
   "type": "module",
-  "private": true,
   "exports": {
     "./base": "./base.ts",
     "./solid": "./solid.ts"

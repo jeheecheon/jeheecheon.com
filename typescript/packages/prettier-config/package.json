@@ -1,7 +1,6 @@
 {
   "name": "@packages/prettier-config",
   "type": "module",
-  "private": true,
   "exports": {
     "./base": "./base.mjs",
     "./front": "./front.mjs"

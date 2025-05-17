@@ -1,0 +1,6 @@
+{
+  "extends": "@packages/typescript-config/nest.json",
+  "compilerOptions": {
+    "outDir": "./dist"
+  }
+}

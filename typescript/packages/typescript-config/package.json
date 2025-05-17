@@ -1,4 +1,4 @@
 {
   "name": "@packages/typescript-config",
-  "private": true
+  "type": "module"
 }

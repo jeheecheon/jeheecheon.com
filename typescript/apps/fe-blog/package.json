@@ -1,5 +1,5 @@
 {
-  "name": "example-with-tailwindcss",
+  "name": "fe-blog",
   "type": "module",
   "scripts": {
     "dev": "vinxi dev",

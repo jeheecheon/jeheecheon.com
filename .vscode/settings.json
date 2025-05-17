@@ -10,5 +10,5 @@
   "eslint.workingDirectories": [{ "mode": "auto" }],
 
   // Typescript settings
-  "typescript.preferences.importModuleSpecifier": "project-relative"
+  "typescript.preferences.importModuleSpecifier": "non-relative"
 }
