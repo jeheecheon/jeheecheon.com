@@ -8,7 +8,7 @@
   "exports": {
     "./*": {
       "types": "./src/*.ts",
-      "default": "./dist/*.js"
+      "default": "./dist/src/*.js"
     }
   }
 }
