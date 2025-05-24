@@ -5,9 +5,15 @@ import {
   Index,
   JoinTable,
   ManyToMany,
+  OneToMany,
   PrimaryColumn,
   PrimaryGeneratedColumn,
+  type Relation,
 } from "typeorm";
+import { Comment } from "../comment/comment.entity.js";
+import { ExternalAuthentication } from "../external-uthentication/external-uthentication.entity.js";
+import { LikedComment } from "../liked-comment/liked-comment.entity.js";
+import { LikedPost } from "../liked-post/liked-post.entity.js";
 import { Role } from "../role/role.entity.js";
 
 @Entity("account", { schema: "public" })
@@ -43,20 +49,20 @@ export class Account {
       referencedColumnName: "id",
     },
   })
-  roles: Role[];
+  roles: Relation<Role>[];
 
-  // @OneToMany(() => Comment, (comment) => comment.account)
-  // comments: Comment[];
+  @OneToMany(() => Comment, (comment) => comment.account)
+  comments: Relation<Comment>[];
 
-  // @OneToMany(
-  //   () => ExternalAuthentication,
-  //   (externalAuthentication) => externalAuthentication.account,
-  // )
-  // externalAuthentications: ExternalAuthentication[];
+  @OneToMany(
+    () => ExternalAuthentication,
+    (externalAuthentication) => externalAuthentication.account,
+  )
+  externalAuthentications: Relation<ExternalAuthentication>[];
 
-  // @OneToMany(() => LikedComment, (likedComment) => likedComment.account)
-  // likedComments: LikedComment[];
+  @OneToMany(() => LikedComment, (likedComment) => likedComment.account)
+  likedComments: Relation<LikedComment>[];
 
-  // @OneToMany(() => LikedPost, (likedPost) => likedPost.account)
-  // likedPosts: LikedPost[];
+  @OneToMany(() => LikedPost, (likedPost) => likedPost.account)
+  likedPosts: Relation<LikedPost>[];
 }
