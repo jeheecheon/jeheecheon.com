@@ -12,7 +12,7 @@ export default createHandler(() => (
           <title>jeheecheon</title>
           {assets}
         </head>
-        <body>
+        <body class="dark">
           <div id="app">{children}</div>
           {scripts}
         </body>
