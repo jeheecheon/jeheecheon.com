@@ -1,11 +1,15 @@
+import type { Maybe } from "@packages/utils/types";
 import {
   Column,
+  CreateDateColumn,
   Entity,
-  Index,
+  ForeignKey,
   JoinColumn,
   ManyToMany,
   ManyToOne,
   OneToMany,
+  PrimaryColumn,
+  UpdateDateColumn,
   type Relation,
 } from "typeorm";
 import { Category } from "../category/category.entity.js";
@@ -13,36 +17,32 @@ import { Comment } from "../comment/comment.entity.js";
 import { Hashtag } from "../hashtag/hashtag.entity.js";
 import { LikedPost } from "../liked-post/liked-post.entity.js";
 
-@Index("post_pkey", ["id"], { unique: true })
 @Entity("post", { schema: "public" })
 export class Post {
-  @Column("uuid", {
-    primary: true,
-    name: "id",
-    default: () => "gen_random_uuid()",
-  })
+  @PrimaryColumn("uuid", { unique: true })
   id: string;
 
-  @Column("varchar", { name: "title", length: 50 })
+  @Column("varchar", { length: 50 })
   title: string;
 
-  @Column("text", { name: "content" })
+  @Column("text")
   content: string;
 
-  @Column("timestamp with time zone", {
-    name: "uploaded_at",
-    default: () => "CURRENT_TIMESTAMP",
-  })
+  @CreateDateColumn({ type: "timestamptz" })
   uploadedAt: Date;
 
-  @Column("timestamp with time zone", { name: "edited_at", nullable: true })
-  editedAt: Date | null;
+  @UpdateDateColumn({ type: "timestamptz", nullable: true })
+  editedAt?: Maybe<Date>;
 
-  @Column("varchar", { name: "cover", nullable: true, length: 256 })
-  cover: string | null;
+  @Column("varchar", { nullable: true, length: 256 })
+  cover?: Maybe<string>;
 
-  @Column("boolean", { name: "is_public", default: () => "false" })
+  @Column("boolean", { default: false })
   isPublic: boolean;
+
+  @Column("uuid", { nullable: true })
+  @ForeignKey(() => Category)
+  categoryId?: Maybe<string>;
 
   @OneToMany(() => Comment, (comment) => comment.post)
   comments: Relation<Comment>[];

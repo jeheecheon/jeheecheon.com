@@ -1,28 +1,33 @@
+import type { Maybe } from "@packages/utils/types";
 import {
   Column,
   Entity,
-  Index,
+  ForeignKey,
   JoinColumn,
   ManyToOne,
   OneToMany,
+  PrimaryColumn,
   type Relation,
 } from "typeorm";
 import { Post } from "../post/post.entity.js";
 
-@Index("category_pkey", ["id"], { unique: true })
 @Entity("category", { schema: "public" })
 export class Category {
-  @Column("boolean", { name: "is_bottom_level" })
-  isBottomLevel: boolean;
-
-  @Column("varchar", { primary: true, name: "id", length: 30 })
+  @PrimaryColumn("varchar", { length: 30, unique: true })
   id: string;
+
+  @Column("varchar", { length: 30, nullable: true })
+  @ForeignKey(() => Category)
+  parentCategoryId?: Maybe<string>;
+
+  @Column("boolean")
+  isBottomLevel: boolean;
 
   @ManyToOne(() => Category, (category) => category.categories, {
     onDelete: "SET NULL",
     onUpdate: "CASCADE",
   })
-  @JoinColumn([{ name: "parent_category_id", referencedColumnName: "id" }])
+  @JoinColumn({ referencedColumnName: "id" })
   parentCategory: Relation<Category>;
 
   @OneToMany(() => Category, (category) => category.parentCategory)

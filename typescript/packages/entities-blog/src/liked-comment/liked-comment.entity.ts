@@ -1,27 +1,26 @@
 import {
-  Column,
+  CreateDateColumn,
   Entity,
-  Index,
+  ForeignKey,
   JoinColumn,
   ManyToOne,
+  PrimaryColumn,
   type Relation,
 } from "typeorm";
 import { Account } from "../account/account.entity.js";
 import { Comment } from "../comment/comment.entity.js";
 
-@Index("liked_comment_pkey", ["accountId", "commentId"], { unique: true })
 @Entity("liked_comment", { schema: "public" })
 export class LikedComment {
-  @Column("uuid", { primary: true, name: "comment_id" })
+  @PrimaryColumn("uuid")
+  @ForeignKey(() => Comment)
   commentId: string;
 
-  @Column("uuid", { primary: true, name: "account_id" })
+  @PrimaryColumn("uuid")
+  @ForeignKey(() => Account)
   accountId: string;
 
-  @Column("timestamp with time zone", {
-    name: "created_at",
-    default: () => "CURRENT_TIMESTAMP",
-  })
+  @CreateDateColumn({ type: "timestamptz" })
   createdAt: Date;
 
   @ManyToOne(() => Account, (account) => account.likedComments, {

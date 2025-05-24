@@ -1,6 +1,5 @@
 import {
   Entity,
-  Index,
   ManyToMany,
   PrimaryColumn,
   PrimaryGeneratedColumn,
@@ -9,7 +8,6 @@ import {
 import { Account } from "../account/account.entity.js";
 
 @Entity("role", { schema: "public" })
-@Index(["id", "name"], { unique: true })
 export class Role {
   @PrimaryGeneratedColumn("increment", { type: "int4" })
   id: number;

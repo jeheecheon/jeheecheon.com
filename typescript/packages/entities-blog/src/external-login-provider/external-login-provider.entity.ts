@@ -1,21 +1,18 @@
 import {
   Column,
   Entity,
-  Index,
   OneToMany,
   PrimaryGeneratedColumn,
   type Relation,
 } from "typeorm";
-import { ExternalAuthentication } from "../external-uthentication/external-uthentication.entity.js";
+import { ExternalAuthentication } from "../external-authentication/external-authentication.entity.js";
 
-@Index("external_login_provider_pkey", ["id"], { unique: true })
-@Index("external_login_provider_name_key", ["name"], { unique: true })
 @Entity("external_login_provider", { schema: "public" })
 export class ExternalLoginProvider {
-  @PrimaryGeneratedColumn({ type: "integer", name: "id" })
+  @PrimaryGeneratedColumn("increment")
   id: number;
 
-  @Column("varchar", { name: "name", unique: true, length: 40 })
+  @Column("varchar", { unique: true, length: 40 })
   name: string;
 
   @OneToMany(

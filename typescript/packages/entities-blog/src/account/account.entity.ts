@@ -1,23 +1,21 @@
+import type { Maybe } from "@packages/utils/types";
 import {
   Column,
   CreateDateColumn,
   Entity,
-  Index,
   JoinTable,
   ManyToMany,
   OneToMany,
-  PrimaryColumn,
   PrimaryGeneratedColumn,
   type Relation,
 } from "typeorm";
 import { Comment } from "../comment/comment.entity.js";
-import { ExternalAuthentication } from "../external-uthentication/external-uthentication.entity.js";
+import { ExternalAuthentication } from "../external-authentication/external-authentication.entity.js";
 import { LikedComment } from "../liked-comment/liked-comment.entity.js";
 import { LikedPost } from "../liked-post/liked-post.entity.js";
 import { Role } from "../role/role.entity.js";
 
 @Entity("account", { schema: "public" })
-@Index(["id", "normalizedEmail"], { unique: true })
 export class Account {
   @PrimaryGeneratedColumn("uuid")
   id: string;
@@ -25,14 +23,14 @@ export class Account {
   @Column("varchar", { length: 254 })
   email: string;
 
-  @PrimaryColumn("varchar", { length: 254, unique: true })
+  @Column("varchar", { length: 254, unique: true })
   normalizedEmail: string;
 
   @Column("bool")
   isEmailConfirmed: boolean;
 
   @Column("varchar", { length: 256, nullable: true })
-  avatar?: string;
+  avatar?: Maybe<string>;
 
   @CreateDateColumn({ type: "timestamptz" })
   createdAt: Date;

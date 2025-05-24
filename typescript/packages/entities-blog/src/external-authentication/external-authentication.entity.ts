@@ -1,35 +1,27 @@
 import {
   Column,
   Entity,
-  Index,
+  ForeignKey,
   JoinColumn,
   ManyToOne,
+  PrimaryColumn,
   type Relation,
 } from "typeorm";
 import { Account } from "../account/account.entity.js";
 import { ExternalLoginProvider } from "../external-login-provider/external-login-provider.entity.js";
 
-@Index(
-  "external_authentication_account_id_from_provider_key",
-  ["accountIdFromProvider"],
-  { unique: true },
-)
-@Index(
-  "external_authentication_pkey",
-  ["accountIdFromProvider", "providerId"],
-  { unique: true },
-)
 @Entity("external_authentication", { schema: "public" })
 export class ExternalAuthentication {
-  @Column("integer", { primary: true, name: "provider_id" })
+  @PrimaryColumn("integer", { unique: true })
+  @ForeignKey(() => ExternalLoginProvider)
   providerId: number;
 
-  @Column("varchar", {
-    primary: true,
-    name: "account_id_from_provider",
-    length: 256,
-  })
+  @PrimaryColumn("varchar", { unique: true, length: 256 })
   accountIdFromProvider: string;
+
+  @Column("uuid")
+  @ForeignKey(() => Account)
+  accountId: string;
 
   @ManyToOne(() => Account, (account) => account.externalAuthentications, {
     onDelete: "CASCADE",
