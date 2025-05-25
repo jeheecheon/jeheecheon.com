@@ -14,6 +14,6 @@
   }
 
   body {
-    @apply font-brand dark:bg-zinc-950 dark:text-zinc-200;
+    @apply font-brand dark:bg-zinc-900 dark:text-zinc-200 dark:md:bg-zinc-950;
   }
 }
