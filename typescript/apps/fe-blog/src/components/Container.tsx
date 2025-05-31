@@ -9,7 +9,7 @@ const Container: ParentComponent<{
   return (
     <Dynamic
       component={props.as || "div"}
-      class={cn("mx-auto max-w-7xl px-4 md:px-8", props.class)}
+      class={cn("mx-auto max-w-7xl px-5 md:px-8", props.class)}
     >
       {props.children}
     </Dynamic>

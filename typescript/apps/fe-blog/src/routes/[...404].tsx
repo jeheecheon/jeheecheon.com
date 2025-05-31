@@ -1,3 +1,7 @@
-export default function NotFound() {
-  return <main class="text-gray-600">Not found</main>;
-}
+import { type VoidComponent } from "solid-js";
+
+const NotFound: VoidComponent = () => {
+  return <div>Not found</div>;
+};
+
+export default NotFound;

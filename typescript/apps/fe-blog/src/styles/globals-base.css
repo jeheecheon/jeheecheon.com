@@ -5,7 +5,10 @@
 @theme {
   --font-brand: "Pretendard", sans-serif;
 
-  --padding-base: 6rem;
+  --padding-base: 8rem;
+
+  --breakpoint-xs: 425px;
+  --breakpoint-2xs: 375px;
 }
 
 @layer base {

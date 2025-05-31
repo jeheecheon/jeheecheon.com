@@ -1,3 +1,13 @@
-export default function Home() {
-  return <main class="text-red-500">Home</main>;
-}
+import type { VoidComponent } from "solid-js";
+import Container from "~/components/Container";
+import Papaer from "~/components/Papaer";
+
+const Home: VoidComponent = () => {
+  return (
+    <Container class="h-full" as="main">
+      <Papaer class="py-base">Hello, World!</Papaer>
+    </Container>
+  );
+};
+
+export default Home;

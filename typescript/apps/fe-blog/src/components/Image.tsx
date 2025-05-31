@@ -25,18 +25,19 @@ const Image: VoidComponent<Props> = (props) => {
 
       <Portal>
         <PresenceTransition
-          class="fixed inset-0 z-50 size-full bg-black/85"
+          class="fixed inset-0 z-50 size-full dark:bg-black/85"
           visible={previewVisible()}
           transitionKey={previewVisible().toString()}
           option="fadeInOut"
         >
+          <button
+            class="absolute top-4 left-4 z-10 cursor-pointer"
+            onClick={handleTogglePreview(false)}
+          >
+            <Icon class="size-7 dark:text-orange-100" path={xMark} />
+          </button>
+
           <div class="relative mx-auto size-full max-w-7xl">
-            <button
-              class="absolute top-4 left-4 cursor-pointer"
-              onClick={handleTogglePreview(false)}
-            >
-              <Icon class="size-7 text-orange-100" path={xMark} />
-            </button>
             <PreloadedImage
               {...props}
               class="size-full object-contain"
