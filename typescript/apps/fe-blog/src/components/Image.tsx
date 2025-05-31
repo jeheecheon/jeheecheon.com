@@ -1,9 +1,9 @@
-import { Icon } from "solid-heroicons";
 import { xMark } from "solid-heroicons/outline";
-import { createSignal, Show, VoidComponent, type JSX } from "solid-js";
+import { createSignal, VoidComponent, type JSX } from "solid-js";
 import { Portal } from "solid-js/web";
-import { Motion, Presence } from "solid-motionone";
+import Icon from "~/components/Icon";
 import PreloadedImage from "~/components/PreloadedImage";
+import PresenceTransition from "~/components/PresenceTransition";
 import Skeleton from "~/components/Skeleton";
 import { cn } from "~/utils/class-name";
 
@@ -24,32 +24,26 @@ const Image: VoidComponent<Props> = (props) => {
       />
 
       <Portal>
-        <Presence initial>
-          <Show when={previewVisible()}>
-            <Motion.section
-              class="fixed inset-0 z-50 bg-black/95"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
+        <PresenceTransition
+          class="fixed inset-0 z-50 size-full bg-black/85"
+          visible={previewVisible()}
+          transitionKey={previewVisible().toString()}
+          option="fadeInOut"
+        >
+          <div class="relative mx-auto size-full max-w-7xl">
+            <button
+              class="absolute top-4 left-4 cursor-pointer"
+              onClick={handleTogglePreview(false)}
             >
-              <div class="relative mx-auto size-full max-w-7xl">
-                <button class="absolute top-4 left-4 cursor-pointer">
-                  <Icon
-                    class="size-7 text-orange-100"
-                    path={xMark}
-                    onClick={handleTogglePreview(false)}
-                  />
-                </button>
-                <PreloadedImage
-                  {...props}
-                  class="size-full object-contain"
-                  renderFallback={Skeleton}
-                />
-              </div>
-            </Motion.section>
-          </Show>
-        </Presence>
+              <Icon class="size-7 text-orange-100" path={xMark} />
+            </button>
+            <PreloadedImage
+              {...props}
+              class="size-full object-contain"
+              renderFallback={Skeleton}
+            />
+          </div>
+        </PresenceTransition>
       </Portal>
     </>
   );

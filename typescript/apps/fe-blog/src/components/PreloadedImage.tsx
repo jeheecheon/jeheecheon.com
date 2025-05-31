@@ -34,7 +34,7 @@ const PreloadedImage: VoidComponent<Props> = (props) => {
     <>
       <Show when={loading()}>{props.renderFallback?.(props)}</Show>
       <Switch>
-        <Match when={props.src}>
+        <Match when={props.src} keyed>
           <img
             {...props}
             class={cn(
