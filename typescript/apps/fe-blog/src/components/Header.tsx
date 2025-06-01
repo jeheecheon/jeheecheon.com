@@ -57,7 +57,7 @@ const Header: VoidComponent<{ class?: string }> = (props) => {
               <li>
                 <ConditionalLink
                   class={cn(
-                    "text-sm font-medium text-stone-300 transition-colors duration-300 hover:underline hover:underline-offset-4",
+                    "text-sm font-medium text-stone-400 transition-colors duration-300 hover:text-white hover:underline-offset-4",
                     link?.isActive &&
                       "font-semibold dark:text-orange-300 dark:group-hover/nav-box:text-orange-400",
                   )}
@@ -91,8 +91,8 @@ const Header: VoidComponent<{ class?: string }> = (props) => {
   function handleToggleTheme(theme?: Theme) {
     return () => {
       setTheme((prev) => {
-        if (prev === Theme.LIGHT) {
-          alert("Light theme is not available yet");
+        if (theme === Theme.LIGHT || prev === Theme.DARK) {
+          alert("Light theme is not supported yet 👀");
         }
 
         return theme ?? (prev === Theme.LIGHT ? Theme.DARK : Theme.LIGHT);
