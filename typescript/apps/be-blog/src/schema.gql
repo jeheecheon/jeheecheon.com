@@ -1,0 +1,27 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Post {
+  id: String!
+  title: String!
+  content: String!
+  uploadedAt: Timestamp!
+  editedAt: Timestamp
+  cover: String
+  isPublic: Boolean!
+  categoryId: String
+}
+
+"""
+`Date` type as integer. Type represents date and time as number of milliseconds from start of UNIX epoch.
+"""
+scalar Timestamp
+
+type Query {
+  post(filter: GetPostFilter!): Post!
+}
+
+input GetPostFilter {
+  id: String!
+}
