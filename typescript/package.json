@@ -13,12 +13,14 @@
     "check-types": "turbo run check-types"
   },
   "dependencies": {
-    "@packages/utils": "workspace:*"
+    "@packages/utils": "workspace:*",
+    "lodash-es": "^4.17.21"
   },
   "devDependencies": {
     "@packages/eslint-config": "workspace:*",
     "@packages/prettier-config": "workspace:*",
     "@packages/typescript-config": "workspace:*",
+    "@types/lodash-es": "^4.17.12",
     "eslint": "^9.26.0",
     "prettier": "^3.5.3",
     "prettier-plugin-organize-imports": "^4.1.0",
