@@ -1,12 +1,8 @@
-import { clientOnly } from "@solidjs/start";
 import { type VoidComponent } from "solid-js";
 import CoinPriceGraph from "~/components/CoinPriceGraph";
 import Container from "~/components/Container";
 import Papaer from "~/components/Papaer";
-
-const RecentPostsGrid = clientOnly(
-  () => import("~/components/RecentPostsGrid"),
-);
+import RecentPostsGrid from "~/components/RecentPostsGrid";
 
 const Home: VoidComponent = () => {
   return (

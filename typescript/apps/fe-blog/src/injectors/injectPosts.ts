@@ -11,7 +11,7 @@ export type InjectPostsArgs = {
 };
 
 export const injectPosts = async (args: InjectPostsArgs = {}) => {
-  const { posts } = await request<{ posts: Post[] }>({
+  const data = await request<{ posts: Post[] }>({
     url: configs.BLOG_GRAPHQL_URL,
     document: LIST_POSTS,
     variables: {
@@ -21,5 +21,5 @@ export const injectPosts = async (args: InjectPostsArgs = {}) => {
     },
   });
 
-  return posts;
+  return data;
 };

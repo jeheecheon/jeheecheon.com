@@ -1,16 +1,15 @@
-import type { DateLike, Nullable } from "@packages/common/types/misc";
 import { clientOnly } from "@solidjs/start";
 import dayjs from "dayjs";
 import { capitalize } from "lodash-es";
 import { noSymbol } from "solid-heroicons/solid";
-import { createEffect, createSignal, Show, type VoidComponent } from "solid-js";
+import { Show, type VoidComponent } from "solid-js";
 import { Spinner, SpinnerType } from "solid-spinner";
 import toast from "solid-toast";
 import Button from "~/components/Button";
 import Icon from "~/components/Icon";
 import PresenceTransition from "~/components/PresenceTransition";
 import Skeleton from "~/components/Skeleton";
-import { useCoinPriceHistory } from "~/hooks/useCoinPrices";
+import { useCoinChartData } from "~/hooks/useCoinChartData";
 import { cn } from "~/utils/class-name";
 
 const ApexCharts = clientOnly(() =>
@@ -24,9 +23,7 @@ const CoinPriceGraph: VoidComponent<{
   coinId: string;
   days: number;
 }> = (props) => {
-  const [refreshedAt, setRefreshedAt] = createSignal<Nullable<DateLike>>(null);
-
-  const historyQuery = useCoinPriceHistory(() => ({
+  const historyQuery = useCoinChartData(() => ({
     coinId: props.coinId,
     days: props.days,
   }));
@@ -36,20 +33,13 @@ const CoinPriceGraph: VoidComponent<{
   const titleColor = "oklch(83.7% 0.128 66.29)";
   const labelColor = "#383838";
 
-  createEffect(() => {
-    if (!historyQuery.isSuccess) {
-      return;
-    }
-
-    setRefreshedAt(dayjs());
-  });
-
   return (
     <div class={cn("relative h-96", props.class)}>
       <div class="absolute top-0 right-3 z-10 flex items-end gap-x-4">
-        <Show when={historyQuery.isSuccess && refreshedAt()}>
+        <Show when={historyQuery.isSuccess}>
           <span class="text-sm text-orange-300 not-md:hidden">
-            Last updated {dayjs(refreshedAt()).format("hh:mm:ss A")}
+            Last updated{" "}
+            {dayjs(historyQuery.data?.refreshedAt).format("hh:mm:ss A")}
           </span>
         </Show>
 
@@ -154,10 +144,10 @@ const CoinPriceGraph: VoidComponent<{
           {
             name: `${capitalize(props.coinId)} Price (USD)`,
             data: historyQuery.isSuccess
-              ? historyQuery.data?.map((item) => [
+              ? (historyQuery.data?.prices.map((item) => [
                   item.timestamp.getTime(),
                   item.price,
-                ])
+                ]) ?? [])
               : [],
           },
         ]}
@@ -184,16 +174,11 @@ const CoinPriceGraph: VoidComponent<{
   );
 
   function handleReload() {
-    toast.promise(
-      historyQuery.refetch().then(() => {
-        setRefreshedAt(dayjs());
-      }),
-      {
-        loading: "Reloading...",
-        success: "History updated",
-        error: "Failed to update history",
-      },
-    );
+    toast.promise(historyQuery.refetch(), {
+      loading: "Reloading...",
+      success: "History updated",
+      error: "Failed to update history",
+    });
   }
 };
 
