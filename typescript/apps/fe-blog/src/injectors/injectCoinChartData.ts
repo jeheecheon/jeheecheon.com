@@ -35,7 +35,7 @@ export const injectCoinChartData = async (args: InjectCoinChartDataArgs) => {
         timestamp,
         totalVolume,
       })),
-      updatedAt: new Date(),
+      fetchedAt: new Date(),
     }))
     .catch((error) => {
       console.error(error);

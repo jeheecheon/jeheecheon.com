@@ -26,5 +26,5 @@ export type CoinChartDataWithRefreshedAt = {
     timestamp: Date;
     totalVolume: number;
   }[];
-  updatedAt: Date;
+  fetchedAt: Date;
 };
