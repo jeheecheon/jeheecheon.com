@@ -1,4 +1,4 @@
-import type { DateLike, Nullable } from "@packages/utils/types";
+import type { DateLike, Nullable } from "@packages/common/types/misc";
 import dayjs from "dayjs";
 import { capitalize } from "lodash-es";
 import { SolidApexCharts } from "solid-apexcharts";
@@ -46,6 +46,22 @@ const CoinPriceGraph: VoidComponent<{
 
   return (
     <div class={cn("relative", props.class)}>
+      <div class="absolute top-0 right-3 flex items-end gap-x-4">
+        <Show when={refreshedAt()}>
+          <span class="text-sm text-orange-300 not-md:hidden">
+            Last updated {dayjs(refreshedAt()).format("hh:mm:ss A")}
+          </span>
+        </Show>
+
+        <Button
+          size="sm"
+          loading={historyQuery.isLoading}
+          onClick={handleReload}
+        >
+          Reload
+        </Button>
+      </div>
+
       <SolidApexCharts
         width="100%"
         height="100%"
@@ -160,22 +176,6 @@ const CoinPriceGraph: VoidComponent<{
           color={lineColor}
         />
       </Show>
-
-      <div class="absolute top-0 right-3 flex items-end gap-x-4">
-        <Show when={refreshedAt()}>
-          <span class="text-sm text-orange-300">
-            Last updated {dayjs(refreshedAt()).format("hh:mm:ss A")}
-          </span>
-        </Show>
-
-        <Button
-          size="sm"
-          loading={historyQuery.isLoading}
-          onClick={handleReload}
-        >
-          Reload
-        </Button>
-      </div>
     </div>
   );
 
