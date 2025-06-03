@@ -39,7 +39,7 @@ const CoinPriceGraph: VoidComponent<{
         <Show when={historyQuery.isSuccess}>
           <span class="text-sm text-orange-300 not-md:hidden">
             Last updated{" "}
-            {dayjs(historyQuery.data?.refreshedAt).format("hh:mm:ss A")}
+            {dayjs(historyQuery.data?.updatedAt).format("hh:mm:ss A")}
           </span>
         </Show>
 
