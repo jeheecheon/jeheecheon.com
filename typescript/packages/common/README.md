@@ -1,3 +1,3 @@
-# `@packages/utils`
+# `@packages/common`
 
 Collection of internal prettier configurations.

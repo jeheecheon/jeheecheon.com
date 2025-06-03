@@ -1,4 +1,4 @@
-import type { Optional } from "@packages/utils/types";
+import type { Optional } from "@packages/common/types/misc";
 import type { PaginationInput } from "./dto.js";
 
 const DEFAULT_TAKE = 10;

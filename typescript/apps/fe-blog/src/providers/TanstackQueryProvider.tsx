@@ -1,4 +1,4 @@
-import { MINUTE } from "@packages/utils/time";
+import { MINUTE } from "@packages/common/utils/time";
 import { QueryClient, QueryClientProvider } from "@tanstack/solid-query";
 import { SolidQueryDevtools } from "@tanstack/solid-query-devtools";
 import { type ParentComponent } from "solid-js";

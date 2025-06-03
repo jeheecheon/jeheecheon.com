@@ -1,4 +1,4 @@
-import { type Nullable } from "@packages/utils/types";
+import { type Nullable } from "@packages/common/types/misc";
 import {
   createEffect,
   createSignal,

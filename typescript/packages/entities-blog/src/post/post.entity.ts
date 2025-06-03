@@ -1,5 +1,5 @@
 import { Field, ObjectType } from "@nestjs/graphql";
-import type { Maybe } from "@packages/utils/types";
+import type { Maybe } from "@packages/common/types/misc";
 import {
   Column,
   CreateDateColumn,

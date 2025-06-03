@@ -13,7 +13,7 @@
     "check-types": "turbo run check-types"
   },
   "dependencies": {
-    "@packages/utils": "workspace:*",
+    "@packages/common": "workspace:*",
     "dayjs": "^1.11.13",
     "lodash-es": "^4.17.21"
   },

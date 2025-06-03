@@ -2,7 +2,7 @@ import { Args, Query, Resolver } from "@nestjs/graphql";
 import { Post } from "@packages/entities-blog/post/post.entity";
 import { PaginationInput } from "../../utils/dto.js";
 import { handlePaginationParams } from "../../utils/pagination.js";
-import { GetPostFilter, type ListPostsFilter } from "./post.dto.js";
+import { GetPostFilter, ListPostsFilter } from "./post.dto.js";
 import { PostService } from "./post.service.js";
 
 @Resolver(() => Post)

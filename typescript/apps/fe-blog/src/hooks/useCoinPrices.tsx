@@ -1,4 +1,4 @@
-import type { Maybe } from "@packages/utils/types";
+import type { Maybe } from "@packages/common/types/misc";
 import { useQuery } from "@tanstack/solid-query";
 import { coingeckoClient } from "~/axios/coingecko-client";
 import type { ChartData, PriceHistory } from "~/types/coin";

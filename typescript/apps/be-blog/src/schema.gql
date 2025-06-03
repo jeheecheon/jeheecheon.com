@@ -20,8 +20,19 @@ scalar Timestamp
 
 type Query {
   post(filter: GetPostFilter!): Post!
+  posts(filter: ListPostsFilter, pagination: PaginationInput): [Post!]!
 }
 
 input GetPostFilter {
   id: String!
+}
+
+input ListPostsFilter {
+  categoryId: String
+  isPublic: Boolean
+}
+
+input PaginationInput {
+  skip: Int!
+  take: Int!
 }

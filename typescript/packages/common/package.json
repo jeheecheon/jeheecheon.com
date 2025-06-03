@@ -1,5 +1,5 @@
 {
-  "name": "@packages/utils",
+  "name": "@packages/common",
   "type": "module",
   "scripts": {
     "dev": "tsc --watch",
