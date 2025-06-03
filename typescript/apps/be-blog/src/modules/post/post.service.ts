@@ -1,8 +1,11 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Post } from "@packages/entities-blog/post/post.entity";
-import { Repository } from "typeorm";
-import type { IDefaultGetQueryOptions } from "../../utils/types.js";
+import { Repository, type FindOptionsWhere } from "typeorm";
+import type {
+  IDefaultGetQueryOptions,
+  IDefaultListQueryOptions,
+} from "../../utils/types.js";
 
 @Injectable()
 export class PostService {
@@ -21,6 +24,29 @@ export class PostService {
       where: {
         id: args.id,
       },
+      ...options,
+    });
+  }
+
+  async listPosts(
+    args: {
+      categoryId?: string;
+      isPublic?: boolean;
+    },
+    options?: IDefaultListQueryOptions<Post>,
+  ) {
+    const where: FindOptionsWhere<Post> = {};
+
+    if (args.categoryId) {
+      where.categoryId = args.categoryId;
+    }
+
+    if (args.isPublic) {
+      where.isPublic = args.isPublic;
+    }
+
+    return this.postRepository.find({
+      where,
       ...options,
     });
   }
