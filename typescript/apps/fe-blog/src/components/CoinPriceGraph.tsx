@@ -1,26 +1,26 @@
 import type { DateLike, Nullable } from "@packages/common/types/misc";
+import { clientOnly } from "@solidjs/start";
 import dayjs from "dayjs";
 import { capitalize } from "lodash-es";
-import { SolidApexCharts } from "solid-apexcharts";
 import { noSymbol } from "solid-heroicons/solid";
-import {
-  createEffect,
-  createSignal,
-  Show,
-  VoidComponent,
-  type JSX,
-} from "solid-js";
+import { createEffect, createSignal, Show, type VoidComponent } from "solid-js";
 import { Spinner, SpinnerType } from "solid-spinner";
 import toast from "solid-toast";
 import Button from "~/components/Button";
 import Icon from "~/components/Icon";
 import PresenceTransition from "~/components/PresenceTransition";
+import Skeleton from "~/components/Skeleton";
 import { useCoinPriceHistory } from "~/hooks/useCoinPrices";
 import { cn } from "~/utils/class-name";
 
+const ApexCharts = clientOnly(() =>
+  import("solid-apexcharts").then((module) => ({
+    default: module.SolidApexCharts,
+  })),
+);
+
 const CoinPriceGraph: VoidComponent<{
   class?: string;
-  fallback?: JSX.Element;
   coinId: string;
   days: number;
 }> = (props) => {
@@ -45,24 +45,27 @@ const CoinPriceGraph: VoidComponent<{
   });
 
   return (
-    <div class={cn("relative", props.class)}>
-      <div class="absolute top-0 right-3 flex items-end gap-x-4">
-        <Show when={refreshedAt()}>
+    <div class={cn("relative h-96", props.class)}>
+      <div class="absolute top-0 right-3 z-10 flex items-end gap-x-4">
+        <Show when={historyQuery.isSuccess && refreshedAt()}>
           <span class="text-sm text-orange-300 not-md:hidden">
             Last updated {dayjs(refreshedAt()).format("hh:mm:ss A")}
           </span>
         </Show>
 
-        <Button
-          size="sm"
-          loading={historyQuery.isLoading}
-          onClick={handleReload}
-        >
-          Reload
-        </Button>
+        <Show when={historyQuery.isSuccess}>
+          <Button
+            size="sm"
+            loading={historyQuery.isLoading}
+            onClick={handleReload}
+          >
+            Reload
+          </Button>
+        </Show>
       </div>
 
-      <SolidApexCharts
+      <ApexCharts
+        fallback={<Skeleton class="size-full rounded-md" />}
         width="100%"
         height="100%"
         type="line"
@@ -150,28 +153,29 @@ const CoinPriceGraph: VoidComponent<{
         series={[
           {
             name: `${capitalize(props.coinId)} Price (USD)`,
-            data:
-              historyQuery.data?.map((item) => [
-                item.timestamp.getTime(),
-                item.price,
-              ]) || [],
+            data: historyQuery.isSuccess
+              ? historyQuery.data?.map((item) => [
+                  item.timestamp.getTime(),
+                  item.price,
+                ])
+              : [],
           },
         ]}
       />
 
       <PresenceTransition
-        class="absolute inset-0 flex cursor-not-allowed items-center justify-center gap-x-1 rounded-lg select-none dark:text-orange-800"
+        class="absolute-center cursor-not-allowed rounded-lg dark:text-orange-800"
         visible={historyQuery.isError}
         transitionKey="coin-price-graph"
         option="fadeInOut"
       >
-        <Icon class="size-4" path={noSymbol} />
-        <p class="text-sm">No data available</p>
+        <Icon class="-mt-0.5 inline-block size-4" path={noSymbol} />
+        <p class="ml-1 inline-block text-sm">No data available</p>
       </PresenceTransition>
 
       <Show when={historyQuery.isLoading}>
         <Spinner
-          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          class="absolute-center"
           type={SpinnerType.puff}
           color={lineColor}
         />

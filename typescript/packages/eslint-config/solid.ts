@@ -15,6 +15,9 @@ export default ts.config(
         ...globals.node,
       },
     },
+    rules: {
+      "no-empty-pattern": "off",
+    },
   },
   eslintPluginPrettierRecommended
 );

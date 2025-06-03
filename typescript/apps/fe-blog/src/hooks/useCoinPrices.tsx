@@ -1,5 +1,6 @@
 import type { Maybe } from "@packages/common/types/misc";
 import { useQuery } from "@tanstack/solid-query";
+import { createClientSignal } from "solid-use/client-only";
 import { coingeckoClient } from "~/axios/coingecko-client";
 import type { ChartData, PriceHistory } from "~/types/coin";
 
@@ -7,6 +8,7 @@ export const useCoinPriceHistory = (
   argsFn: () => { coinId: string; days: number; precision?: number },
 ) => {
   const { coinId, days, precision = 2 } = argsFn();
+  const isClient = createClientSignal();
 
   const query = useQuery<Maybe<ChartData>, Error, PriceHistory>(() => ({
     queryKey: ["coin-price-graph", `${coinId}-${days}-${precision}`],
@@ -29,6 +31,7 @@ export const useCoinPriceHistory = (
         timestamp: new Date(timestamp),
         price,
       })) ?? [],
+    enabled: isClient(),
   }));
 
   return query;
