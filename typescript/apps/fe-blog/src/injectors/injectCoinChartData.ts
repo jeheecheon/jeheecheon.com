@@ -1,5 +1,9 @@
 import { coingeckoClient } from "~/axios/coingecko-client";
-import type { RawCoinChartData } from "~/types/coin";
+import {
+  rawCoinChartDataSchema,
+  type CoinChartDataWithRefreshedAt,
+  type RawCoinChartData,
+} from "~/types/coin";
 
 export type InjectCoinChartDataArgs = {
   coinId: string;
@@ -8,7 +12,7 @@ export type InjectCoinChartDataArgs = {
 };
 
 export const injectCoinChartData = async (args: InjectCoinChartDataArgs) => {
-  const data = await coingeckoClient
+  return coingeckoClient
     .get<RawCoinChartData>(`/coins/${args.coinId}/market_chart`, {
       params: {
         vs_currency: "usd",
@@ -16,11 +20,25 @@ export const injectCoinChartData = async (args: InjectCoinChartDataArgs) => {
         precision: args.precision ?? 2,
       },
     })
-    .then((res) => res.data)
+    .then<RawCoinChartData>((res) => res.data)
+    .then(rawCoinChartDataSchema.parse)
+    .then<CoinChartDataWithRefreshedAt>((data) => ({
+      marketCaps: data.market_caps.map(([timestamp, marketCap]) => ({
+        timestamp,
+        marketCap,
+      })),
+      prices: data.prices.map(([timestamp, price]) => ({
+        timestamp,
+        price,
+      })),
+      totalVolumes: data.total_volumes.map(([timestamp, totalVolume]) => ({
+        timestamp,
+        totalVolume,
+      })),
+      refreshedAt: new Date(),
+    }))
     .catch((error) => {
       console.error(error);
       return null;
     });
-
-  return data;
 };

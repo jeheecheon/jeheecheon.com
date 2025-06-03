@@ -1,10 +1,17 @@
-export type RawCoinCharItem = [number, number];
+import { z } from "zod";
 
-export type RawCoinChartData = {
-  prices: RawCoinCharItem[];
-  market_caps: RawCoinCharItem[];
-  total_volumes: RawCoinCharItem[];
-};
+export const rawCoinChartItemSchema = z.tuple([
+  z.number().transform((val) => new Date(val)),
+  z.number(),
+]);
+export type RawCoinChartItem = z.infer<typeof rawCoinChartItemSchema>;
+
+export const rawCoinChartDataSchema = z.object({
+  prices: z.array(rawCoinChartItemSchema),
+  market_caps: z.array(rawCoinChartItemSchema),
+  total_volumes: z.array(rawCoinChartItemSchema),
+});
+export type RawCoinChartData = z.infer<typeof rawCoinChartDataSchema>;
 
 export type CoinChartDataWithRefreshedAt = {
   prices: {

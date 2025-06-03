@@ -17,6 +17,9 @@ importers:
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
+      zod:
+        specifier: ^3.25.49
+        version: 3.25.49
     devDependencies:
       '@packages/eslint-config':
         specifier: workspace:*
@@ -7265,6 +7268,9 @@ packages:
 
   zod@3.24.4:
     resolution: {integrity: sha512-OdqJE9UDRPwWsrHjLN2F8bPxvwJBK22EHLWtanu0LSYr5YqzsaaW3RMgmjwr8Rypg5k+meEJdSPXJZXE/yqOMg==}
+
+  zod@3.25.49:
+    resolution: {integrity: sha512-JMMPMy9ZBk3XFEdbM3iL1brx4NUSejd6xr3ELrrGEfGb355gjhiAWtG3K5o+AViV/3ZfkIrCzXsZn6SbLwTR8Q==}
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
@@ -14986,5 +14992,7 @@ snapshots:
       readable-stream: 4.7.0
 
   zod@3.24.4: {}
+
+  zod@3.25.49: {}
 
   zwitch@2.0.4: {}
