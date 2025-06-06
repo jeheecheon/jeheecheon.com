@@ -12,12 +12,6 @@
 }
 
 @layer base {
-  html,
-  body,
-  #app {
-    @apply h-full;
-  }
-
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     @apply cursor-pointer;

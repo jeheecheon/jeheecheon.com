@@ -2,7 +2,7 @@ import { clientOnly } from "@solidjs/start";
 import dayjs from "dayjs";
 import { capitalize } from "lodash-es";
 import { noSymbol } from "solid-heroicons/solid";
-import { Show, type VoidComponent } from "solid-js";
+import { type VoidComponent } from "solid-js";
 import { Spinner, SpinnerType } from "solid-spinner";
 import toast from "solid-toast";
 import Button from "~/components/Button";
@@ -36,14 +36,22 @@ const CoinPriceGraph: VoidComponent<{
   return (
     <div class={cn("relative h-96", props.class)}>
       <div class="absolute top-0 right-3 z-10 flex items-end gap-x-4">
-        <Show when={historyQuery.isSuccess}>
-          <span class="text-sm text-orange-300 not-md:hidden">
-            Last updated{" "}
-            {dayjs(historyQuery.data?.fetchedAt).format("hh:mm:ss A")}
-          </span>
-        </Show>
+        <PresenceTransition
+          as="span"
+          class="text-sm text-orange-300 not-md:hidden"
+          transitionKey={`last-updated-label-${historyQuery.isSuccess}`}
+          visible={historyQuery.isSuccess}
+          option="fadeInOut"
+        >
+          Last updated{" "}
+          {dayjs(historyQuery.data?.fetchedAt).format("hh:mm:ss A")}
+        </PresenceTransition>
 
-        <Show when={historyQuery.isSuccess}>
+        <PresenceTransition
+          transitionKey={`reload-button-${historyQuery.isSuccess}`}
+          visible={historyQuery.isSuccess}
+          option="fadeInOut"
+        >
           <Button
             size="sm"
             loading={historyQuery.isLoading}
@@ -51,7 +59,7 @@ const CoinPriceGraph: VoidComponent<{
           >
             Reload
           </Button>
-        </Show>
+        </PresenceTransition>
       </div>
 
       <ApexCharts
@@ -156,20 +164,24 @@ const CoinPriceGraph: VoidComponent<{
       <PresenceTransition
         class="absolute-center cursor-not-allowed rounded-lg dark:text-orange-800"
         visible={historyQuery.isError}
-        transitionKey="coin-price-graph"
+        transitionKey={`coin-price-graph-error-${historyQuery.isError}`}
         option="fadeInOut"
       >
         <Icon class="-mt-0.5 inline-block size-4" path={noSymbol} />
         <p class="ml-1 inline-block text-sm">No data available</p>
       </PresenceTransition>
 
-      <Show when={historyQuery.isLoading}>
+      <PresenceTransition
+        visible={historyQuery.isLoading}
+        transitionKey={`coin-price-graph-loading-${historyQuery.isLoading}`}
+        option="fadeInOut"
+      >
         <Spinner
           class="absolute-center"
           type={SpinnerType.puff}
           color={lineColor}
         />
-      </Show>
+      </PresenceTransition>
     </div>
   );
 
