@@ -1,11 +1,14 @@
 import { A } from "@solidjs/router";
-import { createMemo, type ParentComponent } from "solid-js";
+import { createMemo, type JSX, type ParentComponent } from "solid-js";
 import { Dynamic } from "solid-js/web";
 
-const ConditionalLink: ParentComponent<{ class?: string; href: string }> = (
-  props,
-) => {
-  const isExternal = createMemo(() => /^\/.+/.test(props.href));
+type Props = {
+  class?: string;
+  href?: string;
+} & JSX.AnchorHTMLAttributes<HTMLAnchorElement>;
+
+const ConditionalLink: ParentComponent<Props> = (props) => {
+  const isExternal = createMemo(() => /^\/.+/.test(props.href || ""));
 
   return (
     <Dynamic
