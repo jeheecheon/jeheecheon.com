@@ -3,13 +3,13 @@ import { createClientSignal } from "solid-use/client-only";
 import { injectPosts, type InjectPostsArgs } from "~/injectors/injectPosts";
 
 export const usePosts = (argsFn: () => InjectPostsArgs = () => ({})) => {
-  const { categoryId, pagination } = argsFn();
+  const { categoryIds, isPublic, pagination } = argsFn();
 
   const isClient = createClientSignal();
 
   const query = useQuery(() => ({
-    queryKey: ["posts", categoryId, pagination],
-    queryFn: () => injectPosts({ categoryId, pagination }),
+    queryKey: ["posts", categoryIds, isPublic, pagination],
+    queryFn: () => injectPosts({ categoryIds, isPublic, pagination }),
     enabled: isClient(),
   }));
 

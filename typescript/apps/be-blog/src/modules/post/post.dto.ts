@@ -9,9 +9,9 @@ export class GetPostFilter {
 
 @InputType()
 export class ListPostsFilter {
-  @Field(() => String, { nullable: true })
+  @Field(() => [String], { nullable: true })
   @IsOptional()
-  categoryId?: string;
+  categoryIds?: string[];
 
   @Field(() => Boolean, { nullable: true })
   @IsOptional()

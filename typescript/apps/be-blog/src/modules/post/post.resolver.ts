@@ -21,11 +21,14 @@ export class PostResolver {
   ) {
     return this.postService.listPosts(
       {
-        categoryId: filter?.categoryId,
+        categoryIds: filter?.categoryIds,
         isPublic: filter?.isPublic,
       },
       {
         ...handlePaginationParams(pagination),
+        order: {
+          uploadedAt: "DESC",
+        },
       },
     );
   }

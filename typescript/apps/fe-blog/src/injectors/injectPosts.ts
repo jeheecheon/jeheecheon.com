@@ -6,7 +6,8 @@ import { LIST_POSTS } from "~/graphql/documents/post.queries";
 import { configs } from "~/utils/config";
 
 export type InjectPostsArgs = {
-  categoryId?: PostCategory;
+  categoryIds?: PostCategory[];
+  isPublic?: boolean;
   pagination?: PaginationInput;
 };
 
@@ -16,8 +17,10 @@ export const injectPosts = async (args: InjectPostsArgs = {}) => {
     document: LIST_POSTS,
     variables: {
       filter: {
-        categoryId: args.categoryId,
+        categoryIds: args.categoryIds,
+        isPublic: args.isPublic,
       },
+      pagination: args.pagination,
     },
   });
 };

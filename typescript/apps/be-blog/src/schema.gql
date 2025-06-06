@@ -28,7 +28,7 @@ input GetPostFilter {
 }
 
 input ListPostsFilter {
-  categoryId: String
+  categoryIds: [String!]
   isPublic: Boolean
 }
 
