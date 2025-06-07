@@ -22,7 +22,7 @@ const RecentPostsGrid: VoidComponent<{
   return (
     <PresenceTransition
       as="ul"
-      class={cn("grid grid-cols-1 gap-4 md:grid-cols-2", props.class)}
+      class={cn("grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-2", props.class)}
       transitionKey={`recent-posts-${postsQuery.isSuccess}`}
       option="fadeInOut"
     >
@@ -41,6 +41,7 @@ const RecentPostsGrid: VoidComponent<{
         </For>
       </Show>
     </PresenceTransition>
+    // TODO: Add infinite scroll
   );
 };
 

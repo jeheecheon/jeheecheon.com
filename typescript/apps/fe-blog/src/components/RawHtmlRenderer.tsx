@@ -1,64 +1,50 @@
-import parse, { HTMLElement, type Node } from "node-html-parser";
+import { HTMLElement, type Node } from "node-html-parser";
 import {
   createMemo,
   Match,
   Switch,
-  VoidComponent,
   type JSX,
   type ParentComponent,
+  type VoidComponent,
 } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import ConditionalLink from "~/components/ConditionalLink";
 import Image from "~/components/Image";
 import { cn } from "~/utils/class-name";
+import { renderRawHtml } from "~/utils/html";
 
 const RawHtmlRenderer: VoidComponent<{
+  class?: string;
   rawHtml: string;
   allowedTags?: (keyof JSX.IntrinsicElements)[];
 }> = (props) => {
-  const rendered = createMemo(() => renderToJsx(parse(props.rawHtml)));
+  const rendered = createMemo(() =>
+    renderRawHtml(props.rawHtml, {
+      class: props.class,
+      allowedTags: props.allowedTags,
+      renderNode: HtmlNodeRenderer,
+    }),
+  );
 
   return rendered();
-
-  function renderToJsx(node: HTMLElement | Node) {
-    const shouldFilterByTag = !!props.allowedTags?.length;
-    const isAllowedTag = props.allowedTags?.includes(
-      node.rawTagName as keyof JSX.IntrinsicElements,
-    );
-    const isAllowedParent = props.allowedTags?.includes(
-      node.parentNode?.rawTagName as keyof JSX.IntrinsicElements,
-    );
-    const isLeafNode = node.rawTagName === "";
-    const shouldRender =
-      !shouldFilterByTag || isAllowedTag || (isAllowedParent && isLeafNode);
-
-    const renderedChildren = node.childNodes.map(renderToJsx);
-    const isEmptyChildren = renderedChildren.length === 0;
-
-    if (!shouldRender && isEmptyChildren) {
-      return null;
-    }
-
-    return (
-      <RenderAsSolidComponent node={node}>
-        {isLeafNode ? node.rawText : renderedChildren}
-      </RenderAsSolidComponent>
-    );
-  }
 };
 
-const RenderAsSolidComponent: ParentComponent<{
+const HtmlNodeRenderer: ParentComponent<{
+  class?: string;
   node: HTMLElement | Node;
 }> = (props) => {
-  const className =
-    props.node instanceof HTMLElement ? props.node.attributes.class : "";
+  const className = cn(
+    props.class,
+    props.node instanceof HTMLElement ? props.node.attributes.class : "",
+  );
 
   return (
     <Switch
       fallback={
         <Dynamic
-          component={props.node.rawTagName || "div"}
           {...(props.node instanceof HTMLElement ? props.node.attributes : {})}
+          component={props.node.rawTagName || "div"}
+          class={cn("", className)}
         >
           {props.children}
         </Dynamic>

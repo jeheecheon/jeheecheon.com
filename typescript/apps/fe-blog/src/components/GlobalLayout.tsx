@@ -6,7 +6,7 @@ import { cn } from "~/utils/class-name";
 const GlobalLayout: ParentComponent<{ class?: string }> = (props) => {
   return (
     <div class={cn("h-full", props.class)}>
-      <div class="fixed top-6 w-full">
+      <div class="fixed top-6 z-30 w-full">
         <Container>
           <Header />
         </Container>
