@@ -3,6 +3,7 @@ import { Post } from "@packages/entities-blog/post/post.entity";
 import { PaginationInput } from "../../utils/dto.js";
 import { handlePaginationParams } from "../../utils/pagination.js";
 import { CommentService } from "../comment/comment.service.js";
+import { LikedPostService } from "../liked-post/liked-post.service.js";
 import { GetPostFilter, ListPostsFilter } from "./post.dto.js";
 import { PostService } from "./post.service.js";
 
@@ -11,11 +12,14 @@ export class PostResolver {
   constructor(
     private readonly postService: PostService,
     private readonly commentService: CommentService,
+    private readonly likedPostService: LikedPostService,
   ) {}
 
   @ResolveField(() => Number)
   async likesCount(@Parent() post: Post) {
-    return 99;
+    return this.likedPostService.countLikedPosts({
+      postId: post.id,
+    });
   }
 
   @ResolveField(() => Number)
