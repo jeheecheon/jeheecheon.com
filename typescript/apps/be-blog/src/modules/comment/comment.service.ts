@@ -10,6 +10,16 @@ export class CommentService {
     private readonly commentRepository: Repository<Comment>,
   ) {}
 
+  async listComments(args: { postId?: string }) {
+    const where: FindOptionsWhere<Comment> = {};
+
+    if (args.postId) {
+      where.postId = args.postId;
+    }
+
+    return this.commentRepository.find({ where });
+  }
+
   async countComments(args: { postId?: string }) {
     const where: FindOptionsWhere<Comment> = {};
 

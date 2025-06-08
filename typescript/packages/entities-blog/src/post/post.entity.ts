@@ -54,7 +54,7 @@ export class Post {
   @Field(() => String, { nullable: true })
   categoryId?: Maybe<string>;
 
-  @OneToMany(() => Comment, (comment) => comment.post)
+  @Field(() => [Comment])
   comments: Relation<Comment>[];
 
   @Field(() => Number)

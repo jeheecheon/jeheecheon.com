@@ -1,7 +1,10 @@
 import type { Post } from "@packages/common/types/blog/post";
-import { Navigate } from "@solidjs/router";
+import { A, Navigate } from "@solidjs/router";
+import { arrowLeft } from "solid-heroicons/solid";
 import { VoidComponent } from "solid-js";
 import { ClientOnly } from "solid-use/client-only";
+import CommentsSection from "~/components/CommentsSection";
+import Icon from "~/components/Icon";
 import Image from "~/components/Image";
 import RawHtmlRenderer from "~/components/RawHtmlRenderer";
 
@@ -15,8 +18,12 @@ const PostSection: VoidComponent<{
 
   return (
     <section>
+      <A class="inline-block" href="/">
+        <Icon path={arrowLeft} class="size-8 text-zinc-400" />
+      </A>
+
       <Image
-        class="mx-auto aspect-square rounded-4xl object-cover object-center md:w-1/2"
+        class="mx-auto mt-7 aspect-square rounded-4xl object-cover object-center md:w-1/2"
         src={props.post.cover}
         alt={props.post.title}
       />
@@ -30,6 +37,8 @@ const PostSection: VoidComponent<{
       <ClientOnly>
         <RawHtmlRenderer class="mt-20" rawHtml={props.post.content} />
       </ClientOnly>
+
+      <CommentsSection class="mt-20" postId={props.post.id} />
     </section>
   );
 };

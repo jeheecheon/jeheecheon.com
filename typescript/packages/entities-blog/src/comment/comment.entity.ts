@@ -1,3 +1,4 @@
+import { Field, ObjectType } from "@nestjs/graphql";
 import type { Maybe } from "@packages/common/types/misc";
 import {
   Column,
@@ -15,29 +16,35 @@ import { LikedComment } from "../liked-comment/liked-comment.entity.js";
 import { Post } from "../post/post.entity.js";
 
 @Entity("comment", { schema: "public" })
+@ObjectType()
 export class Comment {
   @PrimaryGeneratedColumn("uuid")
+  @Field(() => String)
   id: string;
 
   @Column("uuid", { nullable: true })
   @ForeignKey(() => Comment)
+  @Field(() => String, { nullable: true })
   parentCommentId?: Maybe<string>;
 
   @Column("uuid")
   @ForeignKey(() => Account)
-  account_id: string;
+  accountId: string;
 
   @Column("uuid")
   @ForeignKey(() => Post)
   postId: string;
 
   @Column("text")
+  @Field(() => String)
   content: string;
 
   @CreateDateColumn()
+  @Field(() => Date)
   uploadedAt: Date;
 
   @Column("boolean", { default: false })
+  @Field(() => Boolean)
   isDeleted: boolean;
 
   @ManyToOne(() => Account, {
@@ -52,7 +59,7 @@ export class Comment {
   @JoinColumn({ referencedColumnName: "id" })
   parentComment: Relation<Comment>;
 
-  @OneToMany(() => Comment, (comment) => comment.parentComment)
+  @Field(() => [Comment])
   comments: Relation<Comment>[];
 
   @ManyToOne(() => Post, (post) => post.comments, { onDelete: "CASCADE" })

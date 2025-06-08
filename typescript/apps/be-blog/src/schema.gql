@@ -11,6 +11,7 @@ type Post {
   cover: String
   isPublic: Boolean!
   categoryId: String
+  comments: [Comment!]!
   likesCount: Float!
   commentsCount: Float!
 }
@@ -20,9 +21,19 @@ type Post {
 """
 scalar Timestamp
 
+type Comment {
+  id: String!
+  parentCommentId: String
+  content: String!
+  uploadedAt: Timestamp!
+  isDeleted: Boolean!
+  comments: [Comment!]!
+}
+
 type Query {
   post(filter: GetPostFilter!): Post!
   posts(filter: ListPostsFilter, pagination: PaginationInput): [Post!]!
+  comments(filter: ListCommentsFilter): [Comment!]!
 }
 
 input GetPostFilter {
@@ -37,4 +48,8 @@ input ListPostsFilter {
 input PaginationInput {
   skip: Int!
   take: Int!
+}
+
+input ListCommentsFilter {
+  postId: String
 }

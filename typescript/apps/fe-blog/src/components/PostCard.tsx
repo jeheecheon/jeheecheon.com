@@ -27,9 +27,9 @@ const PostCard: VoidComponent<{ class?: string; post: Post }> = (props) => {
         <section class="p-3">
           <h3 class="text-lg font-bold text-orange-300">{props.post.title}</h3>
 
-          <div class="mt-2 line-clamp-3 text-sm text-zinc-300">
+          <div class="mt-2 line-clamp-3 h-15 text-sm text-zinc-300">
             {renderRawHtml(props.post.content, {
-              allowedTags: ["p", "code"],
+              allowedTags: ["p", "code", "a"],
             })}
           </div>
         </section>
