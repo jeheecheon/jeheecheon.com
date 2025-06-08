@@ -43,8 +43,7 @@ const CoinPriceGraph: VoidComponent<{
           visible={historyQuery.isSuccess}
           option="fadeInOut"
         >
-          Last updated{" "}
-          {dayjs(historyQuery.data?.fetchedAt).format("hh:mm:ss A")}
+          Last updated {dayjs(historyQuery.dataUpdatedAt).format("hh:mm:ss A")}
         </PresenceTransition>
 
         <PresenceTransition

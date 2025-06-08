@@ -16,7 +16,6 @@ import {
 import { Category } from "../category/category.entity.js";
 import { Comment } from "../comment/comment.entity.js";
 import { Hashtag } from "../hashtag/hashtag.entity.js";
-import { LikedPost } from "../liked-post/liked-post.entity.js";
 
 @Entity("post", { schema: "public" })
 @ObjectType()
@@ -57,8 +56,11 @@ export class Post {
   @OneToMany(() => Comment, (comment) => comment.post)
   comments: Relation<Comment>[];
 
-  @OneToMany(() => LikedPost, (likedPost) => likedPost.post)
-  likedPosts: Relation<LikedPost>[];
+  @Field(() => Number)
+  likesCount: number;
+
+  @Field(() => Number)
+  commentsCount: number;
 
   @ManyToOne(() => Category, (category) => category.posts)
   @JoinColumn([{ name: "category_id", referencedColumnName: "id" }])

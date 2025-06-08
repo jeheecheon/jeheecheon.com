@@ -35,18 +35,19 @@ const PostCard: VoidComponent<{ class?: string; post: Post }> = (props) => {
         </section>
 
         <section class="flex items-center justify-between p-3">
-          {/* FIXME: comments and likes are hardcoded */}
           <div>
             <div class="inline-flex items-center gap-x-2">
               <Icon class="size-4 text-red-400" path={heart} />
-              <span class="text-sm text-zinc-400">{35}</span>
+              <span class="text-sm text-zinc-400">{props.post.likesCount}</span>
             </div>
             <div class="ml-4 inline-flex items-center gap-x-2">
               <Icon
                 class="size-4 text-blue-400"
                 path={chatBubbleBottomCenterText}
               />
-              <span class="text-sm text-zinc-400">{35}</span>
+              <span class="text-sm text-zinc-400">
+                {props.post.commentsCount}
+              </span>
             </div>
           </div>
 

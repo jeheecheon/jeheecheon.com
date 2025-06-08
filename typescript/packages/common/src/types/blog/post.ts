@@ -9,4 +9,6 @@ export type Post = {
   cover: string;
   isPublic: boolean;
   categoryId: PostCategory;
+  likesCount: number;
+  commentsCount: number;
 };

@@ -13,7 +13,7 @@ export const rawCoinChartDataSchema = z.object({
 });
 export type RawCoinChartData = z.infer<typeof rawCoinChartDataSchema>;
 
-export type CoinChartDataWithRefreshedAt = {
+export type CoinChartData = {
   prices: {
     timestamp: Date;
     price: number;
@@ -26,5 +26,4 @@ export type CoinChartDataWithRefreshedAt = {
     timestamp: Date;
     totalVolume: number;
   }[];
-  fetchedAt: Date;
 };

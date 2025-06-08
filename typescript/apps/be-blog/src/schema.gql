@@ -11,6 +11,8 @@ type Post {
   cover: String
   isPublic: Boolean!
   categoryId: String
+  likesCount: Float!
+  commentsCount: Float!
 }
 
 """

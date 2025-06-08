@@ -5,6 +5,8 @@ export const LIST_POSTS = gql`
   query ListPosts($filter: ListPostsFilter!, $pagination: PaginationInput) {
     posts(filter: $filter, pagination: $pagination) {
       ...PostFragment
+      likesCount
+      commentsCount
     }
   }
   ${POST_FRAGMENT}

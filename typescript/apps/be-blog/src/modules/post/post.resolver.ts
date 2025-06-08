@@ -1,4 +1,4 @@
-import { Args, Query, Resolver } from "@nestjs/graphql";
+import { Args, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
 import { Post } from "@packages/entities-blog/post/post.entity";
 import { PaginationInput } from "../../utils/dto.js";
 import { handlePaginationParams } from "../../utils/pagination.js";
@@ -8,6 +8,16 @@ import { PostService } from "./post.service.js";
 @Resolver(() => Post)
 export class PostResolver {
   constructor(private readonly postService: PostService) {}
+
+  @ResolveField(() => Number)
+  async likesCount(@Parent() post: Post) {
+    return 99;
+  }
+
+  @ResolveField(() => Number)
+  async commentsCount(@Parent() post: Post) {
+    return 99;
+  }
 
   @Query(() => Post)
   async post(@Args("filter") filter: GetPostFilter) {

@@ -1,7 +1,7 @@
 import { coingeckoClient } from "~/axios/coingecko-client";
 import {
   rawCoinChartDataSchema,
-  type CoinChartDataWithRefreshedAt,
+  type CoinChartData,
   type RawCoinChartData,
 } from "~/types/coin";
 
@@ -21,8 +21,8 @@ export const injectCoinChartData = async (args: InjectCoinChartDataArgs) => {
       },
     })
     .then<RawCoinChartData>((res) => res.data)
-    .then(rawCoinChartDataSchema.parse)
-    .then<CoinChartDataWithRefreshedAt>((data) => ({
+    .then<RawCoinChartData>(rawCoinChartDataSchema.parse)
+    .then<CoinChartData>((data) => ({
       marketCaps: data.market_caps.map(([timestamp, marketCap]) => ({
         timestamp,
         marketCap,
@@ -35,7 +35,6 @@ export const injectCoinChartData = async (args: InjectCoinChartDataArgs) => {
         timestamp,
         totalVolume,
       })),
-      fetchedAt: new Date(),
     }))
     .catch((error) => {
       console.error(error);
