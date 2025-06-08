@@ -29,7 +29,7 @@ export class Comment {
 
   @Column("uuid")
   @ForeignKey(() => Post)
-  post_id: string;
+  postId: string;
 
   @Column("text")
   content: string;

@@ -2,12 +2,16 @@ import { Args, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
 import { Post } from "@packages/entities-blog/post/post.entity";
 import { PaginationInput } from "../../utils/dto.js";
 import { handlePaginationParams } from "../../utils/pagination.js";
+import { CommentService } from "../comment/comment.service.js";
 import { GetPostFilter, ListPostsFilter } from "./post.dto.js";
 import { PostService } from "./post.service.js";
 
 @Resolver(() => Post)
 export class PostResolver {
-  constructor(private readonly postService: PostService) {}
+  constructor(
+    private readonly postService: PostService,
+    private readonly commentService: CommentService,
+  ) {}
 
   @ResolveField(() => Number)
   async likesCount(@Parent() post: Post) {
@@ -16,7 +20,9 @@ export class PostResolver {
 
   @ResolveField(() => Number)
   async commentsCount(@Parent() post: Post) {
-    return 99;
+    return this.commentService.countComments({
+      postId: post.id,
+    });
   }
 
   @Query(() => Post)

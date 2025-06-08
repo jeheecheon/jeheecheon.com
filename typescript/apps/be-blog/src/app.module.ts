@@ -8,6 +8,7 @@ import { Comment } from "@packages/entities-blog/comment/comment.entity";
 import { Post } from "@packages/entities-blog/post/post.entity";
 import { Role } from "@packages/entities-blog/role/role.entity";
 import { join } from "path";
+import { CommentModule } from "./modules/comment/comment.module.js";
 import { DatabaseModule } from "./modules/database/database.module.js";
 import { PostModule } from "./modules/post/post.module.js";
 import { configs } from "./utils/config.js";
@@ -35,6 +36,7 @@ import { configs } from "./utils/config.js";
     }),
     TypeOrmModule.forFeature([Account, Role, Comment, Post]),
     PostModule,
+    CommentModule,
   ],
 })
 export class AppModule {}
