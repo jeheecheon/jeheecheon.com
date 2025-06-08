@@ -53,7 +53,7 @@ const HtmlNodeRenderer: ParentComponent<{
       <Match when={props.node.rawTagName === "img"}>
         <Image
           {...(props.node instanceof HTMLElement ? props.node.attributes : {})}
-          class={cn("rounded-md", className)}
+          class={cn("mx-auto rounded-md lg:w-1/2", className)}
         />
       </Match>
       <Match when={props.node.rawTagName === "a"}>

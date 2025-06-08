@@ -2,7 +2,7 @@ import { type FlowComponent, type JSX } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import { cn } from "~/utils/class-name";
 
-const Papaer: FlowComponent<{
+const Paper: FlowComponent<{
   class?: string;
   as?: keyof JSX.HTMLElementTags;
 }> = (props) => {
@@ -19,4 +19,4 @@ const Papaer: FlowComponent<{
   );
 };
 
-export default Papaer;
+export default Paper;

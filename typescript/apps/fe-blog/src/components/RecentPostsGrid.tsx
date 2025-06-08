@@ -1,4 +1,5 @@
 import { PostCategory } from "@packages/common/types/blog/category";
+import { A } from "@solidjs/router";
 import { range } from "lodash-es";
 import { createSignal, For, Show, VoidComponent } from "solid-js";
 import PostCard from "~/components/PostCard";
@@ -59,7 +60,9 @@ const RecentPostsGrid: VoidComponent<{
                   setEntries([element]);
                 }}
               >
-                <PostCard post={post} />
+                <A href={`/posts/${post.id}`}>
+                  <PostCard post={post} />
+                </A>
               </li>
             )}
           </For>
@@ -73,7 +76,7 @@ const RecentPostsGrid: VoidComponent<{
         option="fadeInOut"
         visible={postsQuery.isFetchingNextPage}
       >
-        <For each={range(2)}>
+        <For each={range(4)}>
           {() => (
             <li>
               <Skeleton class="h-102 rounded-md" />
