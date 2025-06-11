@@ -4,4 +4,5 @@ export type Comment = {
   content: string;
   uploadedAt: string;
   isDeleted: boolean;
+  depth?: number;
 };

@@ -5,7 +5,7 @@
 @theme {
   --font-brand: "Pretendard", sans-serif;
 
-  --padding-base: 10rem;
+  --padding-base: 6rem;
 
   --breakpoint-xs: 425px;
   --breakpoint-2xs: 375px;
@@ -19,6 +19,12 @@
 
   body {
     @apply font-brand dark:bg-zinc-900 dark:text-zinc-200 dark:md:bg-zinc-950;
+  }
+
+  @media (min-width: var(--breakpoint-md)) {
+    :root {
+      --padding-base: 10rem;
+    }
   }
 }
 
