@@ -27,7 +27,15 @@ type Comment {
   content: String!
   uploadedAt: Timestamp!
   isDeleted: Boolean!
+  account: Account!
   comments: [Comment!]!
+}
+
+type Account {
+  id: String!
+  email: String!
+  avatar: String
+  createdAt: Timestamp!
 }
 
 type Query {

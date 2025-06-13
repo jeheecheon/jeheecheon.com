@@ -8,6 +8,7 @@ import { Comment } from "@packages/entities-blog/comment/comment.entity";
 import { Post } from "@packages/entities-blog/post/post.entity";
 import { Role } from "@packages/entities-blog/role/role.entity";
 import { join } from "path";
+import { AccountModule } from "./modules/account/account.module.js";
 import { CommentModule } from "./modules/comment/comment.module.js";
 import { DatabaseModule } from "./modules/database/database.module.js";
 import { LikedPostModule } from "./modules/liked-post/liked-post.module.js";
@@ -39,6 +40,7 @@ import { configs } from "./utils/config.js";
     PostModule,
     CommentModule,
     LikedPostModule,
+    AccountModule,
   ],
 })
 export class AppModule {}

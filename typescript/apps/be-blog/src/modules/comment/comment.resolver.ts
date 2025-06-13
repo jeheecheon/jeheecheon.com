@@ -11,8 +11,15 @@ export class CommentResolver {
   async comments(
     @Args("filter", { nullable: true }) filter?: ListCommentsFilter,
   ) {
-    return this.commentService.listComments({
-      postId: filter?.postId,
-    });
+    return this.commentService.listComments(
+      {
+        postId: filter?.postId,
+      },
+      {
+        relations: {
+          account: true,
+        },
+      },
+    );
   }
 }

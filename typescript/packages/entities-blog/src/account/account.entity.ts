@@ -1,3 +1,4 @@
+import { Field, ObjectType } from "@nestjs/graphql";
 import type { Maybe } from "@packages/common/types/misc";
 import {
   Column,
@@ -16,11 +17,14 @@ import { LikedPost } from "../liked-post/liked-post.entity.js";
 import { Role } from "../role/role.entity.js";
 
 @Entity("account", { schema: "public" })
+@ObjectType()
 export class Account {
   @PrimaryGeneratedColumn("uuid")
+  @Field(() => String)
   id: string;
 
   @Column("varchar", { length: 254 })
+  @Field(() => String)
   email: string;
 
   @Column("varchar", { length: 254, unique: true })
@@ -30,9 +34,11 @@ export class Account {
   isEmailConfirmed: boolean;
 
   @Column("varchar", { length: 256, nullable: true })
+  @Field(() => String, { nullable: true })
   avatar?: Maybe<string>;
 
   @CreateDateColumn({ type: "timestamptz" })
+  @Field(() => Date)
   createdAt: Date;
 
   @ManyToMany(() => Role, (role) => role.accounts)

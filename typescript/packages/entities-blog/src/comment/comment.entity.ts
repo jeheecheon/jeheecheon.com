@@ -51,6 +51,7 @@ export class Comment {
     onDelete: "SET NULL",
   })
   @JoinColumn({ referencedColumnName: "id" })
+  @Field(() => Account)
   account: Relation<Account>;
 
   @ManyToOne(() => Comment, (comment) => comment.comments, {

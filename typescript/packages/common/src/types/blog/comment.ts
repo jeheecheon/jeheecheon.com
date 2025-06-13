@@ -1,3 +1,5 @@
+import type { Account } from "./account.js";
+
 export type Comment = {
   id: string;
   parentCommentId?: string;
@@ -5,4 +7,5 @@ export type Comment = {
   uploadedAt: string;
   isDeleted: boolean;
   depth?: number;
+  account: Account;
 };
