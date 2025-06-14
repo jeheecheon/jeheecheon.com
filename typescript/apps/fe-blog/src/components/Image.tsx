@@ -5,6 +5,7 @@ import Icon from "~/components/Icon";
 import PreloadedImage from "~/components/PreloadedImage";
 import PresenceTransition from "~/components/PresenceTransition";
 import Skeleton from "~/components/Skeleton";
+import { useKeydown } from "~/hooks/useKeydown";
 import { cn } from "~/utils/class-name";
 
 type Props = {
@@ -13,6 +14,8 @@ type Props = {
 
 const Image: VoidComponent<Props> = (props) => {
   const [previewVisible, setPreviewVisible] = createSignal(false);
+
+  useKeydown("Escape", handleTogglePreview(false));
 
   return (
     <>
