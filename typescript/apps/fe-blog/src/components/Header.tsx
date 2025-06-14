@@ -7,10 +7,12 @@ import {
   type ParentComponent,
   type VoidComponent,
 } from "solid-js";
+import Button from "~/components/Button";
 import ConditionalLink from "~/components/ConditionalLink";
 import Icon from "~/components/Icon";
 import Image from "~/components/Image";
 import PresenceTransition from "~/components/PresenceTransition";
+import { useSignInModalVisible } from "~/hooks/useSignInModalVisible";
 import { cn } from "~/utils/class-name";
 
 const links = [
@@ -36,6 +38,7 @@ enum Theme {
 
 const Header: VoidComponent<{ class?: string }> = (props) => {
   const [theme, setTheme] = createSignal<Theme>(Theme.DARK);
+  const [, setSignInModalVisible] = useSignInModalVisible();
 
   return (
     <div
@@ -68,6 +71,12 @@ const Header: VoidComponent<{ class?: string }> = (props) => {
               </li>
             )}
           </For>
+
+          <li class="border-l border-l-zinc-700 pl-3">
+            <Button size="xs" onClick={handleSignInClick}>
+              Sign-in
+            </Button>
+          </li>
         </ul>
       </section>
 
@@ -98,6 +107,10 @@ const Header: VoidComponent<{ class?: string }> = (props) => {
         return theme ?? (prev === Theme.LIGHT ? Theme.DARK : Theme.LIGHT);
       });
     };
+  }
+
+  function handleSignInClick() {
+    setSignInModalVisible(true);
   }
 };
 
