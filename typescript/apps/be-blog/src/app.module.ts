@@ -9,8 +9,10 @@ import { Post } from "@packages/entities-blog/post/post.entity";
 import { Role } from "@packages/entities-blog/role/role.entity";
 import { join } from "path";
 import { AccountModule } from "./modules/account/account.module.js";
+import { AuthModule } from "./modules/auth/auth.module.js";
 import { CommentModule } from "./modules/comment/comment.module.js";
 import { DatabaseModule } from "./modules/database/database.module.js";
+import { ExternalAuthenticationModule } from "./modules/external-authentication/external-authentication.module.js";
 import { LikedPostModule } from "./modules/liked-post/liked-post.module.js";
 import { PostModule } from "./modules/post/post.module.js";
 import { configs } from "./utils/config.js";
@@ -41,6 +43,8 @@ import { configs } from "./utils/config.js";
     CommentModule,
     LikedPostModule,
     AccountModule,
+    AuthModule,
+    ExternalAuthenticationModule,
   ],
 })
 export class AppModule {}

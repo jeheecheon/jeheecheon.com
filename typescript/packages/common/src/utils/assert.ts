@@ -1,4 +1,4 @@
-import type { Nullable } from "@packages/common/types/misc.js";
+import type { Nullable } from "../types/misc.js";
 
 export function assert(
   condition: unknown,
