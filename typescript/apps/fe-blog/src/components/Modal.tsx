@@ -2,6 +2,7 @@ import { ParentComponent } from "solid-js";
 import { Portal } from "solid-js/web";
 import PresenceTransition from "~/components/PresenceTransition";
 import { useKeydown } from "~/hooks/useKeydown";
+import { useLockBodyScroll } from "~/hooks/useLockBodyScroll";
 import { cn } from "~/utils/class-name";
 
 const Modal: ParentComponent<{
@@ -10,6 +11,7 @@ const Modal: ParentComponent<{
   onClose: () => void;
 }> = (props) => {
   useKeydown("Escape", props.onClose);
+  useLockBodyScroll(() => ({ locked: props.visible }));
 
   return (
     <Portal>
