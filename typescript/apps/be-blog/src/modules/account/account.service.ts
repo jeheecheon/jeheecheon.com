@@ -11,16 +11,18 @@ export class AccountService {
     private readonly accountRepository: Repository<Account>,
   ) {}
 
-  async getAccount(args: { email: string } | { id: string }) {
+  async getAccount(args: { email?: string; id?: string }) {
     const where: FindOptionsWhere<Account> = {};
 
-    if ("email" in args) {
+    if (args.email) {
       where.normalizedEmail = this.normalizeEmail(args.email);
     }
 
-    if ("id" in args) {
+    if (args.id) {
       where.id = args.id;
     }
+
+    assert(Object.keys(where).length > 0, new NotFoundException());
 
     return this.accountRepository.findOne({
       where,

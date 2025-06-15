@@ -13,11 +13,11 @@ export default function App() {
       root={(props) => (
         // TODO: Add loading component
         <Suspense fallback={<div>Loading...</div>}>
-          <GlobalProvider>
-            <RootProvider>
+          <RootProvider>
+            <GlobalProvider>
               <GlobalLayout>{props.children}</GlobalLayout>
-            </RootProvider>
-          </GlobalProvider>
+            </GlobalProvider>
+          </RootProvider>
         </Suspense>
       )}
     >

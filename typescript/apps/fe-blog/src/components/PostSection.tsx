@@ -1,20 +1,25 @@
 import type { Post } from "@packages/common/types/blog/post";
-import { A, Navigate } from "@solidjs/router";
-import { arrowLeft } from "solid-heroicons/solid";
-import { VoidComponent } from "solid-js";
+import { A } from "@solidjs/router";
+import dayjs from "dayjs";
+import { arrowLeft, heart } from "solid-heroicons/solid";
+import { createEffect, VoidComponent } from "solid-js";
 import { ClientOnly } from "solid-use/client-only";
+import Button from "~/components/Button";
 import CommentsSection from "~/components/CommentsSection";
 import Icon from "~/components/Icon";
 import Image from "~/components/Image";
 import RawHtmlRenderer from "~/components/RawHtmlRenderer";
+import { useGlobalAccount } from "~/hooks/useGlobalAccount";
 
 const PostSection: VoidComponent<{
   class?: string;
-  post?: Post;
+  post: Post;
 }> = (props) => {
-  if (!props.post) {
-    return <Navigate href="/404" />;
-  }
+  const account = useGlobalAccount();
+
+  createEffect(() => {
+    console.log(account.data?.account);
+  });
 
   return (
     <section>
@@ -38,7 +43,21 @@ const PostSection: VoidComponent<{
         <RawHtmlRenderer class="mt-20" rawHtml={props.post.content} />
       </ClientOnly>
 
-      <CommentsSection class="mt-20" postId={props.post.id} />
+      <Button class="mx-auto mt-20 block" theme="secondary">
+        <Icon class="inline-block size-4 text-red-400" path={heart} />
+        <span class="ml-2 inline-block text-sm text-zinc-400">
+          {props.post.likesCount}
+        </span>
+      </Button>
+
+      <div class="mt-4 text-center">
+        <p class="text-xs text-zinc-400">Written on</p>
+        <p class="text-sm font-bold text-orange-300">
+          {dayjs(props.post.uploadedAt).format("YYYY-MM-DD HH:mm")}
+        </p>
+      </div>
+
+      <CommentsSection class="mt-4" postId={props.post.id} />
     </section>
   );
 };

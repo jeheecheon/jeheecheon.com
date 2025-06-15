@@ -1,6 +1,6 @@
 import { useGlobalState } from "./useGlobalState";
 
-export const useSignInModalVisible = () => {
+export const useGlobalSignInModalVisible = () => {
   const { signInModalVisible } = useGlobalState();
 
   return signInModalVisible;

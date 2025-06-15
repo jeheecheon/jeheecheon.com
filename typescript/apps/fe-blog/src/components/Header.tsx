@@ -12,7 +12,7 @@ import ConditionalLink from "~/components/ConditionalLink";
 import Icon from "~/components/Icon";
 import Image from "~/components/Image";
 import PresenceTransition from "~/components/PresenceTransition";
-import { useSignInModalVisible } from "~/hooks/useSignInModalVisible";
+import { useGlobalSignInModalVisible } from "~/hooks/useGlobalSignInModalVisible";
 import { cn } from "~/utils/class-name";
 
 const links = [
@@ -38,7 +38,7 @@ enum Theme {
 
 const Header: VoidComponent<{ class?: string }> = (props) => {
   const [theme, setTheme] = createSignal<Theme>(Theme.DARK);
-  const [, setSignInModalVisible] = useSignInModalVisible();
+  const [, setSignInModalVisible] = useGlobalSignInModalVisible();
 
   return (
     <div

@@ -38,7 +38,7 @@ const PostsRoute: VoidComponent = () => {
             animateOnInitialMount
           >
             <Show when={post()?.post}>
-              <PostSection post={post()?.post} />
+              {(post) => <PostSection post={post()} />}
             </Show>
           </PresenceTransition>
         </Suspense>

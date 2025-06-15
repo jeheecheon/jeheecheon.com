@@ -7,8 +7,12 @@ import { AppModule } from "./app.module.js";
 import { configs } from "./utils/config.js";
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create(AppModule);
 
+  app.enableCors({
+    origin: configs.BLOG_URL,
+    credentials: true,
+  });
   app.use(
     cookieSession({
       name: "blog-session",

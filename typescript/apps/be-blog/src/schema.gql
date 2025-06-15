@@ -42,6 +42,7 @@ type Query {
   post(filter: GetPostFilter!): Post!
   posts(filter: ListPostsFilter, pagination: PaginationInput): [Post!]!
   comments(filter: ListCommentsFilter): [Comment!]!
+  account(filter: GetAccountFilter!): Account!
 }
 
 input GetPostFilter {
@@ -60,4 +61,9 @@ input PaginationInput {
 
 input ListCommentsFilter {
   postId: String
+}
+
+input GetAccountFilter {
+  id: String
+  email: String
 }

@@ -10,5 +10,7 @@ export const POST_FRAGMENT = gql`
     cover
     isPublic
     categoryId
+    likesCount
+    commentsCount
   }
 `;
