@@ -5,6 +5,7 @@ export const GET_POST = gql`
   query GetPost($filter: GetPostFilter!) {
     post(filter: $filter) {
       ...PostFragment
+      isLiked
     }
   }
   ${POST_FRAGMENT}

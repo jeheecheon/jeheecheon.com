@@ -1,6 +1,9 @@
 import { onCleanup, onMount } from "solid-js";
+import { createClientSignal } from "solid-use/client-only";
 
 export const useKeydown = (key: string, callback: () => void) => {
+  const isClient = createClientSignal();
+
   function handleKeyDown(event: KeyboardEvent) {
     if (event.key === key) {
       callback();
@@ -8,7 +11,7 @@ export const useKeydown = (key: string, callback: () => void) => {
   }
 
   onMount(() => {
-    if (typeof window !== "object") {
+    if (!isClient()) {
       return;
     }
 
@@ -16,7 +19,7 @@ export const useKeydown = (key: string, callback: () => void) => {
   });
 
   onCleanup(() => {
-    if (typeof window !== "object") {
+    if (!isClient()) {
       return;
     }
 

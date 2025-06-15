@@ -1,8 +1,19 @@
-import { Args, Parent, Query, ResolveField, Resolver } from "@nestjs/graphql";
+import { UseGuards } from "@nestjs/common";
+import {
+  Args,
+  Context,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from "@nestjs/graphql";
 import { Post } from "@packages/entities-blog/post/post.entity";
+import type { Request } from "express";
 import { PaginationInput } from "../../utils/dto.js";
+import { getAccountId } from "../../utils/misc.js";
 import { handlePaginationParams } from "../../utils/pagination.js";
 import { CommentService } from "../comment/comment.service.js";
+import { SessionAuthGuard } from "../guards/session-auth.guard.js";
 import { LikedPostService } from "../liked-post/liked-post.service.js";
 import { GetPostFilter, ListPostsFilter } from "./post.dto.js";
 import { PostService } from "./post.service.js";
@@ -27,6 +38,23 @@ export class PostResolver {
     return this.commentService.countComments({
       postId: post.id,
     });
+  }
+
+  @ResolveField(() => Boolean)
+  @UseGuards(SessionAuthGuard)
+  async isLiked(@Context("req") req: Request, @Parent() post: Post) {
+    const id = getAccountId(req);
+    console.log(req.headers);
+    if (!id) {
+      return false;
+    }
+
+    const likedPost = await this.likedPostService.getLikedPost({
+      accountId: id,
+      postId: post.id,
+    });
+
+    return !!likedPost;
   }
 
   @Query(() => Post)

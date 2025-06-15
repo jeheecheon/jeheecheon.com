@@ -10,6 +10,45 @@ export class LikedPostService {
     private readonly likedPostRepository: Repository<LikedPost>,
   ) {}
 
+  async getLikedPost(args: { accountId: string; postId: string }) {
+    const where: FindOptionsWhere<LikedPost> = {
+      accountId: args.accountId,
+      postId: args.postId,
+    };
+
+    return this.likedPostRepository.findOne({ where });
+  }
+
+  async createLikedPost(args: { accountId: string; postId: string }) {
+    const likedPost = this.likedPostRepository.create({
+      accountId: args.accountId,
+      postId: args.postId,
+    });
+
+    return this.likedPostRepository.save(likedPost);
+  }
+
+  async deleteLikedPost(args: { accountId: string; postId: string }) {
+    const where: FindOptionsWhere<LikedPost> = {
+      accountId: args.accountId,
+      postId: args.postId,
+    };
+
+    return this.likedPostRepository.delete(where);
+  }
+
+  async likeOrUnlikePost(args: { accountId: string; postId: string }) {
+    const likedPost = await this.getLikedPost(args);
+
+    if (likedPost) {
+      await this.deleteLikedPost(args);
+      return false;
+    }
+
+    await this.createLikedPost(args);
+    return true;
+  }
+
   async countLikedPosts(args: { postId?: string }) {
     const where: FindOptionsWhere<LikedPost> = {};
 

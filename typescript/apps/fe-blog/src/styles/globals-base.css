@@ -5,7 +5,7 @@
 @theme {
   --font-brand: "Pretendard", sans-serif;
 
-  --padding-base: 6rem;
+  --padding-base: 7rem;
 
   --breakpoint-xs: 425px;
   --breakpoint-2xs: 375px;
@@ -17,14 +17,13 @@
     @apply cursor-pointer;
   }
 
-  body {
-    @apply font-brand dark:bg-zinc-900 dark:text-zinc-200 dark:md:bg-zinc-950;
+  button:disabled,
+  [role="button"]:disabled {
+    @apply cursor-not-allowed;
   }
 
-  @media (min-width: var(--breakpoint-md)) {
-    :root {
-      --padding-base: 10rem;
-    }
+  body {
+    @apply font-brand dark:bg-zinc-900 dark:text-zinc-200 dark:md:bg-zinc-950;
   }
 }
 

@@ -1,6 +1,10 @@
-import { Args, Query, Resolver } from "@nestjs/graphql";
+import { UseGuards } from "@nestjs/common";
+import { Args, Context, Mutation, Query, Resolver } from "@nestjs/graphql";
 import { Comment } from "@packages/entities-blog/comment/comment.entity";
-import { ListCommentsFilter } from "./comment.dto.js";
+import type { Request } from "express";
+import { getAccountId } from "../../utils/misc.js";
+import { SessionAuthGuard } from "../guards/session-auth.guard.js";
+import { ListCommentsFilter, UpsertCommentArgs } from "./comment.dto.js";
 import { CommentService } from "./comment.service.js";
 
 @Resolver(() => Comment)
@@ -19,6 +23,24 @@ export class CommentResolver {
         relations: {
           account: true,
         },
+      },
+    );
+  }
+
+  @Mutation(() => Comment)
+  @UseGuards(SessionAuthGuard)
+  async upsertComment(
+    @Context("req") req: Request,
+    @Args("args") args: UpsertCommentArgs,
+  ) {
+    const id = getAccountId(req);
+
+    return this.commentService.upsertComment(
+      { id: args.id },
+      {
+        accountId: id,
+        postId: args.postId,
+        content: args.content,
       },
     );
   }

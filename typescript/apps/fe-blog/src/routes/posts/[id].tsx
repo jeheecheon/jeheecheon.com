@@ -8,7 +8,7 @@ import LoadingFallback from "~/components/LoadingFallback";
 import Paper from "~/components/Paper";
 import PostSection from "~/components/PostSection";
 import PresenceTransition from "~/components/PresenceTransition";
-import { injectPost } from "~/injectors/injectPost";
+import { injectPost } from "~/injectors/injectPost.server";
 
 const paramsSchema = z.object({
   id: z.string().uuid(),

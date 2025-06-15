@@ -63,6 +63,9 @@ export class Post {
   @Field(() => Number)
   commentsCount: number;
 
+  @Field(() => Boolean)
+  isLiked: boolean;
+
   @OneToMany(() => LikedPost, (likedPost) => likedPost.post)
   likedPosts: Relation<LikedPost>[];
 

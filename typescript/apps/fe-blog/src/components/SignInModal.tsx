@@ -21,7 +21,7 @@ const SignInModal: VoidComponent<{
     >
       <ExternalLink
         class="mt-4"
-        href={`${configs.BLOG_API_URL}/auth/google?redirect_url=${location()?.href}`}
+        href={`${configs.BLOG_API_URL}/auth/google?redirect=${location()?.href}`}
       >
         <GoogleSignInIcon class="mx-auto mt-8" />
       </ExternalLink>

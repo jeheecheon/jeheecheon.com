@@ -11,4 +11,5 @@ export type Post = {
   categoryId: PostCategory;
   likesCount: number;
   commentsCount: number;
+  isLiked?: boolean;
 };

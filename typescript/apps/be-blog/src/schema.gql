@@ -14,6 +14,7 @@ type Post {
   comments: [Comment!]!
   likesCount: Float!
   commentsCount: Float!
+  isLiked: Boolean!
 }
 
 """
@@ -38,10 +39,16 @@ type Account {
   createdAt: Timestamp!
 }
 
+type CountLikedPostsResult {
+  likesCount: Float!
+  isLiked: Boolean!
+}
+
 type Query {
   post(filter: GetPostFilter!): Post!
   posts(filter: ListPostsFilter, pagination: PaginationInput): [Post!]!
   comments(filter: ListCommentsFilter): [Comment!]!
+  countLikedPosts(args: CountLikedPostsArgs!): Float!
   account(filter: GetAccountFilter!): Account!
 }
 
@@ -63,7 +70,26 @@ input ListCommentsFilter {
   postId: String
 }
 
+input CountLikedPostsArgs {
+  postId: String
+}
+
 input GetAccountFilter {
   id: String
   email: String
+}
+
+type Mutation {
+  upsertComment(args: UpsertCommentArgs!): Comment!
+  likeOrUnlikePost(args: LikeOrUnlikePostArgs!): CountLikedPostsResult!
+}
+
+input UpsertCommentArgs {
+  id: String
+  postId: String
+  content: String
+}
+
+input LikeOrUnlikePostArgs {
+  postId: String!
 }

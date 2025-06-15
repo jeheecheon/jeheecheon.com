@@ -7,3 +7,18 @@ export class ListCommentsFilter {
   @IsOptional()
   postId?: string;
 }
+
+@InputType()
+export class UpsertCommentArgs {
+  @Field(() => String, { nullable: true })
+  @IsOptional()
+  id?: string;
+
+  @Field(() => String, { nullable: true })
+  @IsOptional()
+  postId?: string;
+
+  @Field(() => String, { nullable: true })
+  @IsOptional()
+  content?: string;
+}

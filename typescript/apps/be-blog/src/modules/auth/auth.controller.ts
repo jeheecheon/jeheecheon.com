@@ -12,7 +12,7 @@ import type { Request, Response } from "express";
 import { AccountService } from "../account/account.service.js";
 import { ExternalAuthenticationProviderId } from "../external-authentication/external-authentication.constants.js";
 import { ExternalAuthenticationService } from "../external-authentication/external-authentication.service.js";
-import { GoogleAuthGuard } from "../passport/google.guard.js";
+import { GoogleAuthGuard } from "../guards/google.guard.js";
 import { googleOAuthUserSchema } from "../passport/google.strategy.js";
 
 @Controller("auth")

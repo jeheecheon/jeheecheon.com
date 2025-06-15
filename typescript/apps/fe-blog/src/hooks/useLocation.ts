@@ -8,9 +8,11 @@ export const useLocation = () => {
     createSignal<Nullable<globalThis.Location>>(null);
 
   createEffect(() => {
-    if (isClient()) {
-      setLocation(window.location);
+    if (!isClient()) {
+      return;
     }
+
+    setLocation(window.location);
   });
 
   return location;
