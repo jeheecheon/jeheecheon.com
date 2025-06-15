@@ -13,6 +13,7 @@
         "DATABASE_URL",
         "DATABASE_LOGGING",
         "DATABASE_SSL",
+        "BLOG_API_URL",
         "BLOG_GRAPHQL_URL",
         "SESSION_SECRET",
         "OAUTH_GOOGLE_CLIENT_ID",

@@ -40,7 +40,14 @@ const Modal: ParentComponent<{
               onClick={handleContentClick}
             >
               <div class="flex items-center justify-between">
-                <h2 class="text-2xl font-bold text-orange-200">
+                <h2
+                  class={cn(
+                    "font-bold text-orange-300",
+                    props.size === "sm" && "text-xl",
+                    props.size === "md" && "text-2xl",
+                    props.size === "lg" && "text-3xl",
+                  )}
+                >
                   {props.title}
                 </h2>
                 <button
