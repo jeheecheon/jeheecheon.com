@@ -54,7 +54,7 @@ const PreloadedImage: VoidComponent<Props> = (props) => {
 
   function handleLoadStart(event: EventOf<HTMLImageElement>) {
     if (typeof props.onLoadStart === "function") {
-      props.onLoadStart?.(event);
+      props.onLoadStart(event);
     }
 
     setLoading(true);
@@ -62,7 +62,7 @@ const PreloadedImage: VoidComponent<Props> = (props) => {
 
   function handleLoad(event: EventOf<HTMLImageElement>) {
     if (typeof props.onLoad === "function") {
-      props.onLoad?.(event);
+      props.onLoad(event);
     }
 
     setLoading(false);
@@ -70,7 +70,7 @@ const PreloadedImage: VoidComponent<Props> = (props) => {
 
   function handleError(event: EventOf<HTMLImageElement, ErrorEvent>) {
     if (typeof props.onError === "function") {
-      props.onError?.(event);
+      props.onError(event);
     }
 
     setLoading(false);

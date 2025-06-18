@@ -2,9 +2,8 @@ import { Icon } from "solid-heroicons";
 import { paperAirplane } from "solid-heroicons/solid";
 import { createSignal, Show, VoidComponent } from "solid-js";
 import toast from "solid-toast";
-import Button from "~/components/Button";
+import AuthOnlyButton from "~/components/AuthOnlyButton";
 import Image from "~/components/Image";
-import Skeleton from "~/components/Skeleton";
 import Textarea from "~/components/Textarea";
 import { useAccount } from "~/hooks/useAccount";
 import { useMutateComment } from "~/hooks/useMutateComment";
@@ -24,17 +23,22 @@ const CommentUploadCard: VoidComponent<{
     <div class={cn("", props.class)}>
       <Show
         when={account.data?.account}
-        fallback={<Skeleton class="size-10 rounded-full" />}
+        fallback={
+          <div class="flex items-center gap-x-3">
+            <div class="size-10 rounded-full bg-gradient-to-br from-orange-300/50 to-orange-500/50" />
+            <span class="text-sm text-zinc-400">Sign in to comment</span>
+          </div>
+        }
       >
         {(account) => (
-          <>
+          <div class="flex items-center gap-x-3">
             <Image
-              class="inline-block size-10 rounded-full"
+              class="size-10 rounded-full"
               src={account().avatar}
               alt="avatar"
             />
-            <span class="ml-3 inline-block">{account().email}</span>
-          </>
+            <span>{account().email}</span>
+          </div>
         )}
       </Show>
 
@@ -45,7 +49,7 @@ const CommentUploadCard: VoidComponent<{
           onInput={setContent}
         />
         <section class="ml-auto w-fit">
-          <Button
+          <AuthOnlyButton
             class="mt-3"
             type="submit"
             theme="primary"
@@ -54,7 +58,7 @@ const CommentUploadCard: VoidComponent<{
           >
             <Icon class="inline-block size-4" path={paperAirplane} />
             <span class="ml-2 inline-block text-sm">Comment</span>
-          </Button>
+          </AuthOnlyButton>
         </section>
       </form>
     </div>

@@ -23,6 +23,12 @@ export class AuthController {
     private readonly externalAuthenticationService: ExternalAuthenticationService,
   ) {}
 
+  @Get("/signout")
+  async signout(@Res() res: Response) {
+    res.clearCookie("blog-session");
+    res.redirect(this.configService.getOrThrow("BLOG_URL"));
+  }
+
   @Get("google")
   @UseGuards(GoogleAuthGuard)
   async redirectToGoogle() {}

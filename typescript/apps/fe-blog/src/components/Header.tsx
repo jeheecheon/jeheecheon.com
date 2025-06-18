@@ -3,17 +3,21 @@ import {
   createSignal,
   For,
   Match,
+  Show,
+  Suspense,
   Switch,
   type ParentComponent,
   type VoidComponent,
 } from "solid-js";
+import AuthOnlyButton from "~/components/AuthOnlyButton";
 import Button from "~/components/Button";
 import ConditionalLink from "~/components/ConditionalLink";
 import Icon from "~/components/Icon";
 import Image from "~/components/Image";
 import PresenceTransition from "~/components/PresenceTransition";
-import { useGlobalSignInModalVisible } from "~/hooks/useGlobalSignInModalVisible";
+import { useAccount } from "~/hooks/useAccount";
 import { cn } from "~/utils/class-name";
+import { configs } from "~/utils/config";
 
 const links = [
   {
@@ -38,7 +42,8 @@ enum Theme {
 
 const Header: VoidComponent<{ class?: string }> = (props) => {
   const [theme, setTheme] = createSignal<Theme>(Theme.DARK);
-  const [, setSignInModalVisible] = useGlobalSignInModalVisible();
+
+  const account = useAccount();
 
   return (
     <div
@@ -73,9 +78,22 @@ const Header: VoidComponent<{ class?: string }> = (props) => {
           </For>
 
           <li class="border-l border-l-zinc-700 pl-3">
-            <Button size="xs" onClick={handleSignInClick}>
-              Sign-in
-            </Button>
+            <Suspense>
+              <Show
+                when={account.isSuccess}
+                fallback={
+                  <AuthOnlyButton theme="secondary" size="xs">
+                    Sign In
+                  </AuthOnlyButton>
+                }
+              >
+                <a href={`${configs.BLOG_API_URL}/auth/signout`}>
+                  <Button theme="secondary" size="xs">
+                    Sign-out
+                  </Button>
+                </a>
+              </Show>
+            </Suspense>
           </li>
         </ul>
       </section>
@@ -107,10 +125,6 @@ const Header: VoidComponent<{ class?: string }> = (props) => {
         return theme ?? (prev === Theme.LIGHT ? Theme.DARK : Theme.LIGHT);
       });
     };
-  }
-
-  function handleSignInClick() {
-    setSignInModalVisible(true);
   }
 };
 
