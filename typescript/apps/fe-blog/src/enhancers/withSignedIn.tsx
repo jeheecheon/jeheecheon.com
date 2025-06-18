@@ -14,7 +14,9 @@ function withSignedIn<T extends ButtonProps>(WrappedComponent: Component<T>) {
     return (
       <WrappedComponent
         {...props}
-        loading={account.isPending || globalSignInModalVisible()}
+        loading={
+          props.loading || account.isPending || globalSignInModalVisible()
+        }
         onClick={handleClick}
       />
     );
