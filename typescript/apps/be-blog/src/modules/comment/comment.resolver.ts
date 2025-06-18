@@ -41,6 +41,7 @@ export class CommentResolver {
         accountId: id,
         postId: args.postId,
         content: args.content,
+        isDeleted: args.isDeleted,
       },
     );
   }

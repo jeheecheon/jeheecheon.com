@@ -1,12 +1,13 @@
 import { Icon } from "solid-heroicons";
 import { paperAirplane } from "solid-heroicons/solid";
 import { createSignal, Show, VoidComponent } from "solid-js";
+import toast from "solid-toast";
 import Button from "~/components/Button";
 import Image from "~/components/Image";
 import Skeleton from "~/components/Skeleton";
 import Textarea from "~/components/Textarea";
 import { useAccount } from "~/hooks/useAccount";
-import { useUploadComment } from "~/hooks/useUploadComment";
+import { useMutateComment } from "~/hooks/useMutateComment";
 import { cn } from "~/utils/class-name";
 
 const CommentUploadCard: VoidComponent<{
@@ -17,9 +18,7 @@ const CommentUploadCard: VoidComponent<{
   const [content, setContent] = createSignal("");
 
   const account = useAccount();
-  const commentMutate = useUploadComment(() => ({
-    onSuccess: handleSuccess,
-  }));
+  const mutateComment = useMutateComment();
 
   return (
     <div class={cn("", props.class)}>
@@ -51,7 +50,7 @@ const CommentUploadCard: VoidComponent<{
             type="submit"
             theme="primary"
             disabled={!content().trim().length}
-            loading={commentMutate.isPending}
+            loading={mutateComment.isPending}
           >
             <Icon class="inline-block size-4" path={paperAirplane} />
             <span class="ml-2 inline-block text-sm">Comment</span>
@@ -64,15 +63,23 @@ const CommentUploadCard: VoidComponent<{
   function handleSubmit(e: SubmitEvent) {
     e.preventDefault();
 
-    commentMutate.mutate({
-      postId: props.postId,
-      content: content(),
-    });
-  }
-
-  function handleSuccess() {
-    setContent("");
-    props.onSuccess?.();
+    mutateComment.mutate(
+      {
+        postId: props.postId,
+        content: content(),
+      },
+      {
+        onSuccess: () => {
+          setContent("");
+          props.onSuccess?.();
+          toast.success("Commented successfully");
+        },
+        onError: () => {
+          setContent("");
+          toast.error("Failed to comment");
+        },
+      },
+    );
   }
 };
 

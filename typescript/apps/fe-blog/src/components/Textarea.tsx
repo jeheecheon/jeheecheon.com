@@ -51,7 +51,7 @@ const Textarea: VoidComponent<{
   });
 
   return (
-    <div class={cn("relative rounded-md bg-zinc-800 p-2", props.class)}>
+    <div class={cn("relative rounded-lg bg-zinc-800 p-3", props.class)}>
       <textarea
         class="invisible absolute h-auto min-h-10 w-full resize-none"
         ref={(element) => (hiddenTextareaElement = element)}

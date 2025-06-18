@@ -6,6 +6,7 @@ export type MutateUpsertCommentArgs = {
   id?: string;
   postId?: string;
   content?: string;
+  isDeleted?: boolean;
 };
 
 export const mutateUpsertComment = (args: MutateUpsertCommentArgs) => {

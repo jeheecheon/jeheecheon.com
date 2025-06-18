@@ -1,13 +1,34 @@
 import { Comment } from "@packages/common/types/blog/comment";
 import dayjs from "dayjs";
 import { range } from "lodash-es";
-import { For, VoidComponent } from "solid-js";
+import {
+  createSignal,
+  For,
+  Match,
+  Show,
+  Switch,
+  VoidComponent,
+} from "solid-js";
+import toast from "solid-toast";
+import Button from "~/components/Button";
 import Image from "~/components/Image";
+import PresenceTransition from "~/components/PresenceTransition";
+import Textarea from "~/components/Textarea";
+import { useAccount } from "~/hooks/useAccount";
+import { useMutateComment } from "~/hooks/useMutateComment";
 import { cn } from "~/utils/class-name";
 
-const CommentCard: VoidComponent<{ class?: string; comment: Comment }> = (
-  props,
-) => {
+const CommentCard: VoidComponent<{
+  class?: string;
+  comment: Comment;
+  onEditSuccess: () => void;
+}> = (props) => {
+  const [isEditing, setIsEditing] = createSignal(false);
+  const [editedContent, setEditedContent] = createSignal(props.comment.content);
+
+  const account = useAccount();
+  const mutateComment = useMutateComment();
+
   return (
     <div
       class={cn(
@@ -27,19 +48,133 @@ const CommentCard: VoidComponent<{ class?: string; comment: Comment }> = (
         </For>
       </div>
 
-      <div class="min-w-2xs">
-        <Image
-          class="inline-block size-10 rounded-full"
-          src={props.comment.account.avatar}
-        />
-        <span class="ml-3 inline-block">{props.comment.account.email}</span>
+      <div class="w-full min-w-2xs">
+        <div>
+          <Image
+            class="inline-block size-10 rounded-full"
+            src={props.comment.account.avatar}
+          />
+          <span class="ml-3 inline-block">{props.comment.account.email}</span>
+        </div>
+
         <div class="mt-2 text-sm text-zinc-500">
           {dayjs(props.comment.uploadedAt).format("YYYY-MM-DD HH:mm")}
         </div>
-        <p class="mt-3">{props.comment.content}</p>
+
+        <Switch>
+          <Match when={isEditing()}>
+            <Textarea
+              class="mt-3 rounded-lg bg-zinc-600 p-3"
+              value={editedContent()}
+              onInput={setEditedContent}
+            />
+          </Match>
+          <Match when={!isEditing()}>
+            <p class="mt-3 rounded-lg bg-zinc-800 p-3">
+              {props.comment.content}
+            </p>
+          </Match>
+        </Switch>
+
+        <Show when={account.data?.account.id === props.comment.account.id}>
+          <PresenceTransition
+            transitionKey={isEditing().toString()}
+            option="enterFromBottom"
+            transition={{ duration: 0.1, easing: "ease-in-out" }}
+          >
+            <Switch>
+              <Match when={isEditing()}>
+                <div class="mt-3 flex gap-x-3">
+                  <Button
+                    theme="secondary"
+                    size="xs"
+                    onClick={handleToggleIsEditing}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    theme="primary"
+                    size="xs"
+                    loading={mutateComment.isPending}
+                    onClick={handleEditSave}
+                  >
+                    Save
+                  </Button>
+                </div>
+              </Match>
+              <Match when={!isEditing()}>
+                <div class="mt-3 flex gap-x-3">
+                  <Button
+                    theme="secondary"
+                    size="xs"
+                    loading={mutateComment.isPending}
+                    onClick={handleDelete}
+                  >
+                    Delete
+                  </Button>
+                  <Button
+                    theme="primary"
+                    size="xs"
+                    onClick={handleToggleIsEditing}
+                  >
+                    Edit
+                  </Button>
+                </div>
+              </Match>
+            </Switch>
+          </PresenceTransition>
+        </Show>
       </div>
     </div>
   );
+
+  function handleToggleIsEditing() {
+    setIsEditing((prev) => {
+      const next = !prev;
+
+      if (next) {
+        setEditedContent(props.comment.content);
+      }
+
+      return next;
+    });
+  }
+
+  function handleEditSave() {
+    mutateComment.mutate(
+      {
+        id: props.comment.id,
+        content: editedContent(),
+      },
+      {
+        onSuccess: () => {
+          props.onEditSuccess();
+          toast.success("Comment edited successfully");
+        },
+        onError: () => {
+          toast.error("Failed to edit comment");
+        },
+      },
+    );
+  }
+
+  function handleDelete() {
+    mutateComment.mutate(
+      {
+        id: props.comment.id,
+        isDeleted: true,
+      },
+      {
+        onSuccess: () => {
+          props.onEditSuccess();
+          toast.success("Comment deleted successfully");
+        },
+        onError: () => {
+          toast.error("Failed to delete comment");
+        },
+      },
+    );
+  }
 };
 
 export default CommentCard;

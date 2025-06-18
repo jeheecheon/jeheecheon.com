@@ -1,11 +1,8 @@
 import { useMutation } from "@tanstack/solid-query";
 import { mutateUpsertComment } from "~/mutators/mutateUpsertComment";
 
-export const useUploadComment = (argsFn: () => { onSuccess?: () => void }) => {
+export const useMutateComment = () => {
   return useMutation(() => ({
     mutationFn: mutateUpsertComment,
-    onSuccess: () => {
-      argsFn().onSuccess?.();
-    },
   }));
 };

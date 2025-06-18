@@ -88,6 +88,7 @@ input UpsertCommentArgs {
   id: String
   postId: String
   content: String
+  isDeleted: Boolean
 }
 
 input LikeOrUnlikePostArgs {

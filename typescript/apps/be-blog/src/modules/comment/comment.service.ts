@@ -70,6 +70,9 @@ export class CommentService {
       where.postId = args.postId;
     }
 
+    // FIXME: change to soft delete in typeorm way
+    where.isDeleted = false;
+
     return this.commentRepository.find({ where, ...options });
   }
 

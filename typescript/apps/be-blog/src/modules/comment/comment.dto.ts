@@ -21,4 +21,8 @@ export class UpsertCommentArgs {
   @Field(() => String, { nullable: true })
   @IsOptional()
   content?: string;
+
+  @Field(() => Boolean, { nullable: true })
+  @IsOptional()
+  isDeleted?: boolean;
 }

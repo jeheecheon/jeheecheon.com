@@ -28,6 +28,14 @@ const optionsMap = {
     },
     transition: { duration: 0.2, easing: "ease-out" },
   },
+  enterFromBottom: {
+    variants: {
+      hidden: { opacity: 0, transform: "translateY(100%)" },
+      visible: { opacity: 1, transform: "translateY(0)" },
+      exit: { opacity: 0 },
+    },
+    transition: { duration: 0.2, easing: "ease-out" },
+  },
 } satisfies Record<string, Partial<Options>>;
 
 const PresenceTransition: ParentComponent<{
@@ -36,6 +44,7 @@ const PresenceTransition: ParentComponent<{
   option: keyof typeof optionsMap;
   as?: keyof typeof Motion;
   visible?: boolean;
+  transition?: Options["transition"];
   fallback?: JSX.Element;
   animateOnInitialMount?: boolean;
 }> = (_props) => {
@@ -55,7 +64,9 @@ const PresenceTransition: ParentComponent<{
               animate={optionsMap[props.option].variants.visible}
               exit={optionsMap[props.option].variants.exit}
               variants={optionsMap[props.option].variants}
-              transition={optionsMap[props.option].transition}
+              transition={
+                props.transition ?? optionsMap[props.option].transition
+              }
             >
               {props.children}
             </Dynamic>

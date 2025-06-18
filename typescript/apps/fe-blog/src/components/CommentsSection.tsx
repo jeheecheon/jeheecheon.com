@@ -25,7 +25,10 @@ const CommentsSection: VoidComponent<{
           <For each={commentsQuery.data?.comments}>
             {(comment) => (
               <li class={cn("pt-5", comment.parentCommentId && "pt-2")}>
-                <CommentCard comment={comment} />
+                <CommentCard
+                  comment={comment}
+                  onEditSuccess={commentsQuery.refetch}
+                />
               </li>
             )}
           </For>
