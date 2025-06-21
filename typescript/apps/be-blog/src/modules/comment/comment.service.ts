@@ -1,13 +1,17 @@
 import {
   Injectable,
   NotFoundException,
+  UnauthorizedException,
   UnprocessableEntityException,
 } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { assert } from "@packages/common/utils/assert";
 import { Comment } from "@packages/entities-blog/comment/comment.entity";
 import { Repository, type FindOptionsWhere } from "typeorm";
-import type { IDefaultListQueryOptions } from "../../utils/types.js";
+import type {
+  IDefaultGetQueryOptions,
+  IDefaultListQueryOptions,
+} from "../../utils/types.js";
 
 @Injectable()
 export class CommentService {
@@ -16,7 +20,10 @@ export class CommentService {
     private readonly commentRepository: Repository<Comment>,
   ) {}
 
-  async getComment(args: { id?: string }) {
+  async getComment(
+    args: { id?: string },
+    options?: IDefaultGetQueryOptions<Comment>,
+  ) {
     const where: FindOptionsWhere<Comment> = {};
 
     if (args.id) {
@@ -27,7 +34,7 @@ export class CommentService {
       return;
     }
 
-    return this.commentRepository.findOne({ where });
+    return this.commentRepository.findOne({ where, ...options });
   }
 
   async getCommentOrThrow(args: { id: string }) {
@@ -51,6 +58,11 @@ export class CommentService {
     const existingComment = await this.getComment({ id: args.id });
 
     if (existingComment) {
+      assert(
+        existingComment.accountId === comment.accountId,
+        new UnauthorizedException(),
+      );
+
       const result = await this.updateComment({ id: args.id }, comment);
       assert(result.affected === 1, new UnprocessableEntityException());
 
@@ -76,12 +88,14 @@ export class CommentService {
     return this.commentRepository.find({ where, ...options });
   }
 
-  async countComments(args: { postId?: string }) {
+  async countComments(args: { postId?: string; isDeleted?: boolean }) {
     const where: FindOptionsWhere<Comment> = {};
 
     if (args.postId) {
       where.postId = args.postId;
     }
+
+    where.isDeleted = args.isDeleted;
 
     return this.commentRepository.count({ where });
   }

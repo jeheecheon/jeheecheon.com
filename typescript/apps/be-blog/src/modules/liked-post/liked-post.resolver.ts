@@ -22,7 +22,6 @@ export class LikedPostResolver {
     @Context("req") req: Request,
     @Args("args") args: LikeOrUnlikePostArgs,
   ) {
-    console.log(req.headers);
     const id = getAccountId(req);
     assert(id, new UnauthorizedException());
 

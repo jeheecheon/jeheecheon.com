@@ -37,6 +37,7 @@ export class PostResolver {
   async commentsCount(@Parent() post: Post) {
     return this.commentService.countComments({
       postId: post.id,
+      isDeleted: false,
     });
   }
 
@@ -44,7 +45,7 @@ export class PostResolver {
   @UseGuards(SessionAuthGuard)
   async isLiked(@Context("req") req: Request, @Parent() post: Post) {
     const id = getAccountId(req);
-    console.log(req.headers);
+
     if (!id) {
       return false;
     }
