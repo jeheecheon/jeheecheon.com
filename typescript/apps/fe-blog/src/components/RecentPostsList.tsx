@@ -49,11 +49,11 @@ const RecentPostsList: VoidComponent<Props> = (props) => {
               <table class="w-full border border-zinc-700">
                 <thead class="border-b border-zinc-700">
                   <tr class="text-right">
-                    <th class="p-2 text-left">Title</th>
-                    <th class="p-2">Category</th>
-                    <th class="p-2">Uploaded At</th>
-                    <th class="p-2">Edited At</th>
-                    <th />
+                    <th class="p-3 pl-5 text-left">Title</th>
+                    <th class="p-3">Category</th>
+                    <th class="p-3">Uploaded At</th>
+                    <th class="p-3">Edited At</th>
+                    <th class="p-3 pr-5" />
                   </tr>
                 </thead>
                 <tbody>
@@ -127,24 +127,24 @@ const PostRow: VoidComponent<{
 }> = (props) => {
   return (
     <tr class={cn("p-1 text-right", props.class)} ref={props.ref}>
-      <td class="p-2 text-left">{props.post.title}</td>
-      <td class="p-2">{props.post.categoryId}</td>
-      <td class="p-2">
+      <td class="p-3 pl-5 text-left">{props.post.title}</td>
+      <td class="p-3 text-nowrap">{props.post.categoryId}</td>
+      <td class="p-3">
         {dayjs(props.post.uploadedAt).format("YYYY-MM-DD HH:mm:ss")}
       </td>
-      <td class="p-2">
+      <td class="p-3">
         {props.post.editedAt
           ? dayjs(props.post.editedAt).format("YYYY-MM-DD HH:mm:ss")
           : "N/A"}
       </td>
-      <td class="p-2">
-        <div>
+      <td class="p-3 pr-5">
+        <div class="flex flex-nowrap gap-x-3">
           <A href={props.buildPostHref(props.post)}>
             <Button theme="primary" size="sm">
               Edit
             </Button>
           </A>
-          <Button class="ml-2" theme="secondary" size="sm">
+          <Button theme="secondary" size="sm">
             Delete
           </Button>
         </div>
