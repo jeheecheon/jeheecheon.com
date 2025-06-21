@@ -3,6 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { assert } from "@packages/common/utils/assert";
 import { Account } from "@packages/entities-blog/account/account.entity";
 import { FindOptionsWhere, Repository } from "typeorm";
+import { IDefaultGetQueryOptions } from "../../utils/types.js";
 
 @Injectable()
 export class AccountService {
@@ -11,7 +12,10 @@ export class AccountService {
     private readonly accountRepository: Repository<Account>,
   ) {}
 
-  async getAccount(args: { email?: string; id?: string }) {
+  async getAccount(
+    args: { email?: string; id?: string },
+    options?: IDefaultGetQueryOptions<Account>,
+  ) {
     const where: FindOptionsWhere<Account> = {};
 
     if (args.email) {
@@ -26,11 +30,15 @@ export class AccountService {
 
     return this.accountRepository.findOne({
       where,
+      ...options,
     });
   }
 
-  async getAccountOrThrow(args: { email: string } | { id: string }) {
-    const account = await this.getAccount(args);
+  async getAccountOrThrow(
+    args: { email: string } | { id: string },
+    options?: IDefaultGetQueryOptions<Account>,
+  ) {
+    const account = await this.getAccount(args, options);
     assert(account, new NotFoundException());
 
     return account;

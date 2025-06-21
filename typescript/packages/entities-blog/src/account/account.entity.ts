@@ -53,7 +53,8 @@ export class Account {
       referencedColumnName: "id",
     },
   })
-  roles: Relation<Role>[];
+  @Field(() => [Role], { nullable: true })
+  roles?: Relation<Role>[];
 
   @OneToMany(() => Comment, (comment) => comment.account)
   comments: Relation<Comment>[];

@@ -38,7 +38,9 @@ const PostSection: VoidComponent<{
       <div class="mt-20 h-px w-full bg-zinc-800" role="separator" />
 
       <ClientOnly>
-        <RawHtmlRenderer class="mt-20" rawHtml={props.post.content} />
+        <div class="mt-20">
+          <RawHtmlRenderer rawHtml={props.post.content} />
+        </div>
       </ClientOnly>
 
       <PostLikesButton class="mx-auto mt-20 block" post={props.post} />

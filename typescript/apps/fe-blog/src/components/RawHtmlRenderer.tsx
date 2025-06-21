@@ -14,13 +14,11 @@ import { cn } from "~/utils/class-name";
 import { renderRawHtml } from "~/utils/html";
 
 const RawHtmlRenderer: VoidComponent<{
-  class?: string;
   rawHtml: string;
   allowedTags?: (keyof JSX.IntrinsicElements)[];
 }> = (props) => {
   const rendered = createMemo(() =>
     renderRawHtml(props.rawHtml, {
-      class: props.class,
       allowedTags: props.allowedTags,
       renderNode: HtmlNodeRenderer,
     }),
@@ -30,12 +28,10 @@ const RawHtmlRenderer: VoidComponent<{
 };
 
 const HtmlNodeRenderer: ParentComponent<{
-  class?: string;
   node: HTMLElement | Node;
 }> = (props) => {
   const className = cn(
-    props.class,
-    props.node instanceof HTMLElement ? props.node.attributes.class : "",
+    props.node instanceof HTMLElement && props.node.attributes.class,
   );
 
   return (

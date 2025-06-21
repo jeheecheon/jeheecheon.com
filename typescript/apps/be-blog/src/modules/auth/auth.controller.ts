@@ -52,9 +52,16 @@ export class AuthController {
       },
     );
 
-    const account = await this.accountService.getAccountOrThrow({
-      email: user.profile.email,
-    });
+    const account = await this.accountService.getAccountOrThrow(
+      {
+        email: user.profile.email,
+      },
+      {
+        relations: {
+          roles: true,
+        },
+      },
+    );
 
     await this.externalAuthenticationService.upsertExternalAuthentication(
       {

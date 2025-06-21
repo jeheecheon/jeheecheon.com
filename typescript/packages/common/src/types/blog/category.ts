@@ -6,3 +6,9 @@ export enum PostCategory {
   UNCATEGORIZED = "Uncategorized",
   WEB_DEVELOPMENT = "Web-Development",
 }
+
+export type Category = {
+  id: string;
+  name: string;
+  parentCategory?: Category;
+};

@@ -10,6 +10,7 @@ import { Role } from "@packages/entities-blog/role/role.entity";
 import { join } from "path";
 import { AccountModule } from "./modules/account/account.module.js";
 import { AuthModule } from "./modules/auth/auth.module.js";
+import { CategoryModule } from "./modules/category/category.module.js";
 import { CommentModule } from "./modules/comment/comment.module.js";
 import { DatabaseModule } from "./modules/database/database.module.js";
 import { ExternalAuthenticationModule } from "./modules/external-authentication/external-authentication.module.js";
@@ -45,6 +46,7 @@ import { configs } from "./utils/config.js";
     AccountModule,
     AuthModule,
     ExternalAuthenticationModule,
+    CategoryModule,
   ],
 })
 export class AppModule {}

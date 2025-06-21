@@ -1,3 +1,4 @@
+import { Field, ObjectType } from "@nestjs/graphql";
 import type { Maybe } from "@packages/common/types/misc";
 import {
   Column,
@@ -12,15 +13,19 @@ import {
 import { Post } from "../post/post.entity.js";
 
 @Entity("category", { schema: "public" })
+@ObjectType()
 export class Category {
   @PrimaryColumn("varchar", { length: 30, unique: true })
+  @Field(() => String)
   id: string;
 
   @Column("varchar", { length: 30, nullable: true })
+  @Field(() => String, { nullable: true })
   @ForeignKey(() => Category)
   parentCategoryId?: Maybe<string>;
 
   @Column("boolean")
+  @Field(() => Boolean)
   isBottomLevel: boolean;
 
   @ManyToOne(() => Category, (category) => category.categories, {
@@ -28,6 +33,7 @@ export class Category {
     onUpdate: "CASCADE",
   })
   @JoinColumn({ referencedColumnName: "id" })
+  @Field(() => Category, { nullable: true })
   parentCategory: Relation<Category>;
 
   @OneToMany(() => Category, (category) => category.parentCategory)
