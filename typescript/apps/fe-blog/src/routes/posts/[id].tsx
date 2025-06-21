@@ -24,7 +24,9 @@ const PostsRoute: VoidComponent = () => {
     return <Navigate href="/404" />;
   }
 
-  const post = createAsync(() => injectPost({ id: params.id }));
+  const post = createAsync(() => injectPost({ id: params.id }), {
+    deferStream: true,
+  });
 
   return (
     <Container>

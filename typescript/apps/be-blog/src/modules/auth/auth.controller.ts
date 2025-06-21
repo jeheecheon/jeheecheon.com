@@ -1,6 +1,8 @@
 import {
   Controller,
   Get,
+  HttpCode,
+  HttpStatus,
   Req,
   Res,
   UnauthorizedException,
@@ -12,6 +14,7 @@ import type { Request, Response } from "express";
 import { AccountService } from "../account/account.service.js";
 import { ExternalAuthenticationProviderId } from "../external-authentication/external-authentication.constants.js";
 import { ExternalAuthenticationService } from "../external-authentication/external-authentication.service.js";
+import { AdminSessionAuthGuard } from "../guards/admin-session-auth.guard.js";
 import { GoogleAuthGuard } from "../guards/google.guard.js";
 import { googleOAuthUserSchema } from "../passport/google.strategy.js";
 
@@ -22,6 +25,15 @@ export class AuthController {
     private readonly accountService: AccountService,
     private readonly externalAuthenticationService: ExternalAuthenticationService,
   ) {}
+
+  @Get("/is-admin")
+  @UseGuards(AdminSessionAuthGuard)
+  @HttpCode(HttpStatus.OK)
+  async isAdmin() {
+    return {
+      isAdmin: true,
+    };
+  }
 
   @Get("/signout")
   async signout(@Res() res: Response) {
