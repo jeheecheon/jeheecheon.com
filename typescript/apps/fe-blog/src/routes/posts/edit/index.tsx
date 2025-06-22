@@ -33,7 +33,7 @@ const Edit: VoidComponent = () => {
   );
 
   function buildPostHref(post: Post) {
-    return `/posts/${post.id}/edit`;
+    return `/posts/edit/${post.id}`;
   }
 };
 

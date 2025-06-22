@@ -1,5 +1,5 @@
 import { ParentComponent } from "solid-js";
-import Container from "~/components/Container";
+import Footer from "~/components/Footer";
 import Header from "~/components/Header";
 import SignInModal from "~/components/SignInModal";
 import { useGlobalSignInModalVisible } from "~/hooks/useGlobalSignInModalVisible";
@@ -12,14 +12,9 @@ const GlobalLayout: ParentComponent<{ class?: string }> = (props) => {
   return (
     <>
       <div class={cn("h-full", props.class)}>
-        <div class="fixed top-6 z-30 w-full">
-          <Container>
-            <Header />
-          </Container>
-        </div>
-
+        <Header class="fixed top-6 z-30 w-full" />
         {props.children}
-        {/* TODO: Add footer */}
+        <Footer />
       </div>
 
       <SignInModal

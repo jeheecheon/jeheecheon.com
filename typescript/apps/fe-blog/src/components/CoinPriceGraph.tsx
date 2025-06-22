@@ -52,6 +52,7 @@ const CoinPriceGraph: VoidComponent<{
           option="fadeInOut"
         >
           <Button
+            theme="primary"
             size="sm"
             loading={historyQuery.isLoading}
             onClick={handleReload}
