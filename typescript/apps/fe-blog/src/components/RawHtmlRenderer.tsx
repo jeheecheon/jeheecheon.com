@@ -39,8 +39,8 @@ const HtmlNodeRenderer: ParentComponent<{
       fallback={
         <Dynamic
           {...(props.node instanceof HTMLElement ? props.node.attributes : {})}
-          component={props.node.rawTagName || "div"}
           class={cn("", className)}
+          component={props.node.rawTagName || "div"}
         >
           {props.children}
         </Dynamic>
@@ -62,6 +62,17 @@ const HtmlNodeRenderer: ParentComponent<{
         >
           {props.children}
         </ConditionalLink>
+      </Match>
+      <Match when={props.node.rawTagName === "pre"}>
+        <pre
+          {...(props.node instanceof HTMLElement
+            ? {
+                ...props.node.attributes,
+                innerHTML: props.node.innerHTML,
+              }
+            : {})}
+          class={cn("rounded-md bg-zinc-800 p-3", className)}
+        />
       </Match>
     </Switch>
   );

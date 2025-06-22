@@ -2,7 +2,7 @@ import type { Post } from "@packages/common/types/blog/post";
 import { A } from "@solidjs/router";
 import dayjs from "dayjs";
 import { arrowLeft, heart } from "solid-heroicons/solid";
-import { createSignal, Match, Switch, VoidComponent } from "solid-js";
+import { createSignal, Match, onMount, Switch, VoidComponent } from "solid-js";
 import { ClientOnly } from "solid-use/client-only";
 import Button from "~/components/Button";
 import CommentsSection from "~/components/CommentsSection";
@@ -14,11 +14,17 @@ import {
   useLikeOrUnlikePost,
 } from "~/hooks/useLikeOrUnlikePost";
 import { cn } from "~/utils/class-name";
+import { initHighlight } from "~/utils/highlight";
 
 const PostSection: VoidComponent<{
   class?: string;
   post: Post;
 }> = (props) => {
+  onMount(() => {
+    const hljs = initHighlight();
+    hljs.highlightAll();
+  });
+
   return (
     <section class={cn("", props.class)}>
       <A class="inline-block" href="/">

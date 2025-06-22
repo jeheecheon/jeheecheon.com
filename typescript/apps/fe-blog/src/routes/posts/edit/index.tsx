@@ -8,7 +8,7 @@ import RecentPostsList from "~/components/RecentPostsList";
 import { injectIsAdmin } from "~/injectors/injectIsAdmin.server";
 
 const Edit: VoidComponent = () => {
-  const isAdminQuery = createAsync(() => injectIsAdmin(), {
+  const isAdminQuery = createAsync(injectIsAdmin, {
     deferStream: true,
   });
 
