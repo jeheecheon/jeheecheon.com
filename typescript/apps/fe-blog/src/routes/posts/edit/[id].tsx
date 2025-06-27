@@ -49,7 +49,12 @@ const PostsRoute: VoidComponent = () => {
                 animateOnInitialMount
               >
                 <Show when={postQuery.data?.post}>
-                  {(post) => <PostEditSection post={post()} />}
+                  {(post) => (
+                    <PostEditSection
+                      post={post()}
+                      onSuccess={postQuery.refetch}
+                    />
+                  )}
                 </Show>
               </PresenceTransition>
             </Match>

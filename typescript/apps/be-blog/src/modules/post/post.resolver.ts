@@ -2,6 +2,7 @@ import { UseGuards } from "@nestjs/common";
 import {
   Args,
   Context,
+  Mutation,
   Parent,
   Query,
   ResolveField,
@@ -13,9 +14,10 @@ import { PaginationInput } from "../../utils/dto.js";
 import { getAccountId } from "../../utils/misc.js";
 import { handlePaginationParams } from "../../utils/pagination.js";
 import { CommentService } from "../comment/comment.service.js";
+import { AdminSessionAuthGuard } from "../guards/admin-session-auth.guard.js";
 import { SessionAuthGuard } from "../guards/session-auth.guard.js";
 import { LikedPostService } from "../liked-post/liked-post.service.js";
-import { GetPostFilter, ListPostsFilter } from "./post.dto.js";
+import { GetPostFilter, ListPostsFilter, UpsertPostArgs } from "./post.dto.js";
 import { PostService } from "./post.service.js";
 
 @Resolver(() => Post)
@@ -78,6 +80,17 @@ export class PostResolver {
         order: {
           uploadedAt: "DESC",
         },
+      },
+    );
+  }
+
+  @Mutation(() => Post)
+  @UseGuards(AdminSessionAuthGuard)
+  async upsertPost(@Args("args") args: UpsertPostArgs) {
+    return this.postService.upsertPost(
+      { id: args.id },
+      {
+        ...args,
       },
     );
   }

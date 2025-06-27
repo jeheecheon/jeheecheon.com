@@ -100,8 +100,20 @@ input ListCategoriesFilter {
 }
 
 type Mutation {
+  upsertPost(args: UpsertPostArgs!): Post!
   upsertComment(args: UpsertCommentArgs!): Comment!
   likeOrUnlikePost(args: LikeOrUnlikePostArgs!): CountLikedPostsResult!
+}
+
+input UpsertPostArgs {
+  id: String
+  title: String!
+  content: String!
+  cover: String
+  isPublic: Boolean!
+  categoryId: String
+  uploadedAt: Timestamp!
+  editedAt: Timestamp
 }
 
 input UpsertCommentArgs {

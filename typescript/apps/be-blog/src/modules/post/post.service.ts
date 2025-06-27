@@ -1,5 +1,6 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, UnprocessableEntityException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import { assert } from "@packages/common/utils/assert";
 import { Post } from "@packages/entities-blog/post/post.entity";
 import { In, Repository, type FindOptionsWhere } from "typeorm";
 import type {
@@ -16,14 +17,18 @@ export class PostService {
 
   async getPost(
     args: {
-      id: string;
+      id?: string;
     },
     options?: IDefaultGetQueryOptions<Post>,
   ) {
+    const where: FindOptionsWhere<Post> = {};
+
+    if (args.id) {
+      where.id = args.id;
+    }
+
     return this.postRepository.findOne({
-      where: {
-        id: args.id,
-      },
+      where,
       ...options,
     });
   }
@@ -49,5 +54,28 @@ export class PostService {
       where,
       ...options,
     });
+  }
+
+  async updatePost(args: { id?: string }, post: Partial<Post>) {
+    const where: FindOptionsWhere<Post> = {};
+
+    if (args.id) {
+      where.id = args.id;
+    }
+
+    return this.postRepository.update(where, post);
+  }
+
+  async upsertPost(args: { id?: string }, post: Partial<Post>) {
+    const existingPost = await this.getPost({ id: args.id });
+
+    if (existingPost) {
+      const result = await this.updatePost({ id: args.id }, post);
+      assert(result.affected === 1, new UnprocessableEntityException());
+
+      return this.getPost({ id: args.id });
+    }
+
+    return this.postRepository.save({ ...post, id: args.id });
   }
 }

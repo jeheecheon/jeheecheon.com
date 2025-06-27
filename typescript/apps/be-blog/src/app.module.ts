@@ -14,6 +14,7 @@ import { CategoryModule } from "./modules/category/category.module.js";
 import { CommentModule } from "./modules/comment/comment.module.js";
 import { DatabaseModule } from "./modules/database/database.module.js";
 import { ExternalAuthenticationModule } from "./modules/external-authentication/external-authentication.module.js";
+import { ImageModule } from "./modules/image/image.module.js";
 import { LikedPostModule } from "./modules/liked-post/liked-post.module.js";
 import { PostModule } from "./modules/post/post.module.js";
 import { configs } from "./utils/config.js";
@@ -47,6 +48,7 @@ import { configs } from "./utils/config.js";
     AuthModule,
     ExternalAuthenticationModule,
     CategoryModule,
+    ImageModule,
   ],
 })
 export class AppModule {}
