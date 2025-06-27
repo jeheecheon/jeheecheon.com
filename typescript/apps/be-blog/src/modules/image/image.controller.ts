@@ -8,8 +8,8 @@ import {
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { AdminSessionAuthGuard } from "../guards/admin-session-auth.guard.js";
-import { multerOptions } from "../s3/multer-s3.config.js";
 import { ImageService } from "./image.service.js";
+import { multerOptions } from "./multer.config.js";
 
 @Controller("image")
 export class ImageController {
@@ -19,11 +19,12 @@ export class ImageController {
   @UseGuards(AdminSessionAuthGuard)
   @UseInterceptors(FileInterceptor("image", multerOptions))
   async uploadImage(
-    @Body() body: { postId: string },
-    @UploadedFile() file: Express.MulterS3.File,
+    @Body() body: { postId?: string },
+    @UploadedFile() file: Express.Multer.File,
   ) {
-    return {
-      url: file.location,
-    };
+    return this.imageService.uploadImage({
+      postId: body.postId,
+      image: file,
+    });
   }
 }

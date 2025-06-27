@@ -17,7 +17,7 @@ const CommentUploadCard: VoidComponent<{
   const [content, setContent] = createSignal("");
 
   const account = useAccount();
-  const mutateComment = useMutateComment();
+  const commentMutate = useMutateComment();
 
   return (
     <div class={cn("", props.class)}>
@@ -54,7 +54,7 @@ const CommentUploadCard: VoidComponent<{
             type="submit"
             theme="primary"
             disabled={!content().trim().length}
-            loading={mutateComment.isPending}
+            loading={commentMutate.isPending}
           >
             <Icon class="inline-block size-4" path={paperAirplane} />
             <span class="ml-2 inline-block text-sm">Comment</span>
@@ -67,7 +67,7 @@ const CommentUploadCard: VoidComponent<{
   function handleSubmit(e: SubmitEvent) {
     e.preventDefault();
 
-    mutateComment.mutate(
+    commentMutate.mutate(
       {
         postId: props.postId,
         content: content(),

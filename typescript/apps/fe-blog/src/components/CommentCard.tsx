@@ -29,7 +29,7 @@ const CommentCard: VoidComponent<{
   const [deleteModalVisible, setDeleteModalVisible] = createSignal(false);
 
   const account = useAccount();
-  const mutateComment = useMutateComment();
+  const commentMutate = useMutateComment();
 
   return (
     <>
@@ -99,7 +99,7 @@ const CommentCard: VoidComponent<{
                     <Button
                       theme="primary"
                       size="xs"
-                      loading={mutateComment.isPending}
+                      loading={commentMutate.isPending}
                       onClick={handleEditSave}
                     >
                       Save
@@ -111,7 +111,7 @@ const CommentCard: VoidComponent<{
                     <Button
                       theme="secondary"
                       size="xs"
-                      loading={mutateComment.isPending}
+                      loading={commentMutate.isPending}
                       onClick={handleToggleDeleteModal(true)}
                     >
                       Delete
@@ -155,7 +155,7 @@ const CommentCard: VoidComponent<{
   }
 
   function handleEditSave() {
-    mutateComment.mutate(
+    commentMutate.mutate(
       {
         id: props.comment.id,
         content: editedContent(),
@@ -179,7 +179,7 @@ const CommentCard: VoidComponent<{
   }
 
   function handleDelete() {
-    mutateComment.mutate(
+    commentMutate.mutate(
       {
         id: props.comment.id,
         isDeleted: true,
