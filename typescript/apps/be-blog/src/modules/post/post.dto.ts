@@ -47,4 +47,8 @@ export class UpsertPostArgs {
   @Field(() => Date, { nullable: true })
   @IsOptional()
   editedAt?: Date;
+
+  @Field(() => Date, { nullable: true })
+  @IsOptional()
+  deletedAt?: Date;
 }

@@ -1,7 +1,6 @@
 import {
   Column,
   Entity,
-  ForeignKey,
   JoinColumn,
   ManyToOne,
   PrimaryColumn,
@@ -13,14 +12,12 @@ import { ExternalLoginProvider } from "../external-login-provider/external-login
 @Entity("external_authentication", { schema: "public" })
 export class ExternalAuthentication {
   @PrimaryColumn("integer", { unique: true })
-  @ForeignKey(() => ExternalLoginProvider)
   providerId: number;
 
   @PrimaryColumn("varchar", { unique: true, length: 256 })
   accountIdFromProvider: string;
 
   @Column("uuid")
-  @ForeignKey(() => Account)
   accountId: string;
 
   @ManyToOne(() => Account, (account) => account.externalAuthentications, {

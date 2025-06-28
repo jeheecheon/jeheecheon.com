@@ -7,6 +7,9 @@
     "node": ">=18"
   },
   "scripts": {
+    "clear": "pnpm run clear:dist && pnpm run clear:node_modules",
+    "clear:dist": "find . -type d -name 'dist' -exec rm -rf {} +",
+    "clear:node_modules": "find . -type d -name 'node_modules' -exec rm -rf {} +",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",

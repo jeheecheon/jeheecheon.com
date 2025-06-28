@@ -15,6 +15,7 @@ type Post {
   content: String!
   uploadedAt: Timestamp!
   editedAt: Timestamp
+  deletedAt: Timestamp
   cover: String
   isPublic: Boolean!
   categoryId: String
@@ -114,6 +115,7 @@ input UpsertPostArgs {
   categoryId: String
   uploadedAt: Timestamp!
   editedAt: Timestamp
+  deletedAt: Timestamp
 }
 
 input UpsertCommentArgs {

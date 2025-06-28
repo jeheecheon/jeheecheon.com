@@ -104,7 +104,7 @@ const RecentPostsList: VoidComponent<Props> = (props) => {
                   <For each={range(10)}>
                     {() => (
                       <tr>
-                        <td colspan={5}>
+                        <td colspan={6}>
                           <Skeleton class="h-40 w-full rounded-md" />
                         </td>
                       </tr>
@@ -154,7 +154,10 @@ const PostRow: VoidComponent<{
   ref: (element: Element) => void;
   post: Post;
   buildPostHref: Props["buildPostHref"];
+  onDeleteSuccess: () => void;
 }> = (props) => {
+  const postMutate = useMutatePost();
+
   return (
     <tr class={cn("p-1 text-right", props.class)} ref={props.ref}>
       <td class="p-3 pl-5 text-left">{props.post.title}</td>
@@ -175,13 +178,39 @@ const PostRow: VoidComponent<{
               Edit
             </Button>
           </A>
-          <Button theme="secondary" size="sm">
+          <Button
+            theme="secondary"
+            size="sm"
+            loading={postMutate.isPending}
+            disabled={postMutate.isPending}
+            onClick={handleDeletePost(props.post)}
+          >
             Delete
           </Button>
         </div>
       </td>
     </tr>
   );
+
+  function handleDeletePost(post: Post) {
+    return () => {
+      postMutate.mutate(
+        {
+          id: post.id,
+          deletedAt: new Date(),
+        },
+        {
+          onSuccess: () => {
+            props.onDeleteSuccess();
+            toast.success("Post deleted successfully");
+          },
+          onError: () => {
+            toast.error("Failed to delete post");
+          },
+        },
+      );
+    };
+  }
 };
 
 export default RecentPostsList;

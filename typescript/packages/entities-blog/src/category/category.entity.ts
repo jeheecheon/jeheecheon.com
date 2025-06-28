@@ -3,7 +3,6 @@ import type { Maybe } from "@packages/common/types/misc";
 import {
   Column,
   Entity,
-  ForeignKey,
   JoinColumn,
   ManyToOne,
   OneToMany,
@@ -21,7 +20,6 @@ export class Category {
 
   @Column("varchar", { length: 30, nullable: true })
   @Field(() => String, { nullable: true })
-  @ForeignKey(() => Category)
   parentCategoryId?: Maybe<string>;
 
   @Column("boolean")

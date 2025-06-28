@@ -6,6 +6,7 @@ export type Post = {
   content: string;
   uploadedAt: string;
   editedAt: string;
+  deletedAt?: string;
   cover: string;
   isPublic: boolean;
   categoryId: PostCategory;

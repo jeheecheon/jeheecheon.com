@@ -3,8 +3,8 @@ import type { Maybe } from "@packages/common/types/misc";
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
-  ForeignKey,
   JoinColumn,
   ManyToMany,
   ManyToOne,
@@ -41,6 +41,10 @@ export class Post {
   @Field(() => Date, { nullable: true })
   editedAt?: Maybe<Date>;
 
+  @DeleteDateColumn({ type: "timestamptz", nullable: true })
+  @Field(() => Date, { nullable: true })
+  deletedAt?: Maybe<Date>;
+
   @Column("varchar", { nullable: true, length: 256 })
   @Field(() => String, { nullable: true })
   cover?: Maybe<string>;
@@ -50,7 +54,6 @@ export class Post {
   isPublic: boolean;
 
   @Column("uuid", { nullable: true })
-  @ForeignKey(() => Category)
   @Field(() => String, { nullable: true })
   categoryId?: Maybe<string>;
 

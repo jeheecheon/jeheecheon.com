@@ -4,11 +4,12 @@ import { UPSERT_POST } from "~/graphql/documents/post.mutations";
 
 export type MutateUpsertPostArgs = {
   id?: string;
-  title: string;
-  content: string;
-  isPublic: boolean;
-  uploadedAt: Date;
+  title?: string;
+  content?: string;
+  isPublic?: boolean;
+  uploadedAt?: Date;
   editedAt?: Date;
+  deletedAt?: Date;
   cover?: string;
   categoryId?: string;
 };

@@ -4,7 +4,6 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  ForeignKey,
   JoinColumn,
   ManyToOne,
   OneToMany,
@@ -23,16 +22,13 @@ export class Comment {
   id: string;
 
   @Column("uuid", { nullable: true })
-  @ForeignKey(() => Comment)
   @Field(() => String, { nullable: true })
   parentCommentId?: Maybe<string>;
 
   @Column("uuid")
-  @ForeignKey(() => Account)
   accountId: string;
 
   @Column("uuid")
-  @ForeignKey(() => Post)
   postId: string;
 
   @Column("text")

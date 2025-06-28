@@ -1,7 +1,6 @@
 import {
   CreateDateColumn,
   Entity,
-  ForeignKey,
   JoinColumn,
   ManyToOne,
   PrimaryColumn,
@@ -13,11 +12,9 @@ import { Comment } from "../comment/comment.entity.js";
 @Entity("liked_comment", { schema: "public" })
 export class LikedComment {
   @PrimaryColumn("uuid")
-  @ForeignKey(() => Comment)
   commentId: string;
 
   @PrimaryColumn("uuid")
-  @ForeignKey(() => Account)
   accountId: string;
 
   @CreateDateColumn({ type: "timestamptz" })

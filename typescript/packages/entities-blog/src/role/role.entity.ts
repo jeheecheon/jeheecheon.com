@@ -1,8 +1,8 @@
 import { Field, ObjectType } from "@nestjs/graphql";
 import {
+  Column,
   Entity,
   ManyToMany,
-  PrimaryColumn,
   PrimaryGeneratedColumn,
   type Relation,
 } from "typeorm";
@@ -15,7 +15,7 @@ export class Role {
   @Field(() => Number)
   id: number;
 
-  @PrimaryColumn("varchar", { unique: true, length: 30 })
+  @Column("varchar", { unique: true, length: 30 })
   @Field(() => String)
   name: string;
 

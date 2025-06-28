@@ -1,7 +1,6 @@
 import {
   CreateDateColumn,
   Entity,
-  ForeignKey,
   JoinColumn,
   ManyToOne,
   PrimaryColumn,
@@ -13,11 +12,9 @@ import { Post } from "../post/post.entity.js";
 @Entity("liked_post", { schema: "public" })
 export class LikedPost {
   @PrimaryColumn("uuid")
-  @ForeignKey(() => Post)
   postId: string;
 
   @PrimaryColumn("uuid")
-  @ForeignKey(() => Account)
   accountId: string;
 
   @CreateDateColumn({ type: "timestamptz" })
