@@ -1,88 +1,71 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import Quill from "quill";
+import toast from "solid-toast";
+import { mutateUploadImage } from "~/mutators/mutateUploadImage";
+import { convertToWebpFile } from "~/utils/image";
 
-// import { convertToWebPFromFile } from "@/posts/edit/_utils/webp";
-
-export function undoChange(this: any) {
+export function undoChange(this: { quill: Quill }) {
   this.quill.history.undo();
 }
 
-export function redoChange(this: any) {
+export function redoChange(this: { quill: Quill }) {
   this.quill.history.redo();
 }
 
-export function insertStar(this: any) {
-  const cursorPosition = this.quill.getSelection().index;
+export function insertStar(this: { quill: Quill }) {
+  const cursorPosition = this.quill.getSelection()?.index;
+  if (typeof cursorPosition !== "number") {
+    console.error("No cursor position found");
+    return;
+  }
+
   this.quill.insertText(cursorPosition, "★");
   this.quill.setSelection(cursorPosition + 1);
 }
 
-// export async function insertImage(this: any) {
-//   // Get the post id that the writer is editing on
-//   const post_id = (
-//     document.getElementById("IdOfPostEditing") as HTMLInputElement
-//   ).value;
-//   if (post_id === null || post_id === undefined) return;
+export async function insertImage(this: { quill: Quill }) {
+  if (typeof window !== "object") {
+    console.error("Must be in browser environment");
+    return;
+  }
 
-//   // Create an input tag and get it clicked
-//   const input = document.createElement("input");
-//   input.type = "file";
-//   input.accept = "image/*";
-//   input.click();
+  const postId = window.location.pathname.match(/posts\/([^/]+)\/edit/)?.[1];
+  if (!postId) {
+    console.error("No post id found in pathname");
+    return;
+  }
 
-//   // Wait until any file has been selected
-//   await new Promise((resolve) => {
-//     input.addEventListener("change", resolve, { once: true });
-//   });
+  const cursorPosition = this.quill.getSelection()?.index;
+  if (typeof cursorPosition !== "number") {
+    console.error("No cursor position found");
+    return;
+  }
 
-//   // Store the selected image into this var
-//   const image = (input as HTMLInputElement).files![0];
+  const input = document.createElement("input");
+  input.type = "file";
+  input.accept = "image/*";
+  input.click();
 
-//   // Error checking if the file was successfuly selected
-//   if (!image) {
-//     console.error("File not selected...");
-//     return;
-//   }
+  await new Promise((resolve) => {
+    input.addEventListener("change", resolve, { once: true });
+  });
 
-//   // Convert the image to webp format
-//   const webp = await convertToWebPFromFile(image, { quality: 0.75 });
+  const webp = await convertToWebpFile(input.files?.[0]);
+  if (!webp) {
+    console.error("Failed to convert image to webp");
+    return;
+  }
 
-//   // Prepare for file transter
-//   let imageUrl = "";
-//   const formData = new FormData();
-//   formData.append("image", webp);
-//   await fetch(
-//     `${
-//       import.meta.env.VITE_SERVER_URL
-//     }/api/blog/posts/${post_id}/images/upload`,
-//     {
-//       headers: {
-//         Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
-//       },
-//       method: "POST",
-//       body: formData,
-//     },
-//   )
-//     .then((res) => {
-//       if (res.ok) {
-//         return res.json();
-//       } else {
-//         throwResponse(res);
-//       }
-//     })
-//     .then((newImageUrl: string) => {
-//       if (newImageUrl && newImageUrl !== "") {
-//         console.log(newImageUrl);
-//         imageUrl = newImageUrl;
-//       } else {
-//         throwError("Failed to upload the image");
-//       }
-//     })
-//     .catch(handleError);
+  try {
+    const image = await mutateUploadImage({
+      postId,
+      image: webp,
+    });
 
-//   // Insert an image tag with the returned image url when the fetch call was successful
-//   if (imageUrl !== "") {
-//     const cursorPosition = this.quill.getSelection().index;
-//     this.quill.pasteHTML(cursorPosition, `<img src="${imageUrl}" />`);
-//     this.quill.setSelection(cursorPosition + 1);
-//   }
-// }
+    this.quill.insertEmbed(cursorPosition, "image", image.url);
+    this.quill.setSelection(cursorPosition + 1);
+  } catch (error: unknown) {
+    toast.error("Failed to upload image");
+    console.error(error);
+    return;
+  }
+}

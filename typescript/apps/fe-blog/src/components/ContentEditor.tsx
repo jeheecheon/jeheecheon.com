@@ -8,7 +8,7 @@ import { createUniqueId, VoidComponent } from "solid-js";
 import { clientOnly } from "solid-use/client-only";
 import Icon from "~/components/Icon";
 import { cn } from "~/utils/class-name";
-import { insertStar, redoChange, undoChange } from "~/utils/quill";
+import { insertImage, insertStar, redoChange, undoChange } from "~/utils/quill";
 
 import "katex/dist/katex.min.css";
 import "quill/dist/quill.snow.css";
@@ -93,22 +93,22 @@ const CustomQuillTollbar: VoidComponent<{
       </div>
 
       <div class="ql-formats">
-        <button class="ql-align" value=""></button>
-        <button class="ql-align" value="center"></button>
-        <button class="ql-align" value="right"></button>
-        <button class="ql-align" value="justify"></button>
+        <button class="ql-align" value="" />
+        <button class="ql-align" value="center" />
+        <button class="ql-align" value="right" />
+        <button class="ql-align" value="justify" />
       </div>
 
       <span class="ql-formats">
-        <button class="ql-bold"></button>
-        <button class="ql-italic"></button>
-        <button class="ql-underline"></button>
-        <button class="ql-strike"></button>
+        <button class="ql-bold" />
+        <button class="ql-italic" />
+        <button class="ql-underline" />
+        <button class="ql-strike" />
       </span>
 
       <span class="ql-formats">
-        <button class="ql-list" value="ordered"></button>
-        <button class="ql-list" value="bullet"></button>
+        <button class="ql-list" value="ordered" />
+        <button class="ql-list" value="bullet" />
         <button class="ql-indent" value="-1" />
         <button class="ql-indent" value="+1" />
       </span>
@@ -117,24 +117,23 @@ const CustomQuillTollbar: VoidComponent<{
         <button class="ql-code" />
         <button class="ql-code-block" />
         <button class="ql-formula" />
-        <button class="ql-clean"></button>
+        <button class="ql-clean" />
       </span>
 
       <span class="ql-formats">
-        <button class="ql-blockquote"></button>
-        <button class="ql-script" value="sub"></button>
-        <button class="ql-script" value="super"></button>
+        <button class="ql-blockquote" />
+        <button class="ql-script" value="sub" />
+        <button class="ql-script" value="super" />
       </span>
 
       <span class="ql-formats">
-        <select class="ql-color" value=""></select>
-        <select class="ql-background" value=""></select>
+        <select class="ql-color" value="" />
+        <select class="ql-background" value="" />
       </span>
 
       <span class="ql-formats">
-        <button class="ql-link"></button>
-        <button class="ql-custom-image">{/* <CustomImage /> */}</button>
-        {/* <button class="ql-image"></button> */}
+        <button class="ql-link" />
+        <button class="ql-image" />
         <button class="ql-video" />
       </span>
 
@@ -199,7 +198,7 @@ const CustomQuill: VoidComponent<{
             undo: undoChange,
             redo: redoChange,
             star: insertStar,
-            //   "custom-image": insertImage,
+            image: insertImage,
           },
         },
         clipboard: {
