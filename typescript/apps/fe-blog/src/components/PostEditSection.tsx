@@ -1,8 +1,11 @@
 import { Post } from "@packages/common/types/blog/post";
+import { A } from "@solidjs/router";
+import { arrowLeft } from "solid-heroicons/outline";
 import { createSignal, VoidComponent } from "solid-js";
 import toast from "solid-toast";
 import Button from "~/components/Button";
 import ContentEditor from "~/components/ContentEditor";
+import Icon from "~/components/Icon";
 import Image from "~/components/Image";
 import { useMutatePost } from "~/hooks/useMutatePost";
 import { useUploadImage } from "~/hooks/useUploadImage";
@@ -23,7 +26,11 @@ const PostEditSection: VoidComponent<{
   return (
     <form class={cn("", props.class)} onSubmit={handleSubmit}>
       <section>
-        <div class="flex flex-col items-center gap-y-2">
+        <A class="inline-block" href="/posts/edit">
+          <Icon path={arrowLeft} class="size-8 text-zinc-400" />
+        </A>
+
+        <div class="mt-7 flex flex-col items-center gap-y-2">
           <Image
             class="md:w-1/2"
             src={editablePost().cover}
@@ -43,6 +50,15 @@ const PostEditSection: VoidComponent<{
           initialHtml={props.post.content}
           onChange={handleContentChange}
         />
+
+        <div class="mt-4 flex gap-x-3">
+          <label class="text-sm text-zinc-400">Public</label>
+          <input
+            type="checkbox"
+            checked={editablePost().isPublic}
+            onChange={handleIsPublicChange}
+          />
+        </div>
       </section>
 
       <section class="mt-4 flex justify-end gap-2">
@@ -94,6 +110,13 @@ const PostEditSection: VoidComponent<{
     setEditablePost((prev) => ({
       ...prev,
       content: html,
+    }));
+  }
+
+  function handleIsPublicChange(event: EventOf<HTMLInputElement>) {
+    setEditablePost((prev) => ({
+      ...prev,
+      isPublic: event.currentTarget.checked,
     }));
   }
 

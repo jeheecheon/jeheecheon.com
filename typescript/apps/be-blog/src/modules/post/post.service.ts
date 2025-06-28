@@ -27,6 +27,10 @@ export class PostService {
       where.id = args.id;
     }
 
+    if (Object.values(where).length === 0) {
+      return null;
+    }
+
     return this.postRepository.findOne({
       where,
       ...options,
@@ -76,6 +80,6 @@ export class PostService {
       return this.getPost({ id: args.id });
     }
 
-    return this.postRepository.save({ ...post, id: args.id });
+    return this.postRepository.save(post);
   }
 }

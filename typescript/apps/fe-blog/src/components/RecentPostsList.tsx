@@ -4,12 +4,14 @@ import { A } from "@solidjs/router";
 import dayjs from "dayjs";
 import { range } from "lodash-es";
 import { createSignal, For, Show, VoidComponent } from "solid-js";
+import toast from "solid-toast";
 import Button from "~/components/Button";
 import LoadingFallback from "~/components/LoadingFallback";
 import PresenceTransition from "~/components/PresenceTransition";
 import Skeleton from "~/components/Skeleton";
 import { useInfinitePosts } from "~/hooks/useInfinitePosts";
 import { useIsInView } from "~/hooks/useIsInView";
+import { useMutatePost } from "~/hooks/useMutatePost";
 import { cn } from "~/utils/class-name";
 
 type Props = {
@@ -20,13 +22,13 @@ type Props = {
 const RecentPostsList: VoidComponent<Props> = (props) => {
   const [entries, setEntries] = createSignal<Element[]>([]);
 
+  const postMutate = useMutatePost();
   const postsQuery = useInfinitePosts(() => ({
     categoryIds: Object.values(PostCategory).filter(
       (category) =>
         category !== PostCategory.ABOUT_ME &&
         category !== PostCategory.PRIVACY_POLICY,
     ),
-    isPublic: true,
   }));
 
   useIsInView({
@@ -36,6 +38,12 @@ const RecentPostsList: VoidComponent<Props> = (props) => {
 
   return (
     <div class={cn("space-y-8", props.class)}>
+      <div class="flex justify-end">
+        <Button theme="primary" size="sm" onClick={handleCreatePost}>
+          Create Post
+        </Button>
+      </div>
+
       <PresenceTransition
         transitionKey={`recent-posts-${postsQuery.isSuccess}`}
         option="fadeInOut"
@@ -109,6 +117,27 @@ const RecentPostsList: VoidComponent<Props> = (props) => {
       </PresenceTransition>
     </div>
   );
+
+  function handleCreatePost() {
+    postMutate.mutate(
+      {
+        title: "Net post",
+        content: "Net post",
+        isPublic: false,
+        uploadedAt: new Date(),
+        categoryId: PostCategory.UNCATEGORIZED,
+      },
+      {
+        onSuccess: () => {
+          postsQuery.refetch();
+          toast.success("Post created successfully");
+        },
+        onError: () => {
+          toast.error("Failed to create post");
+        },
+      },
+    );
+  }
 
   function handleInView() {
     if (!postsQuery.hasNextPage) {

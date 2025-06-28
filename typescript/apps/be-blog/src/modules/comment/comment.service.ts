@@ -69,7 +69,7 @@ export class CommentService {
       return this.getComment({ id: args.id });
     }
 
-    return this.commentRepository.save({ ...comment, id: args.id });
+    return this.commentRepository.save(comment);
   }
 
   async listComments(

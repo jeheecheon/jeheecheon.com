@@ -9,7 +9,7 @@ import {
   ManyToMany,
   ManyToOne,
   OneToMany,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
   UpdateDateColumn,
   type Relation,
 } from "typeorm";
@@ -21,7 +21,7 @@ import { LikedPost } from "../liked-post/liked-post.entity.js";
 @Entity("post", { schema: "public" })
 @ObjectType()
 export class Post {
-  @PrimaryColumn("uuid", { unique: true })
+  @PrimaryGeneratedColumn("uuid")
   @Field(() => String)
   id: string;
 
