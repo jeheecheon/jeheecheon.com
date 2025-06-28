@@ -108,12 +108,12 @@ type Mutation {
 
 input UpsertPostArgs {
   id: String
-  title: String!
-  content: String!
+  title: String
+  content: String
   cover: String
-  isPublic: Boolean!
+  isPublic: Boolean
   categoryId: String
-  uploadedAt: Timestamp!
+  uploadedAt: Timestamp
   editedAt: Timestamp
   deletedAt: Timestamp
 }

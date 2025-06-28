@@ -39,7 +39,13 @@ const RecentPostsList: VoidComponent<Props> = (props) => {
   return (
     <div class={cn("space-y-8", props.class)}>
       <div class="flex justify-end">
-        <Button theme="primary" size="sm" onClick={handleCreatePost}>
+        <Button
+          theme="primary"
+          size="sm"
+          loading={postMutate.isPending}
+          disabled={postsQuery.isPending}
+          onClick={handleCreatePost}
+        >
           Create Post
         </Button>
       </div>
@@ -90,6 +96,7 @@ const RecentPostsList: VoidComponent<Props> = (props) => {
                         }}
                         post={post}
                         buildPostHref={props.buildPostHref}
+                        onDeleteSuccess={postsQuery.refetch}
                       />
                     )}
                   </For>

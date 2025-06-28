@@ -24,25 +24,29 @@ export class UpsertPostArgs {
   @IsOptional()
   id?: string;
 
-  @Field(() => String)
-  title: string;
+  @Field(() => String, { nullable: true })
+  @IsOptional()
+  title?: string;
 
-  @Field(() => String)
-  content: string;
+  @Field(() => String, { nullable: true })
+  @IsOptional()
+  content?: string;
 
   @Field(() => String, { nullable: true })
   @IsOptional()
   cover?: string;
 
-  @Field(() => Boolean)
-  isPublic: boolean;
+  @Field(() => Boolean, { nullable: true })
+  @IsOptional()
+  isPublic?: boolean;
 
   @Field(() => String, { nullable: true })
   @IsOptional()
   categoryId?: string;
 
-  @Field(() => Date)
-  uploadedAt: Date;
+  @Field(() => Date, { nullable: true })
+  @IsOptional()
+  uploadedAt?: Date;
 
   @Field(() => Date, { nullable: true })
   @IsOptional()

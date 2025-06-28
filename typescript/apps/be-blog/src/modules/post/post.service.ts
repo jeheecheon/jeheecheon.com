@@ -71,13 +71,16 @@ export class PostService {
   }
 
   async upsertPost(args: { id?: string }, post: Partial<Post>) {
-    const existingPost = await this.getPost({ id: args.id });
+    const existingPost = await this.getPost(
+      { id: args.id },
+      { withDeleted: true },
+    );
 
     if (existingPost) {
       const result = await this.updatePost({ id: args.id }, post);
       assert(result.affected === 1, new UnprocessableEntityException());
 
-      return this.getPost({ id: args.id });
+      return this.getPost({ id: args.id }, { withDeleted: true });
     }
 
     return this.postRepository.save(post);
