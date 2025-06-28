@@ -59,6 +59,7 @@ const RecentPostsList: VoidComponent<Props> = (props) => {
                   <tr class="text-right">
                     <th class="p-3 pl-5 text-left">Title</th>
                     <th class="p-3">Category</th>
+                    <th class="p-3">Public</th>
                     <th class="p-3">Uploaded At</th>
                     <th class="p-3">Edited At</th>
                     <th class="p-3 pr-5" />
@@ -158,6 +159,7 @@ const PostRow: VoidComponent<{
     <tr class={cn("p-1 text-right", props.class)} ref={props.ref}>
       <td class="p-3 pl-5 text-left">{props.post.title}</td>
       <td class="p-3 text-nowrap">{props.post.categoryId}</td>
+      <td class="p-3">{props.post.isPublic ? "Yes" : "No"}</td>
       <td class="p-3">
         {dayjs(props.post.uploadedAt).format("YYYY-MM-DD HH:mm:ss")}
       </td>
