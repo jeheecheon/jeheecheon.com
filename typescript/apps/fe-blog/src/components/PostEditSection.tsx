@@ -1,3 +1,4 @@
+import { PostCategory } from "@packages/common/types/blog/category";
 import { Post } from "@packages/common/types/blog/post";
 import { A } from "@solidjs/router";
 import { arrowLeft } from "solid-heroicons/outline";
@@ -37,6 +38,20 @@ const PostEditSection: VoidComponent<{
             alt={editablePost().title}
           />
           <input type="file" accept="image/*" onChange={handleCoverChange} />
+        </div>
+
+        <div class="mt-4 flex items-center gap-x-2">
+          <label for="category">Category</label>
+          <select
+            class="bg-white p-2 text-zinc-900"
+            id="category"
+            value={editablePost().categoryId}
+            onChange={handleCategoryChange}
+          >
+            {Object.values(PostCategory).map((category) => (
+              <option value={category}>{category}</option>
+            ))}
+          </select>
         </div>
 
         <input
@@ -99,6 +114,13 @@ const PostEditSection: VoidComponent<{
     );
   }
 
+  function handleCategoryChange(event: EventOf<HTMLSelectElement>) {
+    setEditablePost((prev) => ({
+      ...prev,
+      categoryId: event.currentTarget.value as PostCategory,
+    }));
+  }
+
   function handleTitleChange(event: EventOf<HTMLInputElement>) {
     setEditablePost((prev) => ({
       ...prev,
@@ -134,6 +156,7 @@ const PostEditSection: VoidComponent<{
         content: editablePost().content,
         isPublic: editablePost().isPublic,
         cover: editablePost().cover,
+        categoryId: editablePost().categoryId,
         uploadedAt: new Date(),
         editedAt: new Date(),
       },
