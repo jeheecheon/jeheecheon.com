@@ -1,4 +1,5 @@
-import { HTMLElement, type Node } from "node-html-parser";
+import he from "he";
+import { HTMLElement, TextNode, type Node } from "node-html-parser";
 import {
   createMemo,
   Match,
@@ -73,6 +74,9 @@ const HtmlNodeRenderer: ParentComponent<{
             : {})}
           class={cn("rounded-md bg-zinc-800 p-3", className)}
         />
+      </Match>
+      <Match when={props.node instanceof TextNode}>
+        {he.decode(props.node.text)}
       </Match>
     </Switch>
   );
