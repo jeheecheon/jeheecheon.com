@@ -1,5 +1,7 @@
 import type { Post } from "@packages/common/types/blog/post";
 import dayjs from "dayjs";
+import he from "he";
+import { TextNode } from "node-html-parser";
 import { chatBubbleBottomCenterText, heart } from "solid-heroicons/solid";
 import { VoidComponent } from "solid-js";
 import Icon from "~/components/Icon";
@@ -29,7 +31,14 @@ const PostCard: VoidComponent<{ class?: string; post: Post }> = (props) => {
 
           <div class="mt-2 line-clamp-3 h-15 text-sm text-zinc-300">
             {renderRawHtml(props.post.content, {
-              allowedTags: ["p", "code", "a"],
+              allowedTags: ["p", "a"],
+              renderNode: (props) => {
+                if (props.node instanceof TextNode) {
+                  return he.decode(props.node.text);
+                }
+
+                return props.children;
+              },
             })}
           </div>
         </section>
