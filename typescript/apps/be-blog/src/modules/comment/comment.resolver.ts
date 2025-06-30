@@ -21,7 +21,9 @@ export class CommentResolver {
       },
       {
         relations: {
-          account: true,
+          account: {
+            roles: true,
+          },
         },
       },
     );

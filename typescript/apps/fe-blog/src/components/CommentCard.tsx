@@ -1,4 +1,5 @@
 import { Comment } from "@packages/common/types/blog/comment";
+import { RoleId } from "@packages/common/types/blog/role";
 import dayjs from "dayjs";
 import { range } from "lodash-es";
 import {
@@ -30,6 +31,7 @@ const CommentCard: VoidComponent<{
 
   const account = useAccount();
   const commentMutate = useMutateComment();
+  console.log(props.comment.account.roles);
 
   return (
     <>
@@ -51,7 +53,17 @@ const CommentCard: VoidComponent<{
           </For>
         </div>
 
-        <div class="w-full min-w-2xs">
+        <div class="w-full min-w-2xs space-y-2">
+          <Show
+            when={props.comment.account.roles?.some(
+              (role) => role.id === RoleId.ADMIN,
+            )}
+          >
+            <div class="mt-2 inline-block rounded-full bg-zinc-800 px-4 py-2 text-xs text-orange-300">
+              Owner
+            </div>
+          </Show>
+
           <div>
             <Image
               class="inline-block size-10 rounded-full"
@@ -60,22 +72,20 @@ const CommentCard: VoidComponent<{
             <span class="ml-3 inline-block">{props.comment.account.email}</span>
           </div>
 
-          <div class="mt-2 text-sm text-zinc-500">
+          <div class="text-sm text-zinc-500">
             {dayjs(props.comment.uploadedAt).format("YYYY-MM-DD HH:mm")}
           </div>
 
           <Switch>
             <Match when={isEditing()}>
               <Textarea
-                class="mt-3 rounded-lg bg-zinc-600 p-3"
+                class="rounded-lg bg-zinc-600 p-3"
                 value={editedContent()}
                 onInput={setEditedContent}
               />
             </Match>
             <Match when={!isEditing()}>
-              <p class="mt-3 rounded-lg bg-zinc-800 p-3">
-                {props.comment.content}
-              </p>
+              <p class="rounded-lg bg-zinc-800 p-3">{props.comment.content}</p>
             </Match>
           </Switch>
 
@@ -88,7 +98,7 @@ const CommentCard: VoidComponent<{
             >
               <Switch>
                 <Match when={isEditing()}>
-                  <div class="mt-3 flex gap-x-3">
+                  <div class="flex gap-x-3">
                     <Button
                       theme="secondary"
                       size="xs"
@@ -107,7 +117,7 @@ const CommentCard: VoidComponent<{
                   </div>
                 </Match>
                 <Match when={!isEditing()}>
-                  <div class="mt-3 flex gap-x-3">
+                  <div class="flex gap-x-3">
                     <Button
                       theme="secondary"
                       size="xs"
