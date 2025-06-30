@@ -3,12 +3,12 @@ import dayjs from "dayjs";
 import { capitalize } from "lodash-es";
 import { noSymbol } from "solid-heroicons/solid";
 import { type VoidComponent } from "solid-js";
-import { Spinner, SpinnerType } from "solid-spinner";
 import toast from "solid-toast";
 import Button from "~/components/Button";
 import Icon from "~/components/Icon";
 import PresenceTransition from "~/components/PresenceTransition";
 import Skeleton from "~/components/Skeleton";
+import Spinner from "~/components/Spinner";
 import { useCoinChartData } from "~/hooks/useCoinChartData";
 import { cn } from "~/utils/class-name";
 
@@ -176,11 +176,7 @@ const CoinPriceGraph: VoidComponent<{
         transitionKey={`coin-price-graph-loading-${historyQuery.isLoading}`}
         option="fadeInOut"
       >
-        <Spinner
-          class="absolute-center"
-          type={SpinnerType.puff}
-          color={lineColor}
-        />
+        <Spinner class="absolute-center size-4" />
       </PresenceTransition>
     </div>
   );

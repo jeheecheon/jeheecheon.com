@@ -1,5 +1,5 @@
 import { ParentComponent, Show, type JSX } from "solid-js";
-import { Spinner, SpinnerType } from "solid-spinner";
+import Spinner from "~/components/Spinner";
 import { cn } from "~/utils/class-name";
 
 export type Props = {
@@ -34,11 +34,7 @@ const Button: ParentComponent<Props> = (props) => {
       </div>
 
       <Show when={props.loading}>
-        <Spinner
-          class="absolute top-1/2 left-1/2 size-8 -translate-x-1/2 -translate-y-1/2"
-          color="white"
-          type={SpinnerType.threeDots}
-        />
+        <Spinner class="absolute-center size-4" />
       </Show>
     </button>
   );

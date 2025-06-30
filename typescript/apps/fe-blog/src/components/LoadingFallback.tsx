@@ -1,12 +1,11 @@
 import { type ParentComponent } from "solid-js";
-import { Spinner, SpinnerType } from "solid-spinner";
+import Spinner from "~/components/Spinner";
 import { cn } from "~/utils/class-name";
 
 const LoadingFallback: ParentComponent<{
   class?: string;
   spinnerClass?: string;
   textClass?: string;
-  type?: SpinnerType;
   center?: boolean;
 }> = (props) => {
   return (
@@ -17,11 +16,7 @@ const LoadingFallback: ParentComponent<{
         props.class,
       )}
     >
-      <Spinner
-        class={cn("size-8", props.spinnerClass)}
-        type={props.type ?? SpinnerType.threeDots}
-        color="white"
-      />
+      <Spinner class="size-4" />
       <div class={cn("text-sm text-zinc-400", props.textClass)}>
         {props.children ?? "Loading..."}
       </div>
