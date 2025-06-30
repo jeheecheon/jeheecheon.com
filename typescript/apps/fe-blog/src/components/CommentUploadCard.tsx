@@ -6,6 +6,7 @@ import AuthOnlyButton from "~/components/AuthOnlyButton";
 import Image from "~/components/Image";
 import Textarea from "~/components/Textarea";
 import { useAccount } from "~/hooks/useAccount";
+import { useGlobalSignInModalVisible } from "~/hooks/useGlobalSignInModalVisible";
 import { useMutateComment } from "~/hooks/useMutateComment";
 import { cn } from "~/utils/class-name";
 
@@ -15,6 +16,7 @@ const CommentUploadCard: VoidComponent<{
   onSuccess?: () => void;
 }> = (props) => {
   const [content, setContent] = createSignal("");
+  const [, setGlobalSignInModalVisible] = useGlobalSignInModalVisible();
 
   const account = useAccount();
   const commentMutate = useMutateComment();
@@ -24,10 +26,10 @@ const CommentUploadCard: VoidComponent<{
       <Show
         when={account.data?.account}
         fallback={
-          <div class="flex items-center gap-x-3">
+          <button class="flex items-center gap-x-3" onClick={handleSignIn}>
             <div class="size-10 rounded-full bg-gradient-to-br from-orange-300/50 to-orange-500/50" />
-            <span class="text-sm text-zinc-400">Sign in to comment</span>
-          </div>
+            <span class="text-sm text-zinc-400">Want to comment?</span>
+          </button>
         }
       >
         {(account) => (
@@ -63,6 +65,10 @@ const CommentUploadCard: VoidComponent<{
       </form>
     </div>
   );
+
+  function handleSignIn() {
+    setGlobalSignInModalVisible(true);
+  }
 
   function handleSubmit(e: SubmitEvent) {
     e.preventDefault();
