@@ -10,8 +10,8 @@ const ExternalLink: ParentComponent<Props> = (props) => {
     <a
       {...props}
       class={cn("", props.class)}
-      target="_blank"
-      rel="noopener noreferrer"
+      target={props.target ?? "_blank"}
+      rel={props.rel ?? "noopener noreferrer"}
     >
       {props.children}
     </a>
