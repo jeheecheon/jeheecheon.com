@@ -21,6 +21,7 @@ async function bootstrap() {
       secure: configs.NODE_ENV === "production",
       httpOnly: true,
       domain: configs.BASE_DOMAIN,
+      sameSite: "none",
     }),
   );
   app.use(cookieParser());
