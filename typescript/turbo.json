@@ -13,6 +13,7 @@
         "DATABASE_URL",
         "DATABASE_LOGGING",
         "DATABASE_SSL",
+        "BASE_DOMAIN",
         "VITE_BLOG_API_URL",
         "VITE_BLOG_GRAPHQL_URL",
         "SESSION_SECRET",

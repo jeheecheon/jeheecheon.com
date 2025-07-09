@@ -20,6 +20,7 @@ async function bootstrap() {
       maxAge: WEEK,
       secure: configs.NODE_ENV === "production",
       httpOnly: true,
+      domain: configs.BASE_DOMAIN,
     }),
   );
   app.use(cookieParser());
