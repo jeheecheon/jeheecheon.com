@@ -1,5 +1,6 @@
 import { Logger } from "@nestjs/common";
 import { NestFactory } from "@nestjs/core";
+import { type NestExpressApplication } from "@nestjs/platform-express";
 import { WEEK } from "@packages/common/utils/time";
 import cookieParser from "cookie-parser";
 import cookieSession from "cookie-session";
@@ -7,7 +8,10 @@ import { AppModule } from "./app.module.js";
 import { configs } from "./utils/config.js";
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+  // NOTE: This is required for cookie session to work correctly in production
+  app.set("trust proxy", 1);
 
   app.enableCors({
     origin: configs.BLOG_URL,
