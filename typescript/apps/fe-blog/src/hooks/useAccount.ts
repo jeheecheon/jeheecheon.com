@@ -10,6 +10,7 @@ export const useAccount = (argsFn: () => InjectAccountArgs = () => ({})) => {
   const query = useQuery(() => ({
     queryKey: ["account", id, email],
     queryFn: () => injectAccount({ id, email }),
+    retry: false,
     enabled: isClient(),
   }));
 
