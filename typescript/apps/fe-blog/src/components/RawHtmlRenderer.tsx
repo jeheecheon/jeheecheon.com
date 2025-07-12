@@ -182,7 +182,7 @@ const HtmlNodeRenderer: ParentComponent<{
       <Match when={props.node.rawTagName === "blockquote"}>
         <blockquote
           class={cn(
-            "border-l-4 border-zinc-800 border-l-orange-300 p-4",
+            "border-l-4 border-zinc-800 border-l-orange-300 p-4 break-words",
             className,
           )}
         >
