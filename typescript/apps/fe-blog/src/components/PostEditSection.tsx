@@ -157,7 +157,6 @@ const PostEditSection: VoidComponent<{
         isPublic: editablePost().isPublic,
         cover: editablePost().cover,
         categoryId: editablePost().categoryId,
-        uploadedAt: new Date(),
         editedAt: new Date(),
       },
       {
