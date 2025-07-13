@@ -10,8 +10,9 @@ import { configs } from "./utils/config.js";
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  // NOTE: This is required for cookie session to work correctly in production
-  app.set("trust proxy", 1);
+  if (configs.TRUST_PROXY) {
+    app.set("trust proxy", 1);
+  }
 
   app.enableCors({
     origin: configs.BLOG_URL,
@@ -25,7 +26,7 @@ async function bootstrap() {
       secure: configs.NODE_ENV === "production",
       httpOnly: true,
       domain: configs.BASE_DOMAIN,
-      sameSite: "none",
+      sameSite: configs.NODE_ENV === "production" ? "none" : "lax",
     }),
   );
   app.use(cookieParser());

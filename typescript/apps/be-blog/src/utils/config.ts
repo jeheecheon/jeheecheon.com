@@ -14,6 +14,7 @@ export const configs = {
     process.env.SESSION_SECRET,
     "SESSION_SECRET is required",
   ),
+  TRUST_PROXY: process.env.TRUST_PROXY === "true",
 
   OAUTH_GOOGLE_CLIENT_ID: ensure(
     process.env.OAUTH_GOOGLE_CLIENT_ID,
