@@ -1,5 +1,5 @@
 import { xMark } from "solid-heroicons/outline";
-import { createSignal, VoidComponent, type JSX } from "solid-js";
+import { createSignal, mergeProps, VoidComponent, type JSX } from "solid-js";
 import { Portal } from "solid-js/web";
 import Icon from "~/components/Icon";
 import PreloadedImage from "~/components/PreloadedImage";
@@ -11,9 +11,17 @@ import { cn } from "~/utils/class-name";
 
 type Props = {
   class?: string;
+  showPreviewOnClick?: boolean;
 } & JSX.ImgHTMLAttributes<HTMLImageElement>;
 
-const Image: VoidComponent<Props> = (props) => {
+const Image: VoidComponent<Props> = (_props) => {
+  const props = mergeProps(
+    {
+      showPreviewOnClick: true,
+    },
+    _props,
+  );
+
   const [previewVisible, setPreviewVisible] = createSignal(false);
 
   useKeydown("Escape", handleTogglePreview(false));
@@ -23,7 +31,11 @@ const Image: VoidComponent<Props> = (props) => {
     <>
       <PreloadedImage
         {...props}
-        class={cn("cursor-pointer", props.class)}
+        class={cn(
+          "",
+          props.showPreviewOnClick && "cursor-pointer",
+          props.class,
+        )}
         renderFallback={Skeleton}
         onClick={handleTogglePreview(true)}
       />
@@ -56,6 +68,10 @@ const Image: VoidComponent<Props> = (props) => {
 
   function handleTogglePreview(visible?: boolean) {
     return () => {
+      if (!props.showPreviewOnClick) {
+        return;
+      }
+
       setPreviewVisible((prev) => visible ?? !prev);
     };
   }

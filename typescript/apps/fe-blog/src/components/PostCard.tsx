@@ -22,6 +22,7 @@ const PostCard: VoidComponent<{ class?: string; post: Post }> = (props) => {
           class="size-full object-cover object-center transition-transform duration-300 group-hover/card:scale-105"
           src={props.post.cover}
           alt={props.post.title}
+          showPreviewOnClick={false}
         />
       </div>
 
