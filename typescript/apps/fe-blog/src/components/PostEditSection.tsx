@@ -62,7 +62,7 @@ const PostEditSection: VoidComponent<{
         />
 
         <ContentEditor
-          initialHtml={props.post.content}
+          htmlContent={props.post.content}
           onChange={handleContentChange}
         />
 
@@ -77,7 +77,7 @@ const PostEditSection: VoidComponent<{
       </section>
 
       <section class="mt-4 flex justify-end gap-2">
-        <Button theme="primary" onClick={handleCancel}>
+        <Button theme="primary" type="button" onClick={handleCancel}>
           Cancel
         </Button>
         <Button theme="primary" loading={postMutate.isPending} type="submit">
