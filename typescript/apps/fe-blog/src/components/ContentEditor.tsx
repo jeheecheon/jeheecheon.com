@@ -4,7 +4,7 @@ import { Nullable } from "@packages/common/types/misc";
 import katex from "katex";
 import type Quill from "quill";
 import { arrowUturnLeft, arrowUturnRight, star } from "solid-heroicons/outline";
-import { createUniqueId, VoidComponent } from "solid-js";
+import { createEffect, createUniqueId, VoidComponent } from "solid-js";
 import { clientOnly } from "solid-use/client-only";
 import Icon from "~/components/Icon";
 import { cn } from "~/utils/class-name";
@@ -21,17 +21,17 @@ const SolidQuill = clientOnly(() =>
 
 const ContentEditor: VoidComponent<{
   class?: string;
-  initialHtml: string;
+  htmlContent: string;
   onChange: (html: string) => void;
 }> = (props) => {
   const toolbarId = createUniqueId();
 
   return (
     <div class={cn("bg-white text-black", props.class)}>
-      <CustomQuillTollbar id={toolbarId} />
+      <CustomQuillTollbar class="sticky top-0 z-10 bg-white" id={toolbarId} />
       <CustomQuill
         toolbarId={toolbarId}
-        initialHtml={props.initialHtml}
+        htmlContent={props.htmlContent}
         onChange={props.onChange}
       />
     </div>
@@ -158,16 +158,19 @@ const CustomQuillTollbar: VoidComponent<{
 const CustomQuill: VoidComponent<{
   class?: string;
   toolbarId?: string;
-  initialHtml: string;
+  htmlContent: string;
   onChange: (html: string) => void;
 }> = (props) => {
   let quill: Nullable<Quill> = null;
+
+  createEffect(() => {
+    setHtmlContent(props.htmlContent);
+  });
 
   return (
     <SolidQuill
       ref={(element) => (quill = element)}
       theme="snow"
-      innerHTML={props.initialHtml}
       formats={[
         "header",
         "font",
@@ -248,10 +251,20 @@ const CustomQuill: VoidComponent<{
 
     Quill.register(Size, true);
     Quill.register(Font, true);
+
+    setHtmlContent(props.htmlContent);
   }
 
   function handleChange() {
     props.onChange(quill?.getSemanticHTML() ?? "");
+  }
+
+  function setHtmlContent(htmlContent: string) {
+    if (!quill || typeof htmlContent !== "string") {
+      return;
+    }
+
+    quill.clipboard.dangerouslyPasteHTML(htmlContent);
   }
 };
 
