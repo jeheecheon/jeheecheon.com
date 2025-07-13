@@ -76,10 +76,7 @@ const PostEditSection: VoidComponent<{
         </div>
       </section>
 
-      <section class="mt-4 flex justify-end gap-2">
-        <Button theme="primary" type="button" onClick={handleCancel}>
-          Cancel
-        </Button>
+      <section class="mt-4">
         <Button theme="primary" loading={postMutate.isPending} type="submit">
           Save
         </Button>
@@ -140,10 +137,6 @@ const PostEditSection: VoidComponent<{
       ...prev,
       isPublic: event.currentTarget.checked,
     }));
-  }
-
-  function handleCancel() {
-    setEditablePost(props.post);
   }
 
   function handleSubmit(event: EventOf<HTMLFormElement>) {
