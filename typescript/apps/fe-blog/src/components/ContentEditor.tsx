@@ -28,7 +28,7 @@ const ContentEditor: VoidComponent<{
 
   return (
     <div class={cn("bg-white text-black", props.class)}>
-      <CustomQuillTollbar id={toolbarId} />
+      <CustomQuillTollbar class="sticky top-0 z-10 bg-white" id={toolbarId} />
       <CustomQuill
         toolbarId={toolbarId}
         initialHtml={props.initialHtml}
