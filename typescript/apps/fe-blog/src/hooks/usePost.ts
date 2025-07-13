@@ -10,6 +10,9 @@ export const usePost = (argsFn: () => InjectPostArgs) => {
   const query = useQuery(() => ({
     queryKey: ["post", id],
     queryFn: () => injectPost({ id }),
+    refetchOnReconnect: false,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
     enabled: isClient(),
   }));
 
