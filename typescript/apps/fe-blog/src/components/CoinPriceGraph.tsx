@@ -21,6 +21,7 @@ const ApexCharts = clientOnly(() =>
 const CoinPriceGraph: VoidComponent<{
   class?: string;
   coinId: string;
+  displayName: string;
   days: number;
 }> = (props) => {
   const historyQuery = useCoinChartData(() => ({
@@ -70,7 +71,7 @@ const CoinPriceGraph: VoidComponent<{
         options={{
           title: {
             text: historyQuery.isSuccess
-              ? `${capitalize(props.coinId)} ${props.days}D history`
+              ? `${props.displayName} ${props.days}D history`
               : "",
             align: "left",
             style: {
