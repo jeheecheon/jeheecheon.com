@@ -1,6 +1,5 @@
 import { clientOnly } from "@solidjs/start";
 import dayjs from "dayjs";
-import { capitalize } from "lodash-es";
 import { noSymbol } from "solid-heroicons/solid";
 import { type VoidComponent } from "solid-js";
 import toast from "solid-toast";
@@ -151,7 +150,7 @@ const CoinPriceGraph: VoidComponent<{
         }}
         series={[
           {
-            name: `${capitalize(props.coinId)} Price (USD)`,
+            name: `${props.displayName} Price (USD)`,
             data: historyQuery.isSuccess
               ? (historyQuery.data?.prices.map((item) => [
                   item.timestamp.getTime(),
