@@ -9,7 +9,6 @@ const TanstackQueryProvider: ParentComponent = (props) => {
       queries: {
         staleTime: 1 * MINUTE,
         gcTime: 5 * MINUTE,
-        experimental_prefetchInRender: true,
       },
     },
   });
