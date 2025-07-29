@@ -1,3 +1,5 @@
+"use server";
+
 import { Category } from "@packages/common/types/blog/category";
 import request from "graphql-request";
 import { getRequestHeaders } from "vinxi/http";

@@ -31,7 +31,6 @@ const CommentCard: VoidComponent<{
 
   const account = useAccount();
   const commentMutate = useMutateComment();
-  console.log(props.comment.account.roles);
 
   return (
     <>

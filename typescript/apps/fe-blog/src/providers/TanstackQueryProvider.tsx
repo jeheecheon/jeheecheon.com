@@ -9,6 +9,9 @@ const TanstackQueryProvider: ParentComponent = (props) => {
       queries: {
         staleTime: 1 * MINUTE,
         gcTime: 5 * MINUTE,
+
+        // FIXME: Currently, error logs are shown suggesting this option should be set to true, even though that's not necessary.
+        experimental_prefetchInRender: false,
       },
     },
   });
