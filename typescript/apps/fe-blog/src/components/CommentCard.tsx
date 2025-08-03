@@ -1,8 +1,10 @@
 import { Comment } from "@packages/common/types/blog/comment";
 import { RoleId } from "@packages/common/types/blog/role";
 import Button from "@packages/ui/components/Button";
+import ConfirmModal from "@packages/ui/components/ConfirmModal";
 import Image from "@packages/ui/components/Image";
 import PresenceTransition from "@packages/ui/components/PresenceTransition";
+import Textarea from "@packages/ui/components/Textarea";
 import { cn } from "@packages/ui/utils/class-name";
 import dayjs from "dayjs";
 import { range } from "lodash-es";
@@ -15,8 +17,6 @@ import {
   VoidComponent,
 } from "solid-js";
 import toast from "solid-toast";
-import ConfirmModal from "~/components/ConfirmModal";
-import Textarea from "~/components/Textarea";
 import { useAccount } from "~/hooks/useAccount";
 import { useMutateComment } from "~/hooks/useMutateComment";
 

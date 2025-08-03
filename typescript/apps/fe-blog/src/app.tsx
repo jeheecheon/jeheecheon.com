@@ -1,8 +1,8 @@
+import LoadingFallback from "@packages/ui/components/LoadingFallback";
 import { Router } from "@solidjs/router";
 import { FileRoutes } from "@solidjs/start/router";
 import { Suspense } from "solid-js";
 import GlobalLayout from "~/components/GlobalLayout";
-import LoadingFallback from "~/components/LoadingFallback";
 import RootProvider from "~/providers/RootProvider";
 
 import "@packages/ui/styles/globals-base.css";
