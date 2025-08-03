@@ -2,7 +2,7 @@
   "name": "@packages/ui",
   "type": "module",
   "scripts": {
-    "dev": "nodemon --watch src --exec 'pnpm build'",
+    "dev": "nodemon --watch src --ext ts,tsx,css --exec 'pnpm build'",
     "build": "pnpm clear:dist && pnpm copy:css && tsc",
     "clear:dist": "find . -type d -name 'dist' -exec rm -rf {} +",
     "copy:css": "mkdir -p dist/src/styles && cp -r src/styles dist/src"
