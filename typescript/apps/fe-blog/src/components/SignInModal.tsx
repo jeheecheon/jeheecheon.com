@@ -1,6 +1,6 @@
+import Modal from "@packages/ui/components/Modal";
 import { VoidComponent } from "solid-js";
 import ExternalLink from "~/components/ExternalLink";
-import Modal from "~/components/Modal";
 import { useLocation } from "~/hooks/useLocation";
 import GoogleSignInIcon from "~/icons/GoogleSignInIcon";
 import { configs } from "~/utils/config";
