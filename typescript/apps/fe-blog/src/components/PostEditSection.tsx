@@ -1,5 +1,6 @@
 import { PostCategory } from "@packages/common/types/blog/category";
 import { Post } from "@packages/common/types/blog/post";
+import Button from "@packages/ui/components/Button";
 import Icon from "@packages/ui/components/Icon";
 import Image from "@packages/ui/components/Image";
 import { EventOf } from "@packages/ui/types/misc";
@@ -8,7 +9,6 @@ import { A } from "@solidjs/router";
 import { arrowLeft } from "solid-heroicons/outline";
 import { createSignal, VoidComponent } from "solid-js";
 import toast from "solid-toast";
-import Button from "~/components/Button";
 import ContentEditor from "~/components/ContentEditor";
 import { useMutatePost } from "~/hooks/useMutatePost";
 import { useUploadImage } from "~/hooks/useUploadImage";

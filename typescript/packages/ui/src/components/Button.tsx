@@ -1,6 +1,6 @@
+import Spinner from "@packages/ui/components/Spinner";
 import { cn } from "@packages/ui/utils/class-name";
 import { ParentComponent, Show, type JSX } from "solid-js";
-import Spinner from "~/components/Spinner";
 
 export type Props = {
   class?: string;

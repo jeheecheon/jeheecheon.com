@@ -1,7 +1,7 @@
+import { Props as ButtonProps } from "@packages/ui/components/Button";
 import { EventOf } from "@packages/ui/types/misc";
 import { Component } from "solid-js";
 import toast from "solid-toast";
-import { Props as ButtonProps } from "~/components/Button";
 import { useAccount } from "~/hooks/useAccount";
 import { useGlobalSignInModalVisible } from "~/hooks/useGlobalSignInModalVisible";
 

@@ -1,7 +1,7 @@
+import Button from "@packages/ui/components/Button";
 import Modal from "@packages/ui/components/Modal";
 import { cn } from "@packages/ui/utils/class-name";
 import { ParentComponent } from "solid-js";
-import Button from "~/components/Button";
 
 const ConfirmModal: ParentComponent<{
   class?: string;

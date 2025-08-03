@@ -1,5 +1,6 @@
 import { PostCategory } from "@packages/common/types/blog/category";
 import { Post } from "@packages/common/types/blog/post";
+import Button from "@packages/ui/components/Button";
 import PresenceTransition from "@packages/ui/components/PresenceTransition";
 import Skeleton from "@packages/ui/components/Skeleton";
 import { cn } from "@packages/ui/utils/class-name";
@@ -8,7 +9,6 @@ import dayjs from "dayjs";
 import { range } from "lodash-es";
 import { createSignal, For, Show, VoidComponent } from "solid-js";
 import toast from "solid-toast";
-import Button from "~/components/Button";
 import LoadingFallback from "~/components/LoadingFallback";
 import { useInfinitePosts } from "~/hooks/useInfinitePosts";
 import { useIsInView } from "~/hooks/useIsInView";

@@ -1,5 +1,6 @@
 import { Comment } from "@packages/common/types/blog/comment";
 import { RoleId } from "@packages/common/types/blog/role";
+import Button from "@packages/ui/components/Button";
 import Image from "@packages/ui/components/Image";
 import PresenceTransition from "@packages/ui/components/PresenceTransition";
 import { cn } from "@packages/ui/utils/class-name";
@@ -14,7 +15,6 @@ import {
   VoidComponent,
 } from "solid-js";
 import toast from "solid-toast";
-import Button from "~/components/Button";
 import ConfirmModal from "~/components/ConfirmModal";
 import Textarea from "~/components/Textarea";
 import { useAccount } from "~/hooks/useAccount";

@@ -1,14 +1,14 @@
+import Button from "@packages/ui/components/Button";
 import Icon from "@packages/ui/components/Icon";
 import PresenceTransition from "@packages/ui/components/PresenceTransition";
 import Skeleton from "@packages/ui/components/Skeleton";
+import Spinner from "@packages/ui/components/Spinner";
 import { cn } from "@packages/ui/utils/class-name";
 import { clientOnly } from "@solidjs/start";
 import dayjs from "dayjs";
 import { noSymbol } from "solid-heroicons/solid";
 import { type VoidComponent } from "solid-js";
 import toast from "solid-toast";
-import Button from "~/components/Button";
-import Spinner from "~/components/Spinner";
 import { useCoinChartData } from "~/hooks/useCoinChartData";
 
 const ApexCharts = clientOnly(() =>
