@@ -8,6 +8,7 @@
     "copy:css": "mkdir -p dist/src/styles && cp -r src/styles dist/src"
   },
   "dependencies": {
+    "@solidjs/router": "^0.15.3",
     "clsx": "^2.1.1",
     "solid-heroicons": "^3.2.4",
     "solid-js": "^1.9.5",

@@ -1,4 +1,5 @@
 import Button from "@packages/ui/components/Button";
+import ConditionalLink from "@packages/ui/components/ConditionalLink";
 import Container from "@packages/ui/components/Container";
 import Icon from "@packages/ui/components/Icon";
 import Image from "@packages/ui/components/Image";
@@ -16,7 +17,6 @@ import {
   type VoidComponent,
 } from "solid-js";
 import AuthOnlyButton from "~/components/AuthOnlyButton";
-import ConditionalLink from "~/components/ConditionalLink";
 import { useAccount } from "~/hooks/useAccount";
 import { configs } from "~/utils/config";
 

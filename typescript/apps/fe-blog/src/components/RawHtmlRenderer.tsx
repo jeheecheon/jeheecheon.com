@@ -1,4 +1,5 @@
 import { Optional } from "@packages/common/types/misc";
+import ConditionalLink from "@packages/ui/components/ConditionalLink";
 import Image from "@packages/ui/components/Image";
 import { cn } from "@packages/ui/utils/class-name";
 import he from "he";
@@ -12,7 +13,6 @@ import {
   type VoidComponent,
 } from "solid-js";
 import { Dynamic } from "solid-js/web";
-import ConditionalLink from "~/components/ConditionalLink";
 import { renderRawHtml } from "~/utils/html";
 
 const RawHtmlRenderer: VoidComponent<{
