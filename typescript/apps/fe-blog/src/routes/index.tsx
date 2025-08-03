@@ -1,7 +1,7 @@
+import Container from "@packages/ui/components/Container";
 import Paper from "@packages/ui/components/Paper";
 import { type VoidComponent } from "solid-js";
 import CoinPriceGraph from "~/components/CoinPriceGraph";
-import Container from "~/components/Container";
 import RecentPostsGrid from "~/components/RecentPostsGrid";
 
 const Home: VoidComponent = () => {

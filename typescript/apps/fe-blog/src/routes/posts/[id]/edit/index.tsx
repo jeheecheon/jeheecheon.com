@@ -1,11 +1,11 @@
 "use server";
 
+import Container from "@packages/ui/components/Container";
 import Paper from "@packages/ui/components/Paper";
 import PresenceTransition from "@packages/ui/components/PresenceTransition";
 import { createAsync, Navigate, useParams } from "@solidjs/router";
 import { Match, Show, Suspense, Switch, VoidComponent } from "solid-js";
 import { z } from "zod";
-import Container from "~/components/Container";
 import LoadingFallback from "~/components/LoadingFallback";
 import PostEditSection from "~/components/PostEditSection";
 import { usePost } from "~/hooks/usePost";

@@ -1,8 +1,8 @@
 import { Post } from "@packages/common/types/blog/post";
+import Container from "@packages/ui/components/Container";
 import Paper from "@packages/ui/components/Paper";
 import { createAsync } from "@solidjs/router";
 import { Match, Suspense, Switch, type VoidComponent } from "solid-js";
-import Container from "~/components/Container";
 import LoadingFallback from "~/components/LoadingFallback";
 import RecentPostsList from "~/components/RecentPostsList";
 import { injectIsAdmin } from "~/injectors/injectIsAdmin.server";
