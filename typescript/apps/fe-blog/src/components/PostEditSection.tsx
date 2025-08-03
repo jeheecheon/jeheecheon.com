@@ -1,5 +1,6 @@
 import { PostCategory } from "@packages/common/types/blog/category";
 import { Post } from "@packages/common/types/blog/post";
+import { EventOf } from "@packages/ui/types/misc";
 import { cn } from "@packages/ui/utils/class-name";
 import { A } from "@solidjs/router";
 import { arrowLeft } from "solid-heroicons/outline";
@@ -11,7 +12,6 @@ import Icon from "~/components/Icon";
 import Image from "~/components/Image";
 import { useMutatePost } from "~/hooks/useMutatePost";
 import { useUploadImage } from "~/hooks/useUploadImage";
-import { EventOf } from "~/types/misc";
 import { convertToWebpFile } from "~/utils/image";
 
 const PostEditSection: VoidComponent<{
