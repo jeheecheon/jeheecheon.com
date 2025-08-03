@@ -1,3 +1,4 @@
+import Icon from "@packages/ui/components/Icon";
 import PresenceTransition from "@packages/ui/components/PresenceTransition";
 import { cn } from "@packages/ui/utils/class-name";
 import { moon, sun } from "solid-heroicons/solid";
@@ -15,7 +16,6 @@ import AuthOnlyButton from "~/components/AuthOnlyButton";
 import Button from "~/components/Button";
 import ConditionalLink from "~/components/ConditionalLink";
 import Container from "~/components/Container";
-import Icon from "~/components/Icon";
 import Image from "~/components/Image";
 import { useAccount } from "~/hooks/useAccount";
 import { configs } from "~/utils/config";

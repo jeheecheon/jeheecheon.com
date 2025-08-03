@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Nullable } from "@packages/common/types/misc";
+import Icon from "@packages/ui/components/Icon";
 import { cn } from "@packages/ui/utils/class-name";
 import katex from "katex";
 import type Quill from "quill";
 import { arrowUturnLeft, arrowUturnRight, star } from "solid-heroicons/outline";
 import { createEffect, createUniqueId, VoidComponent } from "solid-js";
 import { clientOnly } from "solid-use/client-only";
-import Icon from "~/components/Icon";
 import { insertImage, insertStar, redoChange, undoChange } from "~/utils/quill";
 
 import "katex/dist/katex.min.css";
