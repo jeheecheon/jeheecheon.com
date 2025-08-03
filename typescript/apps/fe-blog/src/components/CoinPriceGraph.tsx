@@ -1,3 +1,4 @@
+import { cn } from "@packages/ui/utils/class-name";
 import { clientOnly } from "@solidjs/start";
 import dayjs from "dayjs";
 import { noSymbol } from "solid-heroicons/solid";
@@ -9,7 +10,6 @@ import PresenceTransition from "~/components/PresenceTransition";
 import Skeleton from "~/components/Skeleton";
 import Spinner from "~/components/Spinner";
 import { useCoinChartData } from "~/hooks/useCoinChartData";
-import { cn } from "~/utils/class-name";
 
 const ApexCharts = clientOnly(() =>
   import("solid-apexcharts").then((module) => ({
@@ -35,10 +35,10 @@ const CoinPriceGraph: VoidComponent<{
 
   return (
     <div class={cn("relative h-96", props.class)}>
-      <div class="absolute top-0 right-3 z-10 flex items-end gap-x-4">
+      <div class="absolute right-3 top-0 z-10 flex items-end gap-x-4">
         <PresenceTransition
           as="span"
-          class="text-sm text-orange-300 not-md:hidden"
+          class="not-md:hidden text-sm text-orange-300"
           transitionKey={`last-updated-label-${historyQuery.isSuccess}`}
           visible={historyQuery.isSuccess}
           option="fadeInOut"

@@ -1,5 +1,5 @@
+import { cn } from "@packages/ui/utils/class-name";
 import { VoidComponent } from "solid-js";
-import { cn } from "~/utils/class-name";
 
 const Spinner: VoidComponent<{
   class?: string;

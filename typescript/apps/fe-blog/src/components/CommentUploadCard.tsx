@@ -1,3 +1,4 @@
+import { cn } from "@packages/ui/utils/class-name";
 import { Icon } from "solid-heroicons";
 import { paperAirplane } from "solid-heroicons/solid";
 import { createSignal, Show, VoidComponent } from "solid-js";
@@ -8,7 +9,6 @@ import Textarea from "~/components/Textarea";
 import { useAccount } from "~/hooks/useAccount";
 import { useGlobalSignInModalVisible } from "~/hooks/useGlobalSignInModalVisible";
 import { useMutateComment } from "~/hooks/useMutateComment";
-import { cn } from "~/utils/class-name";
 
 const CommentUploadCard: VoidComponent<{
   class?: string;

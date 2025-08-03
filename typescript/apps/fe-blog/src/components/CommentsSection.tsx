@@ -1,8 +1,8 @@
+import { cn } from "@packages/ui/utils/class-name";
 import { For, Show, VoidComponent } from "solid-js";
 import CommentCard from "~/components/CommentCard";
 import CommentUploadCard from "~/components/CommentUploadCard";
 import { useComments } from "~/hooks/useComments";
-import { cn } from "~/utils/class-name";
 
 const CommentsSection: VoidComponent<{
   class?: string;

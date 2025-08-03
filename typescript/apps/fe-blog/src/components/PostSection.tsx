@@ -1,4 +1,5 @@
 import type { Post } from "@packages/common/types/blog/post";
+import { cn } from "@packages/ui/utils/class-name";
 import { A } from "@solidjs/router";
 import dayjs from "dayjs";
 import { arrowLeft, heart } from "solid-heroicons/solid";
@@ -13,7 +14,6 @@ import {
   LikeOrUnlikePostSuccessArgs,
   useLikeOrUnlikePost,
 } from "~/hooks/useLikeOrUnlikePost";
-import { cn } from "~/utils/class-name";
 import { initHighlight } from "~/utils/highlight";
 
 const PostSection: VoidComponent<{
@@ -32,7 +32,7 @@ const PostSection: VoidComponent<{
       </A>
 
       <Image
-        class="mx-auto mt-7 aspect-square rounded-4xl object-cover object-center md:w-1/2"
+        class="rounded-4xl mx-auto mt-7 aspect-square object-cover object-center md:w-1/2"
         src={props.post.cover}
         alt={props.post.title}
       />

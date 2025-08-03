@@ -1,3 +1,4 @@
+import { cn } from "@packages/ui/utils/class-name";
 import { xMark } from "solid-heroicons/outline";
 import { createSignal, mergeProps, VoidComponent, type JSX } from "solid-js";
 import { Portal } from "solid-js/web";
@@ -7,7 +8,6 @@ import PresenceTransition from "~/components/PresenceTransition";
 import Skeleton from "~/components/Skeleton";
 import { useKeydown } from "~/hooks/useKeydown";
 import { useLockBodyScroll } from "~/hooks/useLockBodyScroll";
-import { cn } from "~/utils/class-name";
 
 type Props = {
   class?: string;
@@ -48,7 +48,7 @@ const Image: VoidComponent<Props> = (_props) => {
           option="fadeInOut"
         >
           <button
-            class="absolute top-4 left-4 z-10 cursor-pointer"
+            class="absolute left-4 top-4 z-10 cursor-pointer"
             onClick={handleTogglePreview(false)}
           >
             <Icon class="size-7 dark:text-orange-100" path={xMark} />

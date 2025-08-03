@@ -1,4 +1,5 @@
 import { PostCategory } from "@packages/common/types/blog/category";
+import { cn } from "@packages/ui/utils/class-name";
 import { A } from "@solidjs/router";
 import { range } from "lodash-es";
 import { createSignal, For, Show, VoidComponent } from "solid-js";
@@ -7,7 +8,6 @@ import PresenceTransition from "~/components/PresenceTransition";
 import Skeleton from "~/components/Skeleton";
 import { useInfinitePosts } from "~/hooks/useInfinitePosts";
 import { useIsInView } from "~/hooks/useIsInView";
-import { cn } from "~/utils/class-name";
 
 const RecentPostsGrid: VoidComponent<{
   class?: string;

@@ -1,4 +1,5 @@
 import { Nullable } from "@packages/common/types/misc";
+import { cn } from "@packages/ui/utils/class-name";
 import {
   createComputed,
   createEffect,
@@ -8,7 +9,6 @@ import {
 } from "solid-js";
 import { createClientSignal } from "solid-use/client-only";
 import { EventOf } from "~/types/misc";
-import { cn } from "~/utils/class-name";
 
 const Textarea: VoidComponent<{
   class?: string;

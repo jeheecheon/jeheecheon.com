@@ -7,13 +7,13 @@
     "start": "vinxi start"
   },
   "dependencies": {
+    "@packages/ui": "workspace:*",
     "@solidjs/router": "^0.15.3",
     "@solidjs/start": "^1.1.0",
     "@tanstack/solid-query": "^5.79.0",
     "@tanstack/solid-query-devtools": "^5.79.0",
     "apexcharts": "^4.7.0",
     "axios": "^1.9.0",
-    "clsx": "^2.1.1",
     "graphql": "^16.11.0",
     "graphql-request": "^7.2.0",
     "he": "^1.2.0",
@@ -28,15 +28,12 @@
     "solid-quill": "^0.4.0",
     "solid-toast": "^0.5.0",
     "solid-use": "^0.9.1",
-    "tailwind-merge": "^3.3.0",
     "vinxi": "^0.5.7",
-    "webp-converter-browser": "^1.0.4",
-    "@packages/ui": "workspace:*"
+    "webp-converter-browser": "^1.0.4"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.0.7",
     "@types/he": "^1.2.3",
-    "jiti": "^2.4.2",
-    "tailwindcss": "^4.1.7"
+    "jiti": "^2.4.2"
   }
 }

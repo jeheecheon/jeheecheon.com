@@ -1,5 +1,5 @@
+import { cn } from "@packages/ui/utils/class-name";
 import { JSX, ParentComponent } from "solid-js";
-import { cn } from "~/utils/class-name";
 
 type Props = {
   class?: string;

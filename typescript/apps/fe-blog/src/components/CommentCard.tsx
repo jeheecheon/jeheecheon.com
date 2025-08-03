@@ -1,5 +1,6 @@
 import { Comment } from "@packages/common/types/blog/comment";
 import { RoleId } from "@packages/common/types/blog/role";
+import { cn } from "@packages/ui/utils/class-name";
 import dayjs from "dayjs";
 import { range } from "lodash-es";
 import {
@@ -18,7 +19,6 @@ import PresenceTransition from "~/components/PresenceTransition";
 import Textarea from "~/components/Textarea";
 import { useAccount } from "~/hooks/useAccount";
 import { useMutateComment } from "~/hooks/useMutateComment";
-import { cn } from "~/utils/class-name";
 
 const CommentCard: VoidComponent<{
   class?: string;
@@ -52,7 +52,7 @@ const CommentCard: VoidComponent<{
           </For>
         </div>
 
-        <div class="w-full min-w-2xs space-y-2">
+        <div class="min-w-2xs w-full space-y-2">
           <Show
             when={props.comment.account.roles?.some(
               (role) => role.id === RoleId.ADMIN,

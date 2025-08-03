@@ -1,4 +1,5 @@
 import { Optional } from "@packages/common/types/misc";
+import { cn } from "@packages/ui/utils/class-name";
 import he from "he";
 import { HTMLElement, TextNode, type Node } from "node-html-parser";
 import {
@@ -12,7 +13,6 @@ import {
 import { Dynamic } from "solid-js/web";
 import ConditionalLink from "~/components/ConditionalLink";
 import Image from "~/components/Image";
-import { cn } from "~/utils/class-name";
 import { renderRawHtml } from "~/utils/html";
 
 const RawHtmlRenderer: VoidComponent<{
@@ -104,7 +104,7 @@ const HtmlNodeRenderer: ParentComponent<{
       <Match when={props.node.rawTagName === "h2"}>
         <h2
           class={cn(
-            "mt-8 mb-3 border-l-4 border-l-orange-300 bg-zinc-800 p-4 text-4xl font-bold text-orange-300",
+            "mb-3 mt-8 border-l-4 border-l-orange-300 bg-zinc-800 p-4 text-4xl font-bold text-orange-300",
             className,
           )}
         >
@@ -115,7 +115,7 @@ const HtmlNodeRenderer: ParentComponent<{
       <Match when={props.node.rawTagName === "h3"}>
         <h3
           class={cn(
-            "mt-8 mb-3 border-l-4 border-l-orange-300 bg-zinc-800 p-4 text-3xl font-bold text-orange-300",
+            "mb-3 mt-8 border-l-4 border-l-orange-300 bg-zinc-800 p-4 text-3xl font-bold text-orange-300",
             className,
           )}
         >
@@ -126,7 +126,7 @@ const HtmlNodeRenderer: ParentComponent<{
       <Match when={props.node.rawTagName === "h4"}>
         <h4
           class={cn(
-            "mt-8 mb-3 border-l-4 border-l-orange-300 bg-zinc-800 p-4 text-2xl font-bold text-orange-300",
+            "mb-3 mt-8 border-l-4 border-l-orange-300 bg-zinc-800 p-4 text-2xl font-bold text-orange-300",
             className,
           )}
         >
@@ -137,7 +137,7 @@ const HtmlNodeRenderer: ParentComponent<{
       <Match when={props.node.rawTagName === "h5"}>
         <h5
           class={cn(
-            "mt-8 mb-3 border-l-4 border-l-orange-300 bg-zinc-800 p-4 text-xl font-bold text-orange-300",
+            "mb-3 mt-8 border-l-4 border-l-orange-300 bg-zinc-800 p-4 text-xl font-bold text-orange-300",
             className,
           )}
         >
@@ -148,7 +148,7 @@ const HtmlNodeRenderer: ParentComponent<{
       <Match when={props.node.rawTagName === "h6"}>
         <h6
           class={cn(
-            "mt-8 mb-3 border-l-4 border-l-orange-300 bg-zinc-800 p-4 text-lg font-bold text-orange-300",
+            "mb-3 mt-8 border-l-4 border-l-orange-300 bg-zinc-800 p-4 text-lg font-bold text-orange-300",
             className,
           )}
         >
@@ -182,7 +182,7 @@ const HtmlNodeRenderer: ParentComponent<{
       <Match when={props.node.rawTagName === "blockquote"}>
         <blockquote
           class={cn(
-            "border-l-4 border-zinc-800 border-l-orange-300 p-4 break-words",
+            "break-words border-l-4 border-zinc-800 border-l-orange-300 p-4",
             className,
           )}
         >

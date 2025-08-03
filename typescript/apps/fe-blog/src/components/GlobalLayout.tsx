@@ -1,9 +1,9 @@
+import { cn } from "@packages/ui/utils/class-name";
 import { ParentComponent } from "solid-js";
 import Footer from "~/components/Footer";
 import Header from "~/components/Header";
 import SignInModal from "~/components/SignInModal";
 import { useGlobalSignInModalVisible } from "~/hooks/useGlobalSignInModalVisible";
-import { cn } from "~/utils/class-name";
 
 const GlobalLayout: ParentComponent<{ class?: string }> = (props) => {
   const [signInModalVisible, setSignInModalVisible] =
