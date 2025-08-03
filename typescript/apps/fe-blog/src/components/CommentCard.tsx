@@ -1,5 +1,6 @@
 import { Comment } from "@packages/common/types/blog/comment";
 import { RoleId } from "@packages/common/types/blog/role";
+import Image from "@packages/ui/components/Image";
 import PresenceTransition from "@packages/ui/components/PresenceTransition";
 import { cn } from "@packages/ui/utils/class-name";
 import dayjs from "dayjs";
@@ -15,7 +16,6 @@ import {
 import toast from "solid-toast";
 import Button from "~/components/Button";
 import ConfirmModal from "~/components/ConfirmModal";
-import Image from "~/components/Image";
 import Textarea from "~/components/Textarea";
 import { useAccount } from "~/hooks/useAccount";
 import { useMutateComment } from "~/hooks/useMutateComment";

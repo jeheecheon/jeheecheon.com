@@ -1,11 +1,11 @@
 import Icon from "@packages/ui/components/Icon";
 import PresenceTransition from "@packages/ui/components/PresenceTransition";
+import { useKeydown } from "@packages/ui/hooks/useKeydown";
+import { useLockBodyScroll } from "@packages/ui/hooks/useLockBodyScroll";
 import { cn } from "@packages/ui/utils/class-name";
 import { xMark } from "solid-heroicons/solid";
 import { ParentComponent } from "solid-js";
 import { Portal } from "solid-js/web";
-import { useKeydown } from "~/hooks/useKeydown";
-import { useLockBodyScroll } from "~/hooks/useLockBodyScroll";
 
 const Modal: ParentComponent<{
   class?: string;

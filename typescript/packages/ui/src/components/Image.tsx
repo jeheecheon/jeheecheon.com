@@ -2,12 +2,12 @@ import Icon from "@packages/ui/components/Icon";
 import PreloadedImage from "@packages/ui/components/PreloadedImage";
 import PresenceTransition from "@packages/ui/components/PresenceTransition";
 import Skeleton from "@packages/ui/components/Skeleton";
+import { useKeydown } from "@packages/ui/hooks/useKeydown";
+import { useLockBodyScroll } from "@packages/ui/hooks/useLockBodyScroll";
 import { cn } from "@packages/ui/utils/class-name";
 import { xMark } from "solid-heroicons/outline";
 import { createSignal, mergeProps, VoidComponent, type JSX } from "solid-js";
 import { Portal } from "solid-js/web";
-import { useKeydown } from "~/hooks/useKeydown";
-import { useLockBodyScroll } from "~/hooks/useLockBodyScroll";
 
 type Props = {
   class?: string;

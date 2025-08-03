@@ -1,12 +1,12 @@
 import type { Post } from "@packages/common/types/blog/post";
 import Icon from "@packages/ui/components/Icon";
+import Image from "@packages/ui/components/Image";
 import { cn } from "@packages/ui/utils/class-name";
 import dayjs from "dayjs";
 import he from "he";
 import { TextNode } from "node-html-parser";
 import { chatBubbleBottomCenterText, heart } from "solid-heroicons/solid";
 import { VoidComponent } from "solid-js";
-import Image from "~/components/Image";
 import { renderRawHtml } from "~/utils/html";
 
 const PostCard: VoidComponent<{ class?: string; post: Post }> = (props) => {
