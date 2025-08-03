@@ -7,9 +7,11 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "solid-js": "^1.9.5"
+    "@packages/ui": "workspace:*",
+    "solid-js": "^1.9.7"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.0.7",
     "vite": "^6.0.0",
     "vite-plugin-solid": "^2.11.6"
   }
