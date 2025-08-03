@@ -1,10 +1,10 @@
 import { PostCategory } from "@packages/common/types/blog/category";
+import PresenceTransition from "@packages/ui/components/PresenceTransition";
 import { cn } from "@packages/ui/utils/class-name";
 import { A } from "@solidjs/router";
 import { range } from "lodash-es";
 import { createSignal, For, Show, VoidComponent } from "solid-js";
 import PostCard from "~/components/PostCard";
-import PresenceTransition from "~/components/PresenceTransition";
 import Skeleton from "~/components/Skeleton";
 import { useInfinitePosts } from "~/hooks/useInfinitePosts";
 import { useIsInView } from "~/hooks/useIsInView";

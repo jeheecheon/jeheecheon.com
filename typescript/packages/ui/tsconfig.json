@@ -1,12 +1,12 @@
 {
-  "extends": "@packages/typescript-config/base.json",
+  "extends": "@packages/typescript-config/solid.json",
   "compilerOptions": {
+    "noEmit": false,
     "declaration": true,
-    "jsx": "preserve",
-    "jsxImportSource": "solid-js",
-    "outDir": "./dist",
+
     "rootDir": ".",
     "baseUrl": "./src",
+    "outDir": "./dist",
     "paths": {
       "@packages/ui/*": ["./*"]
     }

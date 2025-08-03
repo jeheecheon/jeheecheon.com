@@ -1,9 +1,9 @@
+import PresenceTransition from "@packages/ui/components/PresenceTransition";
 import { cn } from "@packages/ui/utils/class-name";
 import { xMark } from "solid-heroicons/solid";
 import { ParentComponent } from "solid-js";
 import { Portal } from "solid-js/web";
 import Icon from "~/components/Icon";
-import PresenceTransition from "~/components/PresenceTransition";
 import { useKeydown } from "~/hooks/useKeydown";
 import { useLockBodyScroll } from "~/hooks/useLockBodyScroll";
 

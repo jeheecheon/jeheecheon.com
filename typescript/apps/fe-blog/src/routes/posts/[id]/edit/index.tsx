@@ -1,5 +1,6 @@
 "use server";
 
+import PresenceTransition from "@packages/ui/components/PresenceTransition";
 import { createAsync, Navigate, useParams } from "@solidjs/router";
 import { Match, Show, Suspense, Switch, VoidComponent } from "solid-js";
 import { z } from "zod";
@@ -7,7 +8,6 @@ import Container from "~/components/Container";
 import LoadingFallback from "~/components/LoadingFallback";
 import Paper from "~/components/Paper";
 import PostEditSection from "~/components/PostEditSection";
-import PresenceTransition from "~/components/PresenceTransition";
 import { usePost } from "~/hooks/usePost";
 import { injectIsAdmin } from "~/injectors/injectIsAdmin.server";
 

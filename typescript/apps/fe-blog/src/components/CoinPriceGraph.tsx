@@ -1,3 +1,4 @@
+import PresenceTransition from "@packages/ui/components/PresenceTransition";
 import { cn } from "@packages/ui/utils/class-name";
 import { clientOnly } from "@solidjs/start";
 import dayjs from "dayjs";
@@ -6,7 +7,6 @@ import { type VoidComponent } from "solid-js";
 import toast from "solid-toast";
 import Button from "~/components/Button";
 import Icon from "~/components/Icon";
-import PresenceTransition from "~/components/PresenceTransition";
 import Skeleton from "~/components/Skeleton";
 import Spinner from "~/components/Spinner";
 import { useCoinChartData } from "~/hooks/useCoinChartData";
