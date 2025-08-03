@@ -1,8 +1,8 @@
+import Paper from "@packages/ui/components/Paper";
 import { cn } from "@packages/ui/utils/class-name";
 import { VoidComponent } from "solid-js";
 import Container from "~/components/Container";
 import ExternalLink from "~/components/ExternalLink";
-import Paper from "~/components/Paper";
 
 const Footer: VoidComponent<{ class?: string }> = (props) => {
   return (
