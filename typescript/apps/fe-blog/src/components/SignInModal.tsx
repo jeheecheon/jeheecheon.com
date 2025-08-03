@@ -1,7 +1,7 @@
 import ConditionalLink from "@packages/ui/components/ConditionalLink";
 import Modal from "@packages/ui/components/Modal";
+import { useLocation } from "@packages/ui/hooks/useLocation";
 import { VoidComponent } from "solid-js";
-import { useLocation } from "~/hooks/useLocation";
 import GoogleSignInIcon from "~/icons/GoogleSignInIcon";
 import { configs } from "~/utils/config";
 

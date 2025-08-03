@@ -48,7 +48,7 @@ const Image: VoidComponent<Props> = (_props) => {
           option="fadeInOut"
         >
           <button
-            class="absolute left-4 top-4 z-10 cursor-pointer"
+            class="absolute top-4 left-4 z-10 cursor-pointer"
             onClick={handleTogglePreview(false)}
           >
             <Icon class="size-7 dark:text-orange-100" path={xMark} />

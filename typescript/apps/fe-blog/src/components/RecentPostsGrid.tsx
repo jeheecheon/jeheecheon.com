@@ -1,13 +1,13 @@
 import { PostCategory } from "@packages/common/types/blog/category";
 import PresenceTransition from "@packages/ui/components/PresenceTransition";
 import Skeleton from "@packages/ui/components/Skeleton";
+import { useInView } from "@packages/ui/hooks/useInView";
 import { cn } from "@packages/ui/utils/class-name";
 import { A } from "@solidjs/router";
 import { range } from "lodash-es";
 import { createSignal, For, Show, VoidComponent } from "solid-js";
 import PostCard from "~/components/PostCard";
 import { useInfinitePosts } from "~/hooks/useInfinitePosts";
-import { useIsInView } from "~/hooks/useIsInView";
 
 const RecentPostsGrid: VoidComponent<{
   class?: string;
@@ -23,7 +23,7 @@ const RecentPostsGrid: VoidComponent<{
     isPublic: true,
   }));
 
-  useIsInView({
+  useInView({
     entries,
     onInView: handleInView,
   });

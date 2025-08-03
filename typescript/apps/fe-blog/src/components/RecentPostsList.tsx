@@ -4,6 +4,7 @@ import Button from "@packages/ui/components/Button";
 import LoadingFallback from "@packages/ui/components/LoadingFallback";
 import PresenceTransition from "@packages/ui/components/PresenceTransition";
 import Skeleton from "@packages/ui/components/Skeleton";
+import { useInView } from "@packages/ui/hooks/useInView";
 import { cn } from "@packages/ui/utils/class-name";
 import { A } from "@solidjs/router";
 import dayjs from "dayjs";
@@ -11,7 +12,6 @@ import { range } from "lodash-es";
 import { createSignal, For, Show, VoidComponent } from "solid-js";
 import toast from "solid-toast";
 import { useInfinitePosts } from "~/hooks/useInfinitePosts";
-import { useIsInView } from "~/hooks/useIsInView";
 import { useMutatePost } from "~/hooks/useMutatePost";
 
 type Props = {
@@ -31,7 +31,7 @@ const RecentPostsList: VoidComponent<Props> = (props) => {
     ),
   }));
 
-  useIsInView({
+  useInView({
     entries,
     onInView: handleInView,
   });
