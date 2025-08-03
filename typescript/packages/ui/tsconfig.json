@@ -1,0 +1,9 @@
+{
+  "extends": "@packages/typescript-config/solid.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./src/*"]
+    }
+  }
+}

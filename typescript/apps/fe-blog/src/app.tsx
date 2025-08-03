@@ -5,7 +5,7 @@ import GlobalLayout from "~/components/GlobalLayout";
 import LoadingFallback from "~/components/LoadingFallback";
 import RootProvider from "~/providers/RootProvider";
 
-import "~/styles/globals-base.css";
+import "@packages/ui/styles/globals-base.css";
 
 export default function App() {
   return (

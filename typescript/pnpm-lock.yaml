@@ -184,6 +184,9 @@ importers:
 
   apps/fe-blog:
     dependencies:
+      '@packages/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       '@solidjs/router':
         specifier: ^0.15.3
         version: 0.15.3(solid-js@1.9.7)
@@ -276,9 +279,6 @@ importers:
         specifier: ^1.9.5
         version: 1.9.7
     devDependencies:
-      typescript:
-        specifier: ^5.7.2
-        version: 5.8.2
       vite:
         specifier: ^6.0.0
         version: 6.3.5(@types/node@24.0.10)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.2)
@@ -337,6 +337,16 @@ importers:
   packages/prettier-config: {}
 
   packages/typescript-config: {}
+
+  packages/ui:
+    dependencies:
+      solid-js:
+        specifier: ^1.9.5
+        version: 1.9.7
+    devDependencies:
+      tailwindcss:
+        specifier: ^4.1.7
+        version: 4.1.11
 
 packages:
 
