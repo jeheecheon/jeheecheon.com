@@ -1,9 +1,9 @@
+import PreloadedImage from "@packages/ui/components/PreloadedImage";
 import { cn } from "@packages/ui/utils/class-name";
 import { xMark } from "solid-heroicons/outline";
 import { createSignal, mergeProps, VoidComponent, type JSX } from "solid-js";
 import { Portal } from "solid-js/web";
 import Icon from "~/components/Icon";
-import PreloadedImage from "~/components/PreloadedImage";
 import PresenceTransition from "~/components/PresenceTransition";
 import Skeleton from "~/components/Skeleton";
 import { useKeydown } from "~/hooks/useKeydown";

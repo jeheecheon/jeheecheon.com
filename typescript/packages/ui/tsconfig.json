@@ -1,6 +1,9 @@
 {
   "extends": "@packages/typescript-config/base.json",
   "compilerOptions": {
+    "declaration": true,
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
     "outDir": "./dist",
     "rootDir": ".",
     "baseUrl": "./src",
