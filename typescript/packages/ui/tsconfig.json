@@ -1,0 +1,14 @@
+{
+  "extends": "@packages/typescript-config/solid.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "declaration": true,
+
+    "rootDir": ".",
+    "baseUrl": "./src",
+    "outDir": "./dist",
+    "paths": {
+      "@packages/ui/*": ["./*"]
+    }
+  }
+}

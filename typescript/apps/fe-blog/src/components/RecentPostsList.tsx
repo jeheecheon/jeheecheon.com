@@ -1,18 +1,18 @@
 import { PostCategory } from "@packages/common/types/blog/category";
 import { Post } from "@packages/common/types/blog/post";
+import Button from "@packages/ui/components/Button";
+import LoadingFallback from "@packages/ui/components/LoadingFallback";
+import PresenceTransition from "@packages/ui/components/PresenceTransition";
+import Skeleton from "@packages/ui/components/Skeleton";
+import { useInView } from "@packages/ui/hooks/useInView";
+import { cn } from "@packages/ui/utils/class-name";
 import { A } from "@solidjs/router";
 import dayjs from "dayjs";
 import { range } from "lodash-es";
 import { createSignal, For, Show, VoidComponent } from "solid-js";
 import toast from "solid-toast";
-import Button from "~/components/Button";
-import LoadingFallback from "~/components/LoadingFallback";
-import PresenceTransition from "~/components/PresenceTransition";
-import Skeleton from "~/components/Skeleton";
 import { useInfinitePosts } from "~/hooks/useInfinitePosts";
-import { useIsInView } from "~/hooks/useIsInView";
 import { useMutatePost } from "~/hooks/useMutatePost";
-import { cn } from "~/utils/class-name";
 
 type Props = {
   class?: string;
@@ -31,7 +31,7 @@ const RecentPostsList: VoidComponent<Props> = (props) => {
     ),
   }));
 
-  useIsInView({
+  useInView({
     entries,
     onInView: handleInView,
   });
@@ -59,7 +59,7 @@ const RecentPostsList: VoidComponent<Props> = (props) => {
           fallback={<LoadingFallback center>Loading...</LoadingFallback>}
         >
           <div class="overflow-auto">
-            <div class="max-h-[calc(100dvh-20rem)] min-w-4xl">
+            <div class="min-w-4xl max-h-[calc(100dvh-20rem)]">
               <table class="w-full border border-zinc-700">
                 <thead class="border-b border-zinc-700">
                   <tr class="text-right">
@@ -168,7 +168,7 @@ const PostRow: VoidComponent<{
   return (
     <tr class={cn("p-1 text-right", props.class)} ref={props.ref}>
       <td class="p-3 pl-5 text-left">{props.post.title}</td>
-      <td class="p-3 text-nowrap">{props.post.categoryId}</td>
+      <td class="text-nowrap p-3">{props.post.categoryId}</td>
       <td class="p-3">{props.post.isPublic ? "Yes" : "No"}</td>
       <td class="p-3">
         {dayjs(props.post.uploadedAt).format("YYYY-MM-DD HH:mm:ss")}

@@ -1,6 +1,6 @@
+import { cn } from "@packages/ui/utils/class-name";
 import { ParentComponent, type JSX } from "solid-js";
 import { Dynamic } from "solid-js/web";
-import { cn } from "~/utils/class-name";
 
 const Container: ParentComponent<{
   class?: string;

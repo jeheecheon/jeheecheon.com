@@ -1,0 +1,30 @@
+{
+  "name": "@packages/ui",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon --watch src --ext ts,tsx,css --exec 'pnpm build'",
+    "build": "pnpm copy:css && tsc",
+    "clear:dist": "find . -type d -name 'dist' -exec rm -rf {} +",
+    "copy:css": "mkdir -p dist/src/styles && cp -r src/styles dist/src"
+  },
+  "dependencies": {
+    "@solidjs/router": "^0.15.3",
+    "clsx": "^2.1.1",
+    "solid-heroicons": "^3.2.4",
+    "solid-js": "^1.9.7",
+    "solid-motionone": "^1.0.4",
+    "solid-use": "^0.9.1",
+    "tailwind-merge": "^3.3.1"
+  },
+  "devDependencies": {
+    "glob": "^11.0.3",
+    "nodemon": "^3.1.10",
+    "tailwindcss": "^4.1.7"
+  },
+  "exports": {
+    "./*": {
+      "types": "./dist/src/*.d.ts",
+      "default": "./dist/src/*"
+    }
+  }
+}

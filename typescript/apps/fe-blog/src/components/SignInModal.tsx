@@ -1,7 +1,7 @@
+import ConditionalLink from "@packages/ui/components/ConditionalLink";
+import Modal from "@packages/ui/components/Modal";
+import { useLocation } from "@packages/ui/hooks/useLocation";
 import { VoidComponent } from "solid-js";
-import ExternalLink from "~/components/ExternalLink";
-import Modal from "~/components/Modal";
-import { useLocation } from "~/hooks/useLocation";
 import GoogleSignInIcon from "~/icons/GoogleSignInIcon";
 import { configs } from "~/utils/config";
 
@@ -19,13 +19,13 @@ const SignInModal: VoidComponent<{
       visible={props.visible}
       onClose={props.onClose}
     >
-      <ExternalLink
+      <ConditionalLink
         class="mt-4"
         href={`${configs.BLOG_API_URL}/auth/google?redirect=${location()?.href}`}
         target="_self"
       >
         <GoogleSignInIcon class="mx-auto mt-8" />
-      </ExternalLink>
+      </ConditionalLink>
       <p class="mx-auto mt-3 text-center text-sm text-zinc-400">
         I do not collect your personal information!.. 🐶
       </p>

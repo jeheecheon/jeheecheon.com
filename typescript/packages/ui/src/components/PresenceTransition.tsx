@@ -1,3 +1,4 @@
+import { cn } from "@packages/ui/utils/class-name";
 import {
   createMemo,
   Match,
@@ -9,7 +10,6 @@ import {
 } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import { Motion, Presence, type Options } from "solid-motionone";
-import { cn } from "~/utils/class-name";
 
 const optionsMap = {
   fadeInOut: {

@@ -8,7 +8,7 @@ import {
 } from "solid-js";
 import { createClientSignal } from "solid-use/client-only";
 
-export const useIsInView = (args: {
+export const useInView = (args: {
   entries: Accessor<Element[]>;
   options?: IntersectionObserverInit;
   onInView?: () => void;

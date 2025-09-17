@@ -1,4 +1,6 @@
 import { type Nullable } from "@packages/common/types/misc";
+import type { EventOf } from "@packages/ui/types/misc";
+import { cn } from "@packages/ui/utils/class-name";
 import {
   createEffect,
   createSignal,
@@ -9,8 +11,6 @@ import {
   type JSX,
   type VoidComponent,
 } from "solid-js";
-import type { EventOf } from "~/types/misc";
-import { cn } from "~/utils/class-name";
 
 type Props = {
   class?: string;

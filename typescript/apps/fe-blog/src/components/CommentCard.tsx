@@ -1,5 +1,11 @@
 import { Comment } from "@packages/common/types/blog/comment";
 import { RoleId } from "@packages/common/types/blog/role";
+import Button from "@packages/ui/components/Button";
+import ConfirmModal from "@packages/ui/components/ConfirmModal";
+import Image from "@packages/ui/components/Image";
+import PresenceTransition from "@packages/ui/components/PresenceTransition";
+import Textarea from "@packages/ui/components/Textarea";
+import { cn } from "@packages/ui/utils/class-name";
 import dayjs from "dayjs";
 import { range } from "lodash-es";
 import {
@@ -11,14 +17,8 @@ import {
   VoidComponent,
 } from "solid-js";
 import toast from "solid-toast";
-import Button from "~/components/Button";
-import ConfirmModal from "~/components/ConfirmModal";
-import Image from "~/components/Image";
-import PresenceTransition from "~/components/PresenceTransition";
-import Textarea from "~/components/Textarea";
 import { useAccount } from "~/hooks/useAccount";
 import { useMutateComment } from "~/hooks/useMutateComment";
-import { cn } from "~/utils/class-name";
 
 const CommentCard: VoidComponent<{
   class?: string;
@@ -52,7 +52,7 @@ const CommentCard: VoidComponent<{
           </For>
         </div>
 
-        <div class="w-full min-w-2xs space-y-2">
+        <div class="min-w-2xs w-full space-y-2">
           <Show
             when={props.comment.account.roles?.some(
               (role) => role.id === RoleId.ADMIN,

@@ -1,14 +1,14 @@
+import Image from "@packages/ui/components/Image";
+import Textarea from "@packages/ui/components/Textarea";
+import { cn } from "@packages/ui/utils/class-name";
 import { Icon } from "solid-heroicons";
 import { paperAirplane } from "solid-heroicons/solid";
 import { createSignal, Show, VoidComponent } from "solid-js";
 import toast from "solid-toast";
 import AuthOnlyButton from "~/components/AuthOnlyButton";
-import Image from "~/components/Image";
-import Textarea from "~/components/Textarea";
 import { useAccount } from "~/hooks/useAccount";
 import { useGlobalSignInModalVisible } from "~/hooks/useGlobalSignInModalVisible";
 import { useMutateComment } from "~/hooks/useMutateComment";
-import { cn } from "~/utils/class-name";
 
 const CommentUploadCard: VoidComponent<{
   class?: string;

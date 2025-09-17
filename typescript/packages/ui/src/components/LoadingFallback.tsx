@@ -1,6 +1,6 @@
+import Spinner from "@packages/ui/components/Spinner";
+import { cn } from "@packages/ui/utils/class-name";
 import { type ParentComponent } from "solid-js";
-import Spinner from "~/components/Spinner";
-import { cn } from "~/utils/class-name";
 
 const LoadingFallback: ParentComponent<{
   class?: string;
