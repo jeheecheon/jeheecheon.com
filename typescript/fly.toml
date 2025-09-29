@@ -8,16 +8,28 @@ primary_region = 'nrt'
 
 [build]
 
-[http_service]
-  internal_port = 4001
-  force_https = true
-  auto_stop_machines = 'stop'
-  auto_start_machines = true
-  min_machines_running = 0
-  processes = ['app']
+[processes]
+  be-blog = "pnpm -F @apps/be-blog start:prod"
+  fe-blog = "pnpm -F @apps/fe-blog start:prod"
 
 [[vm]]
   memory = '512mb'
   cpu_kind = 'shared'
   cpus = 1
   memory_mb = 512
+
+[[services]]
+  processes = ["be-blog"]
+  internal_port = 4001
+  protocol = "tcp"
+  [[services.ports]]
+    port = 4001
+    handlers = ["http"]
+
+[[services]]
+  processes = ["fe-blog"]
+  internal_port = 3000
+  protocol = "tcp"
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
