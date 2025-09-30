@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "vinxi dev --port 4000",
     "build": "vinxi build",
-    "start:prod": "vinxi start --port 4000 --host 0.0.0.0"
+    "start:prod": "node .output/server/index.mjs"
   },
   "dependencies": {
     "@packages/ui": "workspace:*",
