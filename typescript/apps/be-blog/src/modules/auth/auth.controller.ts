@@ -10,7 +10,9 @@ import {
 } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { assert } from "@packages/common/utils/assert";
+import { WEEK } from "@packages/common/utils/time";
 import type { Request, Response } from "express";
+import { configs } from "../../utils/config.js";
 import { AccountService } from "../account/account.service.js";
 import { ExternalAuthenticationProviderId } from "../external-authentication/external-authentication.constants.js";
 import { ExternalAuthenticationService } from "../external-authentication/external-authentication.service.js";
@@ -37,7 +39,13 @@ export class AuthController {
 
   @Get("/signout")
   async signout(@Res() res: Response) {
-    res.clearCookie("blog-session");
+    res.clearCookie("blog-session", {
+      maxAge: WEEK,
+      secure: configs.NODE_ENV === "production",
+      httpOnly: true,
+      domain: configs.BASE_DOMAIN,
+      sameSite: configs.NODE_ENV === "production" ? "none" : "lax",
+    });
     res.redirect(this.configService.getOrThrow("BLOG_URL"));
   }
 
