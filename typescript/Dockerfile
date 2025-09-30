@@ -3,6 +3,10 @@ WORKDIR /app
 RUN corepack enable && corepack prepare pnpm@10.10.0 --activate
 COPY . .
 RUN pnpm install --frozen-lockfile
+ARG VITE_BLOG_API_URL
+ARG VITE_BLOG_GRAPHQL_URL
+ENV VITE_BLOG_API_URL=${VITE_BLOG_API_URL}
+ENV VITE_BLOG_GRAPHQL_URL=${VITE_BLOG_GRAPHQL_URL}
 RUN pnpm -F "./packages/*" build \
   && pnpm -F "@apps/be-blog" build \
   && pnpm -F "@apps/fe-blog" build
