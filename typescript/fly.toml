@@ -7,6 +7,9 @@ app = 'jeheecheon-web'
 primary_region = 'nrt'
 
 [build]
+  [build.args]
+    VITE_BLOG_API_URL = "https://blog.jeheecheon.com"
+    VITE_BLOG_GRAPHQL_URL = "https://blog.jeheecheon.com/graphql"
 
 [processes]
   be-blog = "pnpm -F @apps/be-blog start:prod"
