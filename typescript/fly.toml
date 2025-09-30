@@ -29,8 +29,12 @@ primary_region = 'nrt'
 
 [[services]]
   processes = ["fe-blog"]
-  internal_port = 443
+  internal_port = 4000
   protocol = "tcp"
+
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
 
   [[services.ports]]
     handlers = ["tls", "http"]
