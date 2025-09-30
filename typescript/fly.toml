@@ -13,23 +13,29 @@ primary_region = 'nrt'
   fe-blog = "pnpm -F @apps/fe-blog start:prod"
 
 [[vm]]
-  memory = '1536mb'
+  memory = '2048mb'
   cpu_kind = 'shared'
   cpus = 1
-  memory_mb = 1536
+  memory_mb = 2048
 
 [[services]]
   processes = ["be-blog"]
   internal_port = 4001
   protocol = "tcp"
+
   [[services.ports]]
+    handlers = ["tls", "http"]
     port = 4001
-    handlers = ["http"]
 
 [[services]]
   processes = ["fe-blog"]
   internal_port = 3000
   protocol = "tcp"
+
   [[services.ports]]
-    port = 80
     handlers = ["http"]
+    port = "80"
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = "443"
