@@ -22,6 +22,7 @@ primary_region = 'nrt'
   processes = ["be-blog"]
   internal_port = 4001
   protocol = "tcp"
+  min_machines_running = 1
 
   [[services.ports]]
     handlers = ["tls", "http"]
@@ -31,11 +32,12 @@ primary_region = 'nrt'
   processes = ["fe-blog"]
   internal_port = 3000
   protocol = "tcp"
+  min_machines_running = 1
 
   [[services.ports]]
     handlers = ["http"]
-    port = "80"
+    port = 80
 
   [[services.ports]]
     handlers = ["tls", "http"]
-    port = "443"
+    port = 443
