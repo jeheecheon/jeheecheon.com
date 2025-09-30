@@ -8,8 +8,8 @@ primary_region = 'nrt'
 
 [build]
   [build.args]
-    VITE_BLOG_API_URL = "https://blog.jeheecheon.com"
-    VITE_BLOG_GRAPHQL_URL = "https://blog.jeheecheon.com/graphql"
+    VITE_BLOG_API_URL = "https://blog.jeheecheon.com:4001"
+    VITE_BLOG_GRAPHQL_URL = "https://blog.jeheecheon.com:4001/graphql"
 
 [processes]
   be-blog = "pnpm -F @apps/be-blog start:prod"
