@@ -26,4 +26,5 @@ COPY --from=builder /app/packages/prettier-config/package.json ./packages/pretti
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/pnpm-lock.yaml ./pnpm-lock.yaml
 COPY --from=builder /app/pnpm-workspace.yaml ./pnpm-workspace.yaml
-RUN pnpm install --prod --frozen-lockfile 
+RUN pnpm install --prod --frozen-lockfile
+EXPOSE 4000 4001
