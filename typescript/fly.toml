@@ -30,7 +30,7 @@ primary_region = 'nrt'
 
 [[services]]
   processes = ["fe-blog"]
-  internal_port = 3000
+  internal_port = 4000
   protocol = "tcp"
   min_machines_running = 1
 

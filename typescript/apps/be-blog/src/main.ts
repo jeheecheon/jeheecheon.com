@@ -31,8 +31,8 @@ async function bootstrap() {
   );
   app.use(cookieParser());
 
-  await app.listen(configs.PORT);
+  await app.listen(configs.PORT, configs.HOST);
 
-  Logger.log(`Server is running on port ${configs.PORT}`);
+  Logger.log(`Server is running on ${configs.HOST}:${configs.PORT}`);
 }
 bootstrap();

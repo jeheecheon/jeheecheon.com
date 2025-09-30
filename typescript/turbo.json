@@ -9,6 +9,7 @@
       "env": [
         "ENABLE_PLAYGROUND",
         "PORT",
+        "HOST",
         "NODE_ENV",
         "DATABASE_URL",
         "DATABASE_LOGGING",

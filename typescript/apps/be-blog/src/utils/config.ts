@@ -7,6 +7,7 @@ dotenv.config();
 
 export const configs = {
   PORT: Number(process.env.PORT || 4001),
+  HOST: process.env.HOST ?? "0.0.0.0",
   BLOG_URL: process.env.BLOG_URL ?? "http://localhost:4000",
   NODE_ENV: process.env.NODE_ENV ?? "development",
   BASE_DOMAIN: process.env.BASE_DOMAIN ?? "localhost",
