@@ -16,10 +16,9 @@ primary_region = 'nrt'
   fe-blog = "pnpm -F @apps/fe-blog start:prod"
 
 [[vm]]
-  memory = '512'
   cpu_kind = 'shared'
   cpus = 1
-  memory_mb = 1024
+  memory_mb = 512
 
 [[services]]
   processes = ["be-blog"]
