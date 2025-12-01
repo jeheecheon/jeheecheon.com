@@ -1,0 +1,69 @@
+name: Deploy Resume to jeheecheon/resume
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "typescript/apps/fe-resume/**"
+      - "typescript/packages/ui/**"
+      - ".github/workflows/deploy-resume.yml"
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8
+          
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: typescript
+        
+      - name: Build resume app
+        run: pnpm --filter @apps/fe-resume build
+        working-directory: typescript
+        
+      - name: Deploy to jeheecheon/resume repository
+        env:
+          GITHUB_TOKEN: ${{ secrets.RESUME_DEPLOY_TOKEN }}
+          TARGET_REPO: jeheecheon/resume
+          TARGET_BRANCH: main
+        run: |
+          # Configure git
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Clone the target repository
+          git clone https://x-access-token:${GITHUB_TOKEN}@github.com/${TARGET_REPO}.git target-repo
+          
+          # Remove all existing files in target repo (except .git)
+          cd target-repo
+          shopt -s extglob
+          rm -rf !(.git)
+          
+          # Copy build files to target repo root
+          cp -r ../typescript/apps/fe-resume/dist/* .
+          
+          # Check if there are changes
+          if [ -n "$(git status --porcelain)" ]; then
+            git add .
+            git commit -m "Deploy resume from jeheecheon/jeheecheon.com@${GITHUB_SHA:0:7}"
+            git push origin ${TARGET_BRANCH}
+            echo "✅ Successfully deployed to ${TARGET_REPO}"
+          else
+            echo "ℹ️ No changes to deploy"
+          fi
+
