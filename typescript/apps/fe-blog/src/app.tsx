@@ -5,7 +5,7 @@ import { Suspense } from "solid-js";
 import GlobalLayout from "~/components/GlobalLayout";
 import RootProvider from "~/providers/RootProvider";
 
-import "@packages/ui/styles/globals-base.css";
+import "~/styles/globals.css";
 
 export default function App() {
   return (

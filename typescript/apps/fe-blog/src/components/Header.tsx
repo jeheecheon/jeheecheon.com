@@ -23,16 +23,12 @@ import { configs } from "~/utils/config";
 const links = [
   {
     label: "Home",
-    href: "//jeheecheon.com",
+    href: "/",
+    isActive: true,
   },
   {
     label: "Resume",
     href: "//resume.jeheecheon.com",
-  },
-  {
-    label: "Blog",
-    href: "/",
-    isActive: true,
   },
 ];
 
