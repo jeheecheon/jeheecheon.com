@@ -1,7 +1,8 @@
 import Container from "@packages/ui/components/Container";
 import Paper from "@packages/ui/components/Paper";
-import "@packages/ui/styles/globals-base.css";
 import type { Component } from "solid-js";
+
+import "~/styles/globals.css";
 
 const App: Component = () => {
   return (
