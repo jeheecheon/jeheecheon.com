@@ -33,7 +33,7 @@ jobs:
         working-directory: typescript
 
       - name: Build resume app
-        run: pnpm --filter @apps/fe-resume build
+        run: pnpm --filter "./packages/*" build && pnpm --filter "@apps/fe-resume" build
         working-directory: typescript
 
       - name: Deploy to jeheecheon/resume repository
