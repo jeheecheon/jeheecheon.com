@@ -57,6 +57,9 @@ jobs:
           # Copy build files to target repo root
           cp -r ../typescript/apps/fe-resume/dist/* .
 
+          # Create CNAME file for custom domain
+          echo "resume.jeheecheon.com" > CNAME
+
           # Check if there are changes
           if [ -n "$(git status --porcelain)" ]; then
             git add .
