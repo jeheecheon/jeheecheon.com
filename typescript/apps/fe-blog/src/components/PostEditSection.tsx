@@ -73,7 +73,8 @@ const PostEditSection: VoidComponent<{
         </div>
 
         <ContentEditor
-          class="sticky top-10 z-30 -mx-5 md:mx-0"
+          class="-mx-5 md:mx-0"
+          toolbarClass="sticky top-10 z-30"
           htmlContent={props.post.content}
           onChange={handleContentChange}
         />
