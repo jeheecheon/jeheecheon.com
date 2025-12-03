@@ -55,7 +55,7 @@ const PostEditSection: VoidComponent<{
           </select>
         </div>
 
-        <div class="sticky top-0 z-30 mt-4 flex">
+        <div class="sticky top-0 z-30 -mx-5 mt-4 flex md:mx-0">
           <input
             class="w-full bg-white p-2 text-zinc-900"
             type="text"
@@ -73,7 +73,7 @@ const PostEditSection: VoidComponent<{
         </div>
 
         <ContentEditor
-          toolbarClass="sticky top-10 z-30"
+          class="sticky top-10 z-30 -mx-5 md:mx-0"
           htmlContent={props.post.content}
           onChange={handleContentChange}
         />

@@ -51,7 +51,7 @@ const Header: VoidComponent<{ class?: string }> = (props) => {
   return (
     <div class={cn("", props.class)}>
       <Container>
-        <div class="flex w-full items-center justify-between md:px-23">
+        <div class="flex w-full items-center justify-between md:px-20">
           <Image
             class="not-xs:hidden size-14 rounded-full outline-1 outline-offset-4 transition-all duration-200 hover:scale-105 hover:outline-offset-2 hover:outline-orange-400 dark:outline-orange-300"
             src="/images/profile.png"
@@ -92,7 +92,7 @@ const Header: VoidComponent<{ class?: string }> = (props) => {
                         (role) => role.id === RoleId.ADMIN,
                       )}
                     >
-                      <li class="border-l border-l-zinc-700 pl-3">
+                      <li class="border-l border-l-zinc-700 pl-3 not-md:hidden">
                         <Button
                           theme="secondary"
                           size="xs"
