@@ -55,14 +55,25 @@ const PostEditSection: VoidComponent<{
           </select>
         </div>
 
-        <input
-          class="mt-4 w-full bg-white p-2 text-zinc-900"
-          type="text"
-          value={editablePost().title}
-          onChange={handleTitleChange}
-        />
+        <div class="sticky top-0 z-30 mt-4 flex">
+          <input
+            class="w-full bg-white p-2 text-zinc-900"
+            type="text"
+            value={editablePost().title}
+            onChange={handleTitleChange}
+          />
+          <Button
+            class="rounded-none"
+            theme="primary"
+            loading={postMutate.isPending}
+            type="submit"
+          >
+            Save
+          </Button>
+        </div>
 
         <ContentEditor
+          toolbarClass="sticky top-10 z-30"
           htmlContent={props.post.content}
           onChange={handleContentChange}
         />

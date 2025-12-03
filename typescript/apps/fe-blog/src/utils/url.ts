@@ -22,7 +22,7 @@ export class AppUrlBuilder {
     return "/admin/posts";
   }
 
-  static adminPost(post: Post) {
+  static adminPost(post: { id: string }) {
     return `/admin/posts/${post.id}`;
   }
 }

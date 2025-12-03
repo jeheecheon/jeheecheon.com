@@ -5,8 +5,9 @@ import Container from "@packages/ui/components/Container";
 import Icon from "@packages/ui/components/Icon";
 import Image from "@packages/ui/components/Image";
 import PresenceTransition from "@packages/ui/components/PresenceTransition";
+import { useLocation } from "@packages/ui/hooks/useLocation";
 import { cn } from "@packages/ui/utils/class-name";
-import { A } from "@solidjs/router";
+import { useNavigate } from "@solidjs/router";
 import { moon, sun } from "solid-heroicons/solid";
 import {
   createSignal,
@@ -40,6 +41,9 @@ enum Theme {
 }
 
 const Header: VoidComponent<{ class?: string }> = (props) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [theme, setTheme] = createSignal<Theme>(Theme.DARK);
 
   const accountQuery = useAccount();
@@ -47,7 +51,7 @@ const Header: VoidComponent<{ class?: string }> = (props) => {
   return (
     <div class={cn("", props.class)}>
       <Container>
-        <div class="flex w-full items-center justify-between md:px-14">
+        <div class="flex w-full items-center justify-between md:px-23">
           <Image
             class="not-xs:hidden size-14 rounded-full outline-1 outline-offset-4 transition-all duration-200 hover:scale-105 hover:outline-offset-2 hover:outline-orange-400 dark:outline-orange-300"
             src="/images/profile.png"
@@ -89,11 +93,13 @@ const Header: VoidComponent<{ class?: string }> = (props) => {
                       )}
                     >
                       <li class="border-l border-l-zinc-700 pl-3">
-                        <A href={AppUrlBuilder.adminPosts()}>
-                          <Button theme="secondary" size="xs">
-                            Admin
-                          </Button>
-                        </A>
+                        <Button
+                          theme="secondary"
+                          size="xs"
+                          onClick={handleAdminClick}
+                        >
+                          Admin
+                        </Button>
                       </li>
                     </Show>
                     <li class="border-l border-l-zinc-700 pl-3">
@@ -138,6 +144,17 @@ const Header: VoidComponent<{ class?: string }> = (props) => {
         return theme ?? (prev === Theme.LIGHT ? Theme.DARK : Theme.LIGHT);
       });
     };
+  }
+
+  function handleAdminClick() {
+    const pathname = location()?.pathname;
+    const postId = pathname?.match(/posts\/([a-f0-9-]+)/)?.[1];
+
+    const href = postId
+      ? AppUrlBuilder.adminPost({ id: postId })
+      : AppUrlBuilder.adminPosts();
+
+    navigate(href);
   }
 };
 

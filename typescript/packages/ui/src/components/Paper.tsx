@@ -9,7 +9,7 @@ const Paper: FlowComponent<{
   return (
     <Dynamic
       class={cn(
-        "h-full md:border-x md:px-20 dark:bg-zinc-900 md:dark:border-stone-800",
+        "h-full md:border-x md:px-10 lg:px-14 dark:bg-zinc-900 md:dark:border-stone-800",
         props.class,
       )}
       component={props.as ?? "div"}
