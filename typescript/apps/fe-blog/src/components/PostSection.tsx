@@ -15,6 +15,7 @@ import {
   useLikeOrUnlikePost,
 } from "~/hooks/useLikeOrUnlikePost";
 import { initHighlight } from "~/utils/highlight";
+import { AppUrlBuilder } from "~/utils/url";
 
 const PostSection: VoidComponent<{
   class?: string;
@@ -27,12 +28,12 @@ const PostSection: VoidComponent<{
 
   return (
     <section class={cn("", props.class)}>
-      <A class="inline-block" href="/">
+      <A class="inline-block" href={AppUrlBuilder.home()}>
         <Icon path={arrowLeft} class="size-8 text-zinc-400" />
       </A>
 
       <Image
-        class="rounded-4xl mx-auto mt-7 aspect-square object-cover object-center md:w-1/2"
+        class="mx-auto mt-7 aspect-square rounded-4xl object-cover object-center md:w-1/2"
         src={props.post.cover}
         alt={props.post.title}
       />

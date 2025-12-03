@@ -13,10 +13,10 @@ import { createSignal, For, Show, VoidComponent } from "solid-js";
 import toast from "solid-toast";
 import { useInfinitePosts } from "~/hooks/useInfinitePosts";
 import { useMutatePost } from "~/hooks/useMutatePost";
+import { AppUrlBuilder } from "~/utils/url";
 
 type Props = {
   class?: string;
-  buildPostHref: (post: Post) => string;
 };
 
 const RecentPostsList: VoidComponent<Props> = (props) => {
@@ -59,7 +59,7 @@ const RecentPostsList: VoidComponent<Props> = (props) => {
           fallback={<LoadingFallback center>Loading...</LoadingFallback>}
         >
           <div class="overflow-auto">
-            <div class="min-w-4xl max-h-[calc(100dvh-20rem)]">
+            <div class="max-h-[calc(100dvh-20rem)] min-w-4xl">
               <table class="w-full border border-zinc-700">
                 <thead class="border-b border-zinc-700">
                   <tr class="text-right">
@@ -95,7 +95,6 @@ const RecentPostsList: VoidComponent<Props> = (props) => {
                           setEntries([element]);
                         }}
                         post={post}
-                        buildPostHref={props.buildPostHref}
                         onDeleteSuccess={postsQuery.refetch}
                       />
                     )}
@@ -160,7 +159,6 @@ const PostRow: VoidComponent<{
   class?: string;
   ref: (element: Element) => void;
   post: Post;
-  buildPostHref: Props["buildPostHref"];
   onDeleteSuccess: () => void;
 }> = (props) => {
   const postMutate = useMutatePost();
@@ -168,7 +166,7 @@ const PostRow: VoidComponent<{
   return (
     <tr class={cn("p-1 text-right", props.class)} ref={props.ref}>
       <td class="p-3 pl-5 text-left">{props.post.title}</td>
-      <td class="text-nowrap p-3">{props.post.categoryId}</td>
+      <td class="p-3 text-nowrap">{props.post.categoryId}</td>
       <td class="p-3">{props.post.isPublic ? "Yes" : "No"}</td>
       <td class="p-3">
         {dayjs(props.post.uploadedAt).format("YYYY-MM-DD HH:mm:ss")}
@@ -180,7 +178,7 @@ const PostRow: VoidComponent<{
       </td>
       <td class="p-3 pr-5">
         <div class="flex flex-nowrap gap-x-3">
-          <A href={props.buildPostHref(props.post)}>
+          <A href={AppUrlBuilder.adminPost(props.post)}>
             <Button theme="primary" size="sm">
               Edit
             </Button>

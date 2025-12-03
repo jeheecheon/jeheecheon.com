@@ -20,17 +20,17 @@ import {
 } from "solid-js";
 import AuthOnlyButton from "~/components/AuthOnlyButton";
 import { useAccount } from "~/hooks/useAccount";
-import { configs } from "~/utils/config";
+import { AppUrlBuilder } from "~/utils/url";
 
 const links = [
   {
     label: "Home",
-    href: "/",
+    href: AppUrlBuilder.home(),
     isActive: true,
   },
   {
     label: "Resume",
-    href: "//resume.jeheecheon.com",
+    href: AppUrlBuilder.resume(),
   },
 ];
 
@@ -83,26 +83,26 @@ const Header: VoidComponent<{ class?: string }> = (props) => {
                   }
                 >
                   <>
-                    <li class="border-l border-l-zinc-700 pl-3">
-                      <a href={`${configs.BLOG_API_URL}/auth/signout`}>
-                        <Button theme="secondary" size="xs">
-                          Sign-out
-                        </Button>
-                      </a>
-                    </li>
                     <Show
                       when={accountQuery.data?.account?.roles?.some(
                         (role) => role.id === RoleId.ADMIN,
                       )}
                     >
                       <li class="border-l border-l-zinc-700 pl-3">
-                        <A href="/posts/edit">
+                        <A href={AppUrlBuilder.adminPosts()}>
                           <Button theme="secondary" size="xs">
                             Admin
                           </Button>
                         </A>
                       </li>
                     </Show>
+                    <li class="border-l border-l-zinc-700 pl-3">
+                      <a href={AppUrlBuilder.signOut()}>
+                        <Button theme="secondary" size="xs">
+                          Sign-out
+                        </Button>
+                      </a>
+                    </li>
                   </>
                 </Show>
               </Suspense>

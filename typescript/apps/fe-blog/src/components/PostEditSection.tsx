@@ -13,6 +13,7 @@ import ContentEditor from "~/components/ContentEditor";
 import { useMutatePost } from "~/hooks/useMutatePost";
 import { useUploadImage } from "~/hooks/useUploadImage";
 import { convertToWebpFile } from "~/utils/image";
+import { AppUrlBuilder } from "~/utils/url";
 
 const PostEditSection: VoidComponent<{
   class?: string;
@@ -27,7 +28,7 @@ const PostEditSection: VoidComponent<{
   return (
     <form class={cn("", props.class)} onSubmit={handleSubmit}>
       <section>
-        <A class="inline-block" href="/posts/edit">
+        <A class="inline-block" href={AppUrlBuilder.adminPosts()}>
           <Icon path={arrowLeft} class="size-8 text-zinc-400" />
         </A>
 

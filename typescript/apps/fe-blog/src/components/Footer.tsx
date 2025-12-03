@@ -3,15 +3,16 @@ import Container from "@packages/ui/components/Container";
 import Paper from "@packages/ui/components/Paper";
 import { cn } from "@packages/ui/utils/class-name";
 import { VoidComponent } from "solid-js";
+import { configs } from "~/utils/config";
 
 const Footer: VoidComponent<{ class?: string }> = (props) => {
   return (
     <footer class={cn("", props.class)}>
       <Container>
-        <Paper class="py-15 border-t border-zinc-800">
+        <Paper class="border-t border-zinc-800 py-15">
           <ConditionalLink
             class="block text-center text-sm text-zinc-400 hover:text-orange-300"
-            href="mailto:jeheecheon@gmail.com"
+            href={`mailto:${configs.EMAIL}`}
           >
             jeheecheon@gmail.com
           </ConditionalLink>
