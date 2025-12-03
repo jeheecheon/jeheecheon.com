@@ -47,7 +47,7 @@ const HtmlNodeRenderer: ParentComponent<{
         <Dynamic
           {...(props.node instanceof HTMLElement ? props.node.attributes : {})}
           class={cn(
-            "min-h-6",
+            "min-h-6 leading-7.5",
             "[&_.ql-align-center]:text-center [&_.ql-align-justify]:text-justify [&_.ql-align-right]:text-right",
             className,
           )}
@@ -66,7 +66,7 @@ const HtmlNodeRenderer: ParentComponent<{
       <Match when={props.node.rawTagName === "img"}>
         <Image
           {...(props.node instanceof HTMLElement ? props.node.attributes : {})}
-          class={cn("mx-auto rounded-md lg:w-1/2", className)}
+          class={cn("mx-auto my-1 rounded-md lg:w-1/2", className)}
         />
       </Match>
 
@@ -104,7 +104,7 @@ const HtmlNodeRenderer: ParentComponent<{
       <Match when={props.node.rawTagName === "h2"}>
         <h2
           class={cn(
-            "mb-3 mt-8 border-l-4 border-l-orange-300 bg-zinc-800 p-4 text-4xl font-bold text-orange-300",
+            "mt-8 mb-3 border-l-4 border-l-orange-300 bg-zinc-800 p-4 text-3xl font-bold text-orange-300 md:text-4xl",
             className,
           )}
         >
@@ -115,7 +115,7 @@ const HtmlNodeRenderer: ParentComponent<{
       <Match when={props.node.rawTagName === "h3"}>
         <h3
           class={cn(
-            "mb-3 mt-8 border-l-4 border-l-orange-300 bg-zinc-800 p-4 text-3xl font-bold text-orange-300",
+            "mt-8 mb-3 border-l-4 border-l-orange-300 bg-zinc-800 p-4 text-2xl font-bold text-orange-300 md:text-3xl",
             className,
           )}
         >
@@ -126,7 +126,7 @@ const HtmlNodeRenderer: ParentComponent<{
       <Match when={props.node.rawTagName === "h4"}>
         <h4
           class={cn(
-            "mb-3 mt-8 border-l-4 border-l-orange-300 bg-zinc-800 p-4 text-2xl font-bold text-orange-300",
+            "mt-8 mb-3 border-l-4 border-l-orange-300 bg-zinc-800 p-4 text-2xl font-bold text-orange-300",
             className,
           )}
         >
@@ -137,7 +137,7 @@ const HtmlNodeRenderer: ParentComponent<{
       <Match when={props.node.rawTagName === "h5"}>
         <h5
           class={cn(
-            "mb-3 mt-8 border-l-4 border-l-orange-300 bg-zinc-800 p-4 text-xl font-bold text-orange-300",
+            "mt-8 mb-3 border-l-4 border-l-orange-300 bg-zinc-800 p-4 text-xl font-bold text-orange-300",
             className,
           )}
         >
@@ -148,7 +148,7 @@ const HtmlNodeRenderer: ParentComponent<{
       <Match when={props.node.rawTagName === "h6"}>
         <h6
           class={cn(
-            "mb-3 mt-8 border-l-4 border-l-orange-300 bg-zinc-800 p-4 text-lg font-bold text-orange-300",
+            "mt-8 mb-3 border-l-4 border-l-orange-300 bg-zinc-800 p-4 text-lg font-bold text-orange-300",
             className,
           )}
         >
@@ -157,9 +157,7 @@ const HtmlNodeRenderer: ParentComponent<{
       </Match>
 
       <Match when={props.node.rawTagName === "ul"}>
-        <ul
-          class={cn("my-2 list-inside list-disc pl-2 [&_ul]:pl-5", className)}
-        >
+        <ul class={cn("list-inside list-disc pl-2 [&_ul]:pl-5", className)}>
           {props.children}
         </ul>
       </Match>
@@ -176,13 +174,13 @@ const HtmlNodeRenderer: ParentComponent<{
       </Match>
 
       <Match when={props.node.rawTagName === "li"}>
-        <li class={cn("mt-2.5", className)}>{props.children}</li>
+        <li class={cn("", className)}>{props.children}</li>
       </Match>
 
       <Match when={props.node.rawTagName === "blockquote"}>
         <blockquote
           class={cn(
-            "break-words border-l-4 border-zinc-800 border-l-orange-300 p-4",
+            "border-l-4 border-zinc-800 border-l-orange-300 p-4 break-words",
             className,
           )}
         >
@@ -192,7 +190,10 @@ const HtmlNodeRenderer: ParentComponent<{
 
       <Match when={props.node.rawTagName === "code"}>
         <code
-          class={cn("mx-2 inline-block rounded-md bg-zinc-800 px-2", className)}
+          class={cn(
+            "inline rounded-md bg-zinc-800 px-2 py-0.5 break-all text-red-400",
+            className,
+          )}
         >
           {props.children}
         </code>
