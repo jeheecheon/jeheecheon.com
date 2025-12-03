@@ -13,6 +13,7 @@ import ContentEditor from "~/components/ContentEditor";
 import { useMutatePost } from "~/hooks/useMutatePost";
 import { useUploadImage } from "~/hooks/useUploadImage";
 import { convertToWebpFile } from "~/utils/image";
+import { AppUrlBuilder } from "~/utils/url";
 
 const PostEditSection: VoidComponent<{
   class?: string;
@@ -27,7 +28,7 @@ const PostEditSection: VoidComponent<{
   return (
     <form class={cn("", props.class)} onSubmit={handleSubmit}>
       <section>
-        <A class="inline-block" href="/posts/edit">
+        <A class="inline-block" href={AppUrlBuilder.adminPosts()}>
           <Icon path={arrowLeft} class="size-8 text-zinc-400" />
         </A>
 
@@ -54,14 +55,25 @@ const PostEditSection: VoidComponent<{
           </select>
         </div>
 
-        <input
-          class="mt-4 w-full bg-white p-2 text-zinc-900"
-          type="text"
-          value={editablePost().title}
-          onChange={handleTitleChange}
-        />
+        <div class="sticky top-0 z-30 -mx-5 mt-4 flex md:mx-0">
+          <input
+            class="w-full bg-white p-2 text-zinc-900"
+            type="text"
+            value={editablePost().title}
+            onChange={handleTitleChange}
+          />
+          <Button
+            class="rounded-none"
+            theme="primary"
+            loading={postMutate.isPending}
+            type="submit"
+          >
+            Save
+          </Button>
+        </div>
 
         <ContentEditor
+          class="sticky top-10 z-30 -mx-5 md:mx-0"
           htmlContent={props.post.content}
           onChange={handleContentChange}
         />

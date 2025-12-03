@@ -8,6 +8,7 @@ import { range } from "lodash-es";
 import { createSignal, For, Show, VoidComponent } from "solid-js";
 import PostCard from "~/components/PostCard";
 import { useInfinitePosts } from "~/hooks/useInfinitePosts";
+import { AppUrlBuilder } from "~/utils/url";
 
 const RecentPostsGrid: VoidComponent<{
   class?: string;
@@ -60,7 +61,7 @@ const RecentPostsGrid: VoidComponent<{
                   setEntries([element]);
                 }}
               >
-                <A href={`/posts/${post.id}`}>
+                <A href={AppUrlBuilder.post(post)}>
                   <PostCard post={post} />
                 </A>
               </li>

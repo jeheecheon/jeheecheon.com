@@ -1,10 +1,13 @@
+import { RoleId } from "@packages/common/types/blog/role";
 import Button from "@packages/ui/components/Button";
 import ConditionalLink from "@packages/ui/components/ConditionalLink";
 import Container from "@packages/ui/components/Container";
 import Icon from "@packages/ui/components/Icon";
 import Image from "@packages/ui/components/Image";
 import PresenceTransition from "@packages/ui/components/PresenceTransition";
+import { useLocation } from "@packages/ui/hooks/useLocation";
 import { cn } from "@packages/ui/utils/class-name";
+import { useNavigate } from "@solidjs/router";
 import { moon, sun } from "solid-heroicons/solid";
 import {
   createSignal,
@@ -18,17 +21,17 @@ import {
 } from "solid-js";
 import AuthOnlyButton from "~/components/AuthOnlyButton";
 import { useAccount } from "~/hooks/useAccount";
-import { configs } from "~/utils/config";
+import { AppUrlBuilder } from "~/utils/url";
 
 const links = [
   {
     label: "Home",
-    href: "/",
+    href: AppUrlBuilder.home(),
     isActive: true,
   },
   {
     label: "Resume",
-    href: "//resume.jeheecheon.com",
+    href: AppUrlBuilder.resume(),
   },
 ];
 
@@ -38,14 +41,17 @@ enum Theme {
 }
 
 const Header: VoidComponent<{ class?: string }> = (props) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [theme, setTheme] = createSignal<Theme>(Theme.DARK);
 
-  const account = useAccount();
+  const accountQuery = useAccount();
 
   return (
     <div class={cn("", props.class)}>
       <Container>
-        <div class="flex w-full items-center justify-between md:px-14">
+        <div class="flex w-full items-center justify-between md:px-20">
           <Image
             class="not-xs:hidden size-14 rounded-full outline-1 outline-offset-4 transition-all duration-200 hover:scale-105 hover:outline-offset-2 hover:outline-orange-400 dark:outline-orange-300"
             src="/images/profile.png"
@@ -71,24 +77,41 @@ const Header: VoidComponent<{ class?: string }> = (props) => {
                 )}
               </For>
 
-              <li class="border-l border-l-zinc-700 pl-3">
-                <Suspense>
-                  <Show
-                    when={account.isSuccess}
-                    fallback={
-                      <AuthOnlyButton theme="secondary" size="xs">
-                        Sign In
-                      </AuthOnlyButton>
-                    }
-                  >
-                    <a href={`${configs.BLOG_API_URL}/auth/signout`}>
-                      <Button theme="secondary" size="xs">
-                        Sign-out
-                      </Button>
-                    </a>
-                  </Show>
-                </Suspense>
-              </li>
+              <Suspense>
+                <Show
+                  when={accountQuery.isSuccess}
+                  fallback={
+                    <AuthOnlyButton theme="secondary" size="xs">
+                      Sign In
+                    </AuthOnlyButton>
+                  }
+                >
+                  <>
+                    <Show
+                      when={accountQuery.data?.account?.roles?.some(
+                        (role) => role.id === RoleId.ADMIN,
+                      )}
+                    >
+                      <li class="border-l border-l-zinc-700 pl-3 not-md:hidden">
+                        <Button
+                          theme="secondary"
+                          size="xs"
+                          onClick={handleAdminClick}
+                        >
+                          Admin
+                        </Button>
+                      </li>
+                    </Show>
+                    <li class="border-l border-l-zinc-700 pl-3">
+                      <a href={AppUrlBuilder.signOut()}>
+                        <Button theme="secondary" size="xs">
+                          Sign-out
+                        </Button>
+                      </a>
+                    </li>
+                  </>
+                </Show>
+              </Suspense>
             </ul>
           </section>
 
@@ -122,6 +145,17 @@ const Header: VoidComponent<{ class?: string }> = (props) => {
       });
     };
   }
+
+  function handleAdminClick() {
+    const pathname = location()?.pathname;
+    const postId = pathname?.match(/posts\/([a-f0-9-]+)/)?.[1];
+
+    const href = postId
+      ? AppUrlBuilder.adminPost({ id: postId })
+      : AppUrlBuilder.adminPosts();
+
+    navigate(href);
+  }
 };
 
 const ThemeButton: ParentComponent<{
@@ -131,7 +165,7 @@ const ThemeButton: ParentComponent<{
   return (
     <button
       class={cn(
-        "size-9 rounded-full p-2 shadow-lg shadow-black/70 outline-1 outline-offset-4 transition-all duration-300 hover:rotate-12 hover:scale-125 dark:bg-zinc-900 dark:text-orange-200 dark:outline-orange-300 dark:hover:outline-offset-0 dark:hover:outline-orange-400",
+        "size-9 rounded-full p-2 shadow-lg shadow-black/70 outline-1 outline-offset-4 transition-all duration-300 hover:scale-125 hover:rotate-12 dark:bg-zinc-900 dark:text-orange-200 dark:outline-orange-300 dark:hover:outline-offset-0 dark:hover:outline-orange-400",
         props.class,
       )}
       onClick={handleClick}

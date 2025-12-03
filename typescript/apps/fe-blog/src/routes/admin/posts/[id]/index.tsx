@@ -17,7 +17,7 @@ const paramsSchema = z.object({
 
 type Params = z.infer<typeof paramsSchema>;
 
-const PostsRoute: VoidComponent = () => {
+const AdminPostEditRoute: VoidComponent = () => {
   const _params = useParams<Params>();
 
   const { success, data: params } = paramsSchema.safeParse(_params);
@@ -65,4 +65,4 @@ const PostsRoute: VoidComponent = () => {
   );
 };
 
-export default PostsRoute;
+export default AdminPostEditRoute;

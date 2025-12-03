@@ -21,6 +21,7 @@ const SolidQuill = clientOnly(() =>
 
 const ContentEditor: VoidComponent<{
   class?: string;
+  toolbarClass?: string;
   htmlContent: string;
   onChange: (html: string) => void;
 }> = (props) => {
@@ -28,7 +29,10 @@ const ContentEditor: VoidComponent<{
 
   return (
     <div class={cn("bg-white text-black", props.class)}>
-      <CustomQuillTollbar class="sticky top-0 z-10 bg-white" id={toolbarId} />
+      <CustomQuillTollbar
+        class={cn("bg-white", props.toolbarClass)}
+        id={toolbarId}
+      />
       <CustomQuill
         toolbarId={toolbarId}
         htmlContent={props.htmlContent}

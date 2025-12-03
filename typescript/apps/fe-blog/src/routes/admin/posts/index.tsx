@@ -1,4 +1,3 @@
-import { Post } from "@packages/common/types/blog/post";
 import Container from "@packages/ui/components/Container";
 import LoadingFallback from "@packages/ui/components/LoadingFallback";
 import Paper from "@packages/ui/components/Paper";
@@ -24,17 +23,13 @@ const Edit: VoidComponent = () => {
             </Match>
             <Match when={isAdminQuery()?.isAdmin}>
               <h1 class="text-2xl font-bold text-orange-300">Manage posts</h1>
-              <RecentPostsList class="mt-6" buildPostHref={buildPostHref} />
+              <RecentPostsList class="mt-6" />
             </Match>
           </Switch>
         </Suspense>
       </Paper>
     </Container>
   );
-
-  function buildPostHref(post: Post) {
-    return `/posts/${post.id}/edit`;
-  }
 };
 
 export default Edit;

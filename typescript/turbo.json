@@ -18,6 +18,8 @@
         "TRUST_PROXY",
         "VITE_BLOG_API_URL",
         "VITE_BLOG_GRAPHQL_URL",
+        "VITE_MY_EMAIL",
+        "VITE_RESUME_URL",
         "SESSION_SECRET",
         "OAUTH_GOOGLE_CLIENT_ID",
         "OAUTH_GOOGLE_CLIENT_SECRET",
