@@ -16,6 +16,13 @@ export class AccountResolver {
   ) {
     const id = args.id ?? getAccountId(req);
 
-    return this.accountService.getAccount({ id, email: args.email });
+    return this.accountService.getAccount(
+      { id, email: args.email },
+      {
+        relations: {
+          roles: true,
+        },
+      },
+    );
   }
 }
