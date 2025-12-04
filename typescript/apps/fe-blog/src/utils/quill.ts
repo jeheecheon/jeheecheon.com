@@ -28,7 +28,7 @@ export async function insertImage(this: { quill: Quill }) {
     return;
   }
 
-  const postId = window.location.pathname.match(/posts\/([^/]+)\/edit/)?.[1];
+  const postId = window.location.pathname.match(/admin\/posts\/([^/]+)/)?.[1];
   if (!postId) {
     console.error("No post id found in pathname");
     return;
@@ -49,16 +49,20 @@ export async function insertImage(this: { quill: Quill }) {
     input.addEventListener("change", resolve, { once: true });
   });
 
-  const webp = await convertToWebpFile(input.files?.[0]);
-  if (!webp) {
-    console.error("Failed to convert image to webp");
+  const file = input.files?.[0];
+  const type = file?.type;
+  if (!file || !type?.startsWith("image/")) {
+    console.error("No image found");
     return;
   }
 
   try {
+    const shouldConvert =
+      file.type !== "image/gif" && file.type !== "image/webp";
+
     const image = await mutateUploadImage({
       postId,
-      image: webp,
+      image: shouldConvert ? await convertToWebpFile(file) : file,
     });
 
     this.quill.insertEmbed(cursorPosition, "image", image.url);
