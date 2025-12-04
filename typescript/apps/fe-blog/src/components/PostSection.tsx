@@ -1,5 +1,4 @@
 import type { Post } from "@packages/common/types/blog/post";
-import Button from "@packages/ui/components/Button";
 import Icon from "@packages/ui/components/Icon";
 import Image from "@packages/ui/components/Image";
 import { cn } from "@packages/ui/utils/class-name";
@@ -8,6 +7,7 @@ import dayjs from "dayjs";
 import { arrowLeft, heart } from "solid-heroicons/solid";
 import { createSignal, Match, onMount, Switch, VoidComponent } from "solid-js";
 import { ClientOnly } from "solid-use/client-only";
+import AuthOnlyButton from "~/components/AuthOnlyButton";
 import CommentsSection from "~/components/CommentsSection";
 import RawHtmlRenderer from "~/components/RawHtmlRenderer";
 import {
@@ -77,7 +77,7 @@ const PostLikesButton: VoidComponent<{
   }));
 
   return (
-    <Button
+    <AuthOnlyButton
       class={cn("mx-auto mt-20 block", props.class)}
       theme="secondary"
       loading={likeOrUnlikePostMutate.isPending}
@@ -94,7 +94,7 @@ const PostLikesButton: VoidComponent<{
       <span class="ml-2 inline-block text-sm text-zinc-400">
         {likesCount()}
       </span>
-    </Button>
+    </AuthOnlyButton>
   );
 
   function handleClick() {
