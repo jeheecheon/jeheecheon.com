@@ -12,7 +12,7 @@ const GlobalLayout: ParentComponent<{ class?: string }> = (props) => {
   return (
     <>
       <div class={cn("h-full", props.class)}>
-        <Header class="fixed top-6 z-30 w-full" />
+        <Header class="fixed top-3 z-30 w-full md:top-6" />
         {props.children}
         <Footer />
       </div>
