@@ -47,19 +47,18 @@ const Image: VoidComponent<Props> = (_props) => {
           transitionKey={previewVisible().toString()}
           option="fadeInOut"
         >
-          <button
-            class="absolute top-4 left-4 z-10 cursor-pointer"
-            onClick={handleTogglePreview(false)}
-          >
-            <Icon class="size-7 dark:text-orange-100" path={xMark} />
-          </button>
+          <div class="h-full" onClick={handleTogglePreview(false)}>
+            <button class="absolute top-4 left-4 z-10 cursor-pointer">
+              <Icon class="size-7 dark:text-orange-100" path={xMark} />
+            </button>
 
-          <div class="relative mx-auto size-full max-w-7xl">
-            <PreloadedImage
-              {...props}
-              class="size-full object-contain"
-              renderFallback={Skeleton}
-            />
+            <div class="relative mx-auto size-full max-w-7xl">
+              <PreloadedImage
+                {...props}
+                class="size-full object-contain"
+                renderFallback={Skeleton}
+              />
+            </div>
           </div>
         </PresenceTransition>
       </Portal>
