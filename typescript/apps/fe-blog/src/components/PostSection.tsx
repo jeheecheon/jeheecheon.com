@@ -32,11 +32,13 @@ const PostSection: VoidComponent<{
         <Icon path={arrowLeft} class="size-8 text-zinc-400" />
       </A>
 
-      <Image
-        class="mx-auto mt-7 aspect-square rounded-4xl object-cover object-center md:w-1/2"
-        src={props.post.cover}
-        alt={props.post.title}
-      />
+      <div class="mx-auto mt-7 overflow-hidden rounded-4xl md:w-1/2">
+        <Image
+          class="object-cover object-center transition-transform duration-1000 hover:scale-110"
+          src={props.post.cover}
+          alt={props.post.title}
+        />
+      </div>
 
       <h1 class="mt-10 text-center text-4xl font-bold text-orange-300">
         {props.post.title}
