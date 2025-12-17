@@ -1,4 +1,5 @@
 import { cn } from "@packages/ui/utils/class-name";
+import { Title } from "@solidjs/meta";
 import { ParentComponent } from "solid-js";
 import Footer from "~/components/Footer";
 import Header from "~/components/Header";
@@ -11,6 +12,8 @@ const GlobalLayout: ParentComponent<{ class?: string }> = (props) => {
 
   return (
     <>
+      <Title>jeheecheon</Title>
+
       <div class={cn("h-full", props.class)}>
         <Header class="fixed top-3 z-30 w-full md:top-6" />
         {props.children}
