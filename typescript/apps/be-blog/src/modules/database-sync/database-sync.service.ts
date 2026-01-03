@@ -1,6 +1,6 @@
 import { Injectable, Logger, OnModuleInit } from "@nestjs/common";
 import { safely, safelyAsync } from "@packages/common/utils/safely";
-import { HOUR } from "@packages/common/utils/time";
+import { DAY, HOUR } from "@packages/common/utils/time";
 import { existsSync, readFileSync, unlinkSync } from "fs";
 import { copyFile } from "fs/promises";
 import { dirname, join } from "path";
@@ -61,7 +61,7 @@ export class DatabaseSyncService implements OnModuleInit {
       const backups = await listObjects(configs.BACKUP_S3_PREFIX);
 
       const retentionCutoff = new Date(
-        Date.now() - configs.BACKUP_RETENTION_DAYS,
+        Date.now() - configs.BACKUP_RETENTION_DAYS * DAY,
       );
 
       const expiredBackups = backups.filter(
