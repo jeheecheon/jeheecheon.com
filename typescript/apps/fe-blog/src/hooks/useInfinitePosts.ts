@@ -30,6 +30,7 @@ export const useInfinitePosts = (
           }
         : null,
     enabled: isClient(),
+    select: (data) => data.pages.flatMap((page) => page.posts),
   }));
 
   return query;

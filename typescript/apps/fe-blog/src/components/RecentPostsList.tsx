@@ -72,23 +72,13 @@ const RecentPostsList: VoidComponent<Props> = (props) => {
                   </tr>
                 </thead>
                 <tbody>
-                  <For
-                    each={
-                      postsQuery.data?.pages.flatMap((page) => page.posts) ?? []
-                    }
-                  >
+                  <For each={postsQuery.data}>
                     {(post, index) => (
                       <PostRow
                         ref={(element) => {
-                          if (
-                            (
-                              postsQuery.data?.pages.flatMap(
-                                (page) => page.posts,
-                              ) ?? []
-                            ).length -
-                              1 !==
-                            index()
-                          ) {
+                          const length = postsQuery.data?.length ?? 0;
+                          const isLast = length - 1 === index();
+                          if (!isLast) {
                             return;
                           }
 
@@ -101,22 +91,24 @@ const RecentPostsList: VoidComponent<Props> = (props) => {
                   </For>
                 </tbody>
 
-                <PresenceTransition
-                  as="tfoot"
-                  transitionKey={`recent-posts-loading-more-${postsQuery.isFetchingNextPage}`}
-                  option="fadeInOut"
-                  visible={postsQuery.isFetchingNextPage}
-                >
-                  <For each={range(10)}>
-                    {() => (
-                      <tr>
-                        <td colspan={6}>
-                          <Skeleton class="h-40 w-full rounded-md" />
-                        </td>
-                      </tr>
-                    )}
-                  </For>
-                </PresenceTransition>
+                <Show when={postsQuery.isFetchingNextPage}>
+                  <PresenceTransition
+                    as="tfoot"
+                    transitionKey={`recent-posts-loading-more-${postsQuery.isFetchingNextPage}`}
+                    option="fadeInOut"
+                    visible={postsQuery.isFetchingNextPage}
+                  >
+                    <For each={range(10)}>
+                      {() => (
+                        <tr>
+                          <td colspan={6}>
+                            <Skeleton class="h-40 w-full rounded-md" />
+                          </td>
+                        </tr>
+                      )}
+                    </For>
+                  </PresenceTransition>
+                </Show>
               </table>
             </div>
           </div>

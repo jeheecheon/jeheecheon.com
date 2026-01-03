@@ -17,7 +17,7 @@ export class LikedComment {
   @PrimaryColumn("uuid")
   accountId: string;
 
-  @CreateDateColumn({ type: "timestamptz" })
+  @CreateDateColumn()
   createdAt: Date;
 
   @ManyToOne(() => Account, (account) => account.likedComments, {

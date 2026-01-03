@@ -43,18 +43,13 @@ const RecentPostsGrid: VoidComponent<{
             <Skeleton class="h-102 rounded-md" />
           ))}
         >
-          <For
-            each={postsQuery.data?.pages.flatMap((page) => page.posts) ?? []}
-          >
+          <For each={postsQuery.data}>
             {(post, index) => (
               <li
                 ref={(element) => {
-                  if (
-                    (postsQuery.data?.pages.flatMap((page) => page.posts) ?? [])
-                      .length -
-                      1 !==
-                    index()
-                  ) {
+                  const length = postsQuery.data?.length ?? 0;
+                  const isLast = length - 1 === index();
+                  if (!isLast) {
                     return;
                   }
 
@@ -70,21 +65,22 @@ const RecentPostsGrid: VoidComponent<{
         </Show>
       </PresenceTransition>
 
-      <PresenceTransition
-        as="ul"
-        class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-2"
-        transitionKey={`recent-posts-loading-more-${postsQuery.isFetchingNextPage}`}
-        option="fadeInOut"
-        visible={postsQuery.isFetchingNextPage}
-      >
-        <For each={range(4)}>
-          {() => (
-            <li>
-              <Skeleton class="h-102 rounded-md" />
-            </li>
-          )}
-        </For>
-      </PresenceTransition>
+      <Show when={postsQuery.isFetchingNextPage}>
+        <PresenceTransition
+          class="grid grid-cols-1 gap-x-8 gap-y-8 md:grid-cols-2"
+          as="ul"
+          transitionKey={`recent-posts-loading-more-${postsQuery.isFetchingNextPage}`}
+          option="fadeInOut"
+        >
+          <For each={range(4)}>
+            {() => (
+              <li>
+                <Skeleton class="h-102 rounded-md" />
+              </li>
+            )}
+          </For>
+        </PresenceTransition>
+      </Show>
     </div>
   );
 

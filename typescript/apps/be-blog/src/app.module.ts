@@ -10,6 +10,7 @@ import { Role } from "@packages/entities-blog/role/role.entity";
 import { join } from "path";
 import { AccountModule } from "./modules/account/account.module.js";
 import { AuthModule } from "./modules/auth/auth.module.js";
+import { DatabaseBackupModule } from "./modules/backup/backup.module.js";
 import { CategoryModule } from "./modules/category/category.module.js";
 import { CommentModule } from "./modules/comment/comment.module.js";
 import { DatabaseModule } from "./modules/database/database.module.js";
@@ -26,6 +27,7 @@ import { configs } from "./utils/config.js";
       envFilePath: ".env",
     }),
     DatabaseModule,
+    DatabaseBackupModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), "src/schema.gql"),

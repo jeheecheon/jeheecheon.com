@@ -33,15 +33,15 @@ export class Post {
   @Field(() => String)
   content: string;
 
-  @CreateDateColumn({ type: "timestamptz" })
+  @CreateDateColumn()
   @Field(() => Date)
   uploadedAt: Date;
 
-  @UpdateDateColumn({ type: "timestamptz", nullable: true })
+  @UpdateDateColumn({ nullable: true })
   @Field(() => Date, { nullable: true })
   editedAt?: Maybe<Date>;
 
-  @DeleteDateColumn({ type: "timestamptz", nullable: true })
+  @DeleteDateColumn({ nullable: true })
   @Field(() => Date, { nullable: true })
   deletedAt?: Maybe<Date>;
 

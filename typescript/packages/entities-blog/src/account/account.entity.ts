@@ -30,14 +30,14 @@ export class Account {
   @Column("varchar", { length: 254, unique: true })
   normalizedEmail: string;
 
-  @Column("bool")
+  @Column("boolean")
   isEmailConfirmed: boolean;
 
   @Column("varchar", { length: 256, nullable: true })
   @Field(() => String, { nullable: true })
   avatar?: Maybe<string>;
 
-  @CreateDateColumn({ type: "timestamptz" })
+  @CreateDateColumn()
   @Field(() => Date)
   createdAt: Date;
 
