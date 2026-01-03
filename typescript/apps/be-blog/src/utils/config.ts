@@ -39,6 +39,11 @@ export const configs = {
   ),
   AWS_REGION: ensure(process.env.AWS_REGION, "AWS_REGION is required"),
   AWS_S3_BUCKET: ensure(process.env.AWS_S3_BUCKET, "AWS_S3_BUCKET is required"),
+
+  DATABASE_PATH: process.env.DATABASE_PATH ?? "data/blog.sqlite",
+  BACKUP_INTERVAL_HOURS: Number(process.env.BACKUP_INTERVAL_HOURS) || 1,
+  BACKUP_RETENTION_DAYS: Number(process.env.BACKUP_RETENTION_DAYS) || 7,
+  BACKUP_S3_PREFIX: "blog/backups",
 };
 
 export const oauthConfig = registerAs<OAuthConfig>("oauth", () => ({

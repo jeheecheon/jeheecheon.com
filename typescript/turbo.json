@@ -11,9 +11,8 @@
         "PORT",
         "HOST",
         "NODE_ENV",
-        "DATABASE_URL",
+        "DATABASE_PATH",
         "DATABASE_LOGGING",
-        "DATABASE_SSL",
         "BASE_DOMAIN",
         "TRUST_PROXY",
         "VITE_BLOG_API_URL",
@@ -28,7 +27,9 @@
         "AWS_ACCESS_KEY_ID",
         "AWS_SECRET_ACCESS_KEY",
         "AWS_REGION",
-        "AWS_S3_BUCKET"
+        "AWS_S3_BUCKET",
+        "BACKUP_INTERVAL_HOURS",
+        "BACKUP_RETENTION_DAYS"
       ]
     },
     "lint": {

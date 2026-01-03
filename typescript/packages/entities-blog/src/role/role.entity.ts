@@ -11,7 +11,7 @@ import { Account } from "../account/account.entity.js";
 @Entity("role", { schema: "public" })
 @ObjectType()
 export class Role {
-  @PrimaryGeneratedColumn("increment", { type: "int4" })
+  @PrimaryGeneratedColumn("increment")
   @Field(() => Number)
   id: number;
 

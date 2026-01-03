@@ -18,8 +18,8 @@
   },
   "dependencies": {
     "@nestjs/graphql": "^13.1.0",
+    "better-sqlite3": "^12.5.0",
     "dotenv": "^16.5.0",
-    "pg": "^8.16.0",
     "typeorm": "^0.3.24",
     "typeorm-naming-strategies": "^4.1.0"
   },

@@ -5,9 +5,12 @@ import { WEEK } from "@packages/common/utils/time";
 import cookieParser from "cookie-parser";
 import cookieSession from "cookie-session";
 import { AppModule } from "./app.module.js";
+import { restoreDatabaseIfMissing } from "./modules/backup/restore-database.js";
 import { configs } from "./utils/config.js";
 
 async function bootstrap() {
+  await restoreDatabaseIfMissing();
+
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   if (configs.TRUST_PROXY) {
