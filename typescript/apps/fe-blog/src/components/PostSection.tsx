@@ -44,10 +44,10 @@ const PostSection: VoidComponent<{
         {props.post.title}
       </h1>
 
-      <div class="mt-10 h-px w-full bg-zinc-800 md:mt-20" role="separator" />
+      <div class="mt-10 h-px w-full bg-zinc-700 md:mt-14" role="separator" />
 
       <ClientOnly>
-        <div class="mt-10 md:mt-20">
+        <div class="mt-10 md:mt-14">
           <RawHtmlRenderer rawHtml={props.post.content} />
         </div>
       </ClientOnly>
